@@ -34,10 +34,11 @@ class SignupController: UIViewController {
         guard let email = emailTF.text else {return}
         guard let password = passwordTF.text else {return}
         guard let fullname = fullnameTF.text else {return}
+        let accountType: Int = segmentedControl.selectedSegmentIndex
         
-        let values: [String:Any] = ["email": email, "password": password, "fullname": fullname, "accountType": segmentedControl.selectedSegmentIndex]
+        let values: [String:Any] = ["email": email, "password": password, "fullname": fullname, "accountType": accountType]
         
-        Authentication.shared.signupEmail(email: email, password: password, values: values) { [self] (isSuccess, err) in
+        Authentication.shared.signupEmail(email: email, password: password, values: values, accountType: accountType) { [self] (isSuccess, err) in
             if isSuccess{
                 print("success")
                 // GO TO HOME SCREEN

@@ -10,6 +10,7 @@ import Hero
 
 class LocationInputController: UIViewController {
     
+    var userFullName: String?
     
     @IBOutlet weak var locationInputView: UIView!
     @IBOutlet weak var startingLocationTF: UITextField!
@@ -26,6 +27,7 @@ class LocationInputController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
+        fullnameLabel.text = userFullName
         
     }
 
@@ -49,8 +51,7 @@ class LocationInputController: UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
-    }
-    
+    }    
     
 }
 

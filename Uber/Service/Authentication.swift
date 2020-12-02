@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseDatabase
+import GeoFire
 
 class Authentication {
     
@@ -25,7 +26,7 @@ class Authentication {
         }
     }
     
-    func signupEmail(email: String, password: String, values: [String:Any], completion: @escaping ( _ success: Bool, _ error: Error?)->()) {
+    func signupEmail(email: String, password: String, values: [String:Any], accountType: Int, completion: @escaping ( _ success: Bool, _ error: Error?)->()) {
         
         Auth.auth().createUser(withEmail: email, password: password) { (res, err) in
             if let err = err {
@@ -35,7 +36,29 @@ class Authentication {
             }
             guard let uid = res?.user.uid else {return}
             
-            Database.database().reference().child("users").child(uid).updateChildValues(values) { (err, ref) in
+            if accountType == 1 {
+                let geofire = GeoFire(firebaseRef: DRIVER_LOCATIONS_REF)
+                guard let location = LocationHandler.shared.locationManager.location else {return}
+                geofire.setLocation(location, forKey: uid) { (err) in
+                    guard err == nil else {
+                        completion(false,err)
+                        return
+                    }
+                    
+                    REF_USERS.child(uid).updateChildValues(values) { (err, ref) in
+                        if err != nil {
+                            print("error saving data \(String(describing: err))")
+                            completion(false,err)
+                            return
+                        }
+                        completion(true,nil)
+                    }
+                }
+            }
+
+            
+            
+            REF_USERS.child(uid).updateChildValues(values) { (err, ref) in
                 if err != nil {
                     print("error saving data \(String(describing: err))")
                     completion(false,err)

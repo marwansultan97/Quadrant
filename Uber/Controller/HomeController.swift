@@ -16,13 +16,24 @@ class HomeController: UIViewController {
     @IBOutlet weak var whereToView: UIView!
     @IBOutlet weak var mapView: MKMapView!
     
-    let locationManager = CLLocationManager()
+    let locationManager = LocationHandler.shared.locationManager
+    var userData: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         authorizationStatus()
         configureUI()
-        Service.shared.fetchUserData()
+        configureMapView()
+        fetchUserData()
+        fetchDrivers()
+        
+        
+    }
+    
+    func configureMapView() {
+        mapView.delegate = self
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .follow
     }
     
     func signOut() {
@@ -48,16 +59,50 @@ class HomeController: UIViewController {
         whereToView.layer.shadowColor = UIColor.label.cgColor
         whereToView.layer.shadowOpacity = 0.5
         whereToView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        whereToView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showLocationInputView)))
         UIView.animate(withDuration: 2) {
             self.whereToView.alpha = 1
         }
-        whereToView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showLocationInputView)))
-        
+
     }
     
     @objc func showLocationInputView() {
         performSegue(withIdentifier: "LocationInputController", sender: self)
 
+    }
+    
+    func fetchUserData() {
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        Service.shared.fetchUserData(userID: userID) { (user) in
+            self.userData = user
+        }
+    }
+    
+    func fetchDrivers() {
+        guard let location = locationManager?.location else {return}
+        Service.shared.fetchDriver(location: location) { (driver) in
+            print("DEBUG: your driver is \(driver)")
+            guard let driverCoordinates = driver.location?.coordinate else {return}
+            let annotaions = DriverAnnotation(fullname: driver.fullname, uid: driver.uid, coordinate: driverCoordinates)
+            var isDriverAdded: Bool {
+                return self.mapView.annotations.contains { (annotation) -> Bool in
+                    guard let driverAnno = annotation as? DriverAnnotation else { return false }
+                    if driverAnno.uid == annotaions.uid {
+                        driverAnno.updateAnnotationPosition(newCoordinate: driverCoordinates)
+                        return true
+                    }
+                    return false
+                }
+            }
+            if !isDriverAdded {
+                self.mapView.addAnnotation(annotaions)
+            }
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! LocationInputController
+        destinationVC.userFullName = self.userData?.fullname
     }
     
 }
@@ -66,57 +111,53 @@ class HomeController: UIViewController {
 extension HomeController : CLLocationManagerDelegate {
     
     func authorizationStatus() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        switch locationManager.accuracyAuthorization {
+        switch locationManager?.accuracyAuthorization {
         case .reducedAccuracy:
-            locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow 'Maps' to use your precise location once")
+            locationManager?.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow 'Maps' to use your precise location once")
         case .fullAccuracy:
-            locationManager.startUpdatingLocation()
+            locationManager?.startUpdatingLocation()
+        case .none:
+            break
         @unknown default:
             break
         }
         
-        switch locationManager.authorizationStatus {
+        switch locationManager?.authorizationStatus {
         case .denied, .restricted:
             break
         case .authorizedWhenInUse:
-            locationManager.requestAlwaysAuthorization()
+            locationManager?.requestAlwaysAuthorization()
         case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
+            locationManager?.requestWhenInUseAuthorization()
         case .authorizedAlways:
+            break
+        case .none:
             break
         @unknown default:
             break
         }
     }
+}
+
+//MARK: - MapView Methods
+
+extension HomeController: MKMapViewDelegate {
     
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        if locationManager.authorizationStatus == .authorizedWhenInUse && locationManager.accuracyAuthorization == .reducedAccuracy {
-            locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow 'Maps' to use your precise location once") { _ in
-                self.locationManager.requestAlwaysAuthorization()
-                self.locationManager.startUpdatingLocation()
-            }
-        } else if locationManager.authorizationStatus == .authorizedAlways && locationManager.accuracyAuthorization == .reducedAccuracy {
-            locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow 'Maps' to use your precise location once") { _ in
-                self.locationManager.startUpdatingLocation()
-            }
-        } else if locationManager.accuracyAuthorization == .fullAccuracy {
-            self.locationManager.startUpdatingLocation()
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? DriverAnnotation {
+            let annotationTitle = UILabel(frame: CGRect(x: 2, y: -15, width: 50, height: 30))
+            annotationTitle.font = UIFont.systemFont(ofSize: 7)
+            annotationTitle.text = annotation.fullname
+            let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "DriverAnnotation")
+            annotationView.image = #imageLiteral(resourceName: "icons8-car_top_view")
+            annotationView.addSubview(annotationTitle)
+            return annotationView
         }
+        
+        return nil
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            self.locationManager.stopUpdatingLocation()
-            let coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-            let region: MKCoordinateRegion = MKCoordinateRegion(center: coordinate, span: span)
-            mapView.setRegion(region, animated: true)
-            mapView.showsUserLocation = true
-            mapView.userTrackingMode = .follow
-            
-        }
-    }
+    
+    
 }
