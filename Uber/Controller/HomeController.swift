@@ -10,14 +10,25 @@ import FirebaseAuth
 import MapKit
 import CoreLocation
 
+enum cornerButtonConfiguration {
+    case sideMenu
+    case normalState
+}
+
 class HomeController: UIViewController {
     
     
+    @IBOutlet weak var cornerButton: UIButton!
     @IBOutlet weak var whereToView: UIView!
     @IBOutlet weak var mapView: MKMapView!
     
+    
+    static let shared = HomeController()
     let locationManager = LocationHandler.shared.locationManager
     var userData: User?
+    var cornerButtonState: cornerButtonConfiguration = .normalState
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +38,15 @@ class HomeController: UIViewController {
         fetchUserData()
         fetchDrivers()
         
-        
     }
     
     func configureMapView() {
-        mapView.delegate = self
+        self.mapView.delegate = self
+        guard let location = locationManager?.location?.coordinate else {return}
+        let coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let region: MKCoordinateRegion = MKCoordinateRegion(center: coordinate, span: span)
+        mapView.setRegion(region, animated: true)
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
     }
@@ -57,13 +72,12 @@ class HomeController: UIViewController {
     func configureUI() {
         whereToView.alpha = 0
         whereToView.layer.shadowColor = UIColor.label.cgColor
-        whereToView.layer.shadowOpacity = 0.5
-        whereToView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        whereToView.layer.shadowOpacity = 1
+        whereToView.layer.shadowOffset = CGSize(width: 0, height: 0)
         whereToView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showLocationInputView)))
         UIView.animate(withDuration: 2) {
             self.whereToView.alpha = 1
         }
-
     }
     
     @objc func showLocationInputView() {
@@ -81,7 +95,7 @@ class HomeController: UIViewController {
     func fetchDrivers() {
         guard let location = locationManager?.location else {return}
         Service.shared.fetchDriver(location: location) { (driver) in
-            print("DEBUG: your driver is \(driver)")
+
             guard let driverCoordinates = driver.location?.coordinate else {return}
             let annotaions = DriverAnnotation(fullname: driver.fullname, uid: driver.uid, coordinate: driverCoordinates)
             var isDriverAdded: Bool {
@@ -99,10 +113,27 @@ class HomeController: UIViewController {
             }
         }
     }
+    
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! LocationInputController
         destinationVC.userFullName = self.userData?.fullname
+        destinationVC.delegate = self
+    }
+    
+    
+    @IBAction func cornerButtonTapped(_ sender: UIButton) {
+        switch cornerButtonState {
+        case .normalState:
+            break
+        case .sideMenu:
+            self.cornerButtonState = .normalState
+            cornerButton.setImage(#imageLiteral(resourceName: "icons8-menu"), for: .normal)
+            MapKit.shared.removeAnnotation(mapView: mapView)
+            UIView.animate(withDuration: 1) {
+                self.whereToView.alpha = 1
+            }
+        }
     }
     
 }
@@ -143,7 +174,7 @@ extension HomeController : CLLocationManagerDelegate {
 //MARK: - MapView Methods
 
 extension HomeController: MKMapViewDelegate {
-    
+
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? DriverAnnotation {
             let annotationTitle = UILabel(frame: CGRect(x: 2, y: -15, width: 50, height: 30))
@@ -154,10 +185,28 @@ extension HomeController: MKMapViewDelegate {
             annotationView.addSubview(annotationTitle)
             return annotationView
         }
-        
+
         return nil
     }
+}
+
+extension HomeController: ShowPlaceDetails {
     
+    func showAnnotation(place: MKPlacemark) {
+        self.cornerButtonState = .sideMenu
+        self.cornerButton.setImage(#imageLiteral(resourceName: "icons8-back"), for: .normal)
+        self.whereToView.alpha = 0
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = place.coordinate
+        mapView.addAnnotation(annotation)
+        UIView.animate(withDuration: 1) {
+            self.mapView.selectAnnotation(annotation, animated: true)
+        }
+    }
+
     
     
 }
+
+
+

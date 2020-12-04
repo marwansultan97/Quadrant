@@ -7,10 +7,21 @@
 
 import UIKit
 import Hero
+import MapKit
+
+protocol ShowPlaceDetails: class {
+    func showAnnotation(place: MKPlacemark)
+}
 
 class LocationInputController: UIViewController {
     
     var userFullName: String?
+    var delegate: ShowPlaceDetails?
+    var places: [MKPlacemark]? {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     @IBOutlet weak var locationInputView: UIView!
     @IBOutlet weak var startingLocationTF: UITextField!
@@ -26,8 +37,9 @@ class LocationInputController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initUI()
-        fullnameLabel.text = userFullName
+        configureUI()
+        configureTableView()
+        destinationLocationTF.delegate = self
         
     }
 
@@ -36,22 +48,23 @@ class LocationInputController: UIViewController {
     }
     
     
-    func initUI() {
+    func configureUI() {
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.heroNavigationAnimationType = .fade
+        locationInputView.hero.modifiers = [.arc]
+        fullnameLabel.text = userFullName
+//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+    }
+    
+    func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.rowHeight = 50
+        tableView.keyboardDismissMode = .onDrag
         tableView.hero.isEnabled = true
-        tableView.hero.modifiers = [.translate(x: 0, y: 30, z: 0)]
-        navigationController?.navigationBar.isHidden = true
-        navigationController?.heroNavigationAnimationType = .fade
-        locationInputView.hero.modifiers = [.arc]
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
     
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }    
     
 }
 
@@ -69,14 +82,44 @@ extension LocationInputController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 2 : 5
+        return section == 0 ? 2 : places?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationTableViewCell
-        cell.configureCell()
+        if indexPath.section == 1 {
+            guard let placeMark = self.places?[indexPath.row] else {return cell}
+            cell.configureCell(place: placeMark)
+        }
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 1 {
+            print(indexPath.row)
+            guard let placeMark = self.places?[indexPath.row] else {return}
+            delegate?.showAnnotation(place: placeMark)
+            navigationController?.popViewController(animated: true)
+        }
+    }
     
+    
+}
+
+//MARK: - Text Field Delegate
+extension LocationInputController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let query = textField.text else { return false }
+        LocationHandler.shared.seachPlacesOnMap(query: query) { (places, err) in
+            if err != nil {
+                print("DEBUG: error searching places \(err?.localizedDescription)")
+            } else {
+                self.places = places
+            }
+        }
+        textField.resignFirstResponder()
+        return true
+    }
 }

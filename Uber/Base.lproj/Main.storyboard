@@ -441,7 +441,7 @@
                                 <rect key="frame" x="0.0" y="88" width="390" height="722"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1E-EF-WDs" userLabel="whereToView">
-                                <rect key="frame" x="30" y="128" width="330" height="50"/>
+                                <rect key="frame" x="30" y="168" width="330" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where to?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRY-BG-ZBB">
                                         <rect key="frame" x="48" y="12.666666666666657" width="100" height="25"/>
@@ -474,6 +474,17 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="whereToView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jl7-jU-xvB">
+                                <rect key="frame" x="10" y="98" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="gaL-l7-fyO"/>
+                                    <constraint firstAttribute="height" constant="40" id="p7A-Ob-B0S"/>
+                                </constraints>
+                                <state key="normal" image="icons8-menu"/>
+                                <connections>
+                                    <action selector="cornerButtonTapped:" destination="hEo-SF-wXb" eventType="touchUpInside" id="Kkz-No-IXo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bxg-38-xW3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -481,9 +492,11 @@
                             <constraint firstItem="Bxg-38-xW3" firstAttribute="bottom" secondItem="ZuN-7p-Pbo" secondAttribute="bottom" id="4ye-oJ-nc1"/>
                             <constraint firstItem="Bxg-38-xW3" firstAttribute="trailing" secondItem="K1E-EF-WDs" secondAttribute="trailing" constant="30" id="5bd-ha-Q8I"/>
                             <constraint firstItem="ZuN-7p-Pbo" firstAttribute="top" secondItem="Bxg-38-xW3" secondAttribute="top" id="BGp-a6-O63"/>
-                            <constraint firstItem="K1E-EF-WDs" firstAttribute="top" secondItem="Bxg-38-xW3" secondAttribute="top" constant="40" id="EPN-G1-Km6"/>
+                            <constraint firstItem="K1E-EF-WDs" firstAttribute="top" secondItem="Bxg-38-xW3" secondAttribute="top" constant="80" id="EPN-G1-Km6"/>
                             <constraint firstItem="ZuN-7p-Pbo" firstAttribute="leading" secondItem="Bxg-38-xW3" secondAttribute="leading" id="NQb-fi-nxi"/>
+                            <constraint firstItem="jl7-jU-xvB" firstAttribute="leading" secondItem="Bxg-38-xW3" secondAttribute="leading" constant="10" id="Q4a-Sn-xYp"/>
                             <constraint firstItem="Bxg-38-xW3" firstAttribute="trailing" secondItem="ZuN-7p-Pbo" secondAttribute="trailing" id="UFz-Nd-RyH"/>
+                            <constraint firstItem="jl7-jU-xvB" firstAttribute="top" secondItem="Bxg-38-xW3" secondAttribute="top" constant="10" id="boa-k4-9Cr"/>
                             <constraint firstItem="K1E-EF-WDs" firstAttribute="leading" secondItem="Bxg-38-xW3" secondAttribute="leading" constant="30" id="hvn-8Z-gVo"/>
                         </constraints>
                     </view>
@@ -492,6 +505,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="cornerButton" destination="jl7-jU-xvB" id="hyr-16-rDv"/>
                         <outlet property="mapView" destination="ZuN-7p-Pbo" id="5cn-bi-hfv"/>
                         <outlet property="whereToView" destination="K1E-EF-WDs" id="nZJ-SP-szB"/>
                         <segue destination="K9m-HR-Udc" kind="show" identifier="LocationInputController" id="kcT-ys-Anp"/>
@@ -504,7 +518,7 @@
         <!--Location Input Controller-->
         <scene sceneID="Evf-XB-Pws">
             <objects>
-                <viewController id="K9m-HR-Udc" customClass="LocationInputController" customModule="Uber" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationInputController" id="K9m-HR-Udc" customClass="LocationInputController" customModule="Uber" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eHr-Ug-crN">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -512,7 +526,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WOs-Th-uP5" userLabel="locationInputView">
                                 <rect key="frame" x="0.0" y="88" width="390" height="150"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Starting location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ffU-Cx-pQt">
+                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Current location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ffU-Cx-pQt">
                                         <rect key="frame" x="50" y="40" width="290" height="30"/>
                                         <color key="backgroundColor" systemColor="placeholderTextColor"/>
                                         <constraints>
@@ -521,7 +535,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Destination" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j78-tx-sWo">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Destination" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="j78-tx-sWo">
                                         <rect key="frame" x="50" y="80" width="290" height="30"/>
                                         <color key="backgroundColor" systemColor="placeholderTextColor"/>
                                         <constraints>
@@ -612,16 +626,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="aYa-z9-dEG">
-                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="76"/>
+                                                    <rect key="frame" x="10" y="0.0" width="370" height="76"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vn-GC-rir">
-                                                            <rect key="frame" x="0.0" y="0.0" width="390" height="38"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="370" height="38"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QQ-U6-JBO">
-                                                            <rect key="frame" x="0.0" y="38" width="390" height="38"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QQ-U6-JBO">
+                                                            <rect key="frame" x="0.0" y="38" width="370" height="38"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -630,10 +644,10 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="aYa-z9-dEG" firstAttribute="leading" secondItem="Y4t-TF-Sf4" secondAttribute="leading" id="CZD-VI-VBn"/>
+                                                <constraint firstItem="aYa-z9-dEG" firstAttribute="leading" secondItem="Y4t-TF-Sf4" secondAttribute="leading" constant="10" id="CZD-VI-VBn"/>
                                                 <constraint firstItem="aYa-z9-dEG" firstAttribute="top" secondItem="Y4t-TF-Sf4" secondAttribute="top" id="GlL-yO-jrj"/>
                                                 <constraint firstAttribute="bottom" secondItem="aYa-z9-dEG" secondAttribute="bottom" id="HPf-bV-pda"/>
-                                                <constraint firstAttribute="trailing" secondItem="aYa-z9-dEG" secondAttribute="trailing" id="qeJ-Iz-Z4E"/>
+                                                <constraint firstAttribute="trailing" secondItem="aYa-z9-dEG" secondAttribute="trailing" constant="10" id="qeJ-Iz-Z4E"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <userDefinedRuntimeAttributes>
@@ -641,7 +655,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabledForSubviews" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <outlet property="locationFullLabel" destination="0QQ-U6-JBO" id="ObD-w9-Naa"/>
+                                            <outlet property="addressLabel" destination="0QQ-U6-JBO" id="24L-HE-CSD"/>
                                             <outlet property="locationLabel" destination="0vn-GC-rir" id="5P0-dz-aag"/>
                                         </connections>
                                     </tableViewCell>
@@ -678,7 +692,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1F-Jb-ao1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1976.9230769230769" y="895.73459715639808"/>
+            <point key="canvasLocation" x="2275" y="896"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
@@ -689,6 +703,7 @@
         <image name="icons8-driving" width="50" height="50"/>
         <image name="icons8-lock" width="50" height="50"/>
         <image name="icons8-mail" width="50" height="50"/>
+        <image name="icons8-menu" width="32" height="32"/>
         <image name="icons8-person" width="48" height="48"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

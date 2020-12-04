@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 
 class LocationHandler: NSObject, CLLocationManagerDelegate {
@@ -52,5 +53,27 @@ class LocationHandler: NSObject, CLLocationManagerDelegate {
             
         }
     }
+    
+    func seachPlacesOnMap(query: String, completion: @escaping([MKPlacemark]?, Error?)-> Void) {
+        guard let coordinations = self.locationManager.location?.coordinate else {return}
+        let request = MKLocalSearch.Request()
+        let coordinate = CLLocationCoordinate2D(latitude: coordinations.latitude, longitude: coordinations.longitude)
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let region = MKCoordinateRegion(center: coordinate, span: span)
+        request.region = region
+        request.naturalLanguageQuery = query
+        let search = MKLocalSearch.init(request: request)
+        search.start { (res, err) in
+            if err != nil {
+                completion(nil,err)
+            } else {
+                var result: [MKPlacemark]
+                guard let response = res else {return}
+                result = response.mapItems.map { $0.placemark }
+                completion(result,nil)
+            }
+        }
+    }
+    
     
 }

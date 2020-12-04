@@ -7,10 +7,11 @@
 
 import UIKit
 import Hero
+import MapKit
 
 class LocationTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var locationFullLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     
     override func awakeFromNib() {
@@ -18,12 +19,18 @@ class LocationTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func configureCell() {
+    func configureCell(place: MKPlacemark) {
 //        self.hero.isEnabled = true
 //        self.hero.modifiers = [.translate(x: 50, y: 50, z: 0)]
-        locationLabel.text = "123 St, main"
-        locationFullLabel.text = "123 St, main, washington DC"
-        locationFullLabel.alpha = 0.6
+        guard let thoroughFare = place.thoroughfare else {return}
+        guard let subThoroughFare = place.subThoroughfare else {return}
+        guard let locality = place.locality else {return}
+        guard let adminArea = place.administrativeArea else {return}
+        locationLabel.text = place.name
+        addressLabel.text = "\(subThoroughFare) \(thoroughFare) \(locality) \(adminArea)"
+        addressLabel.alpha = 0.7
+        addressLabel.adjustsFontSizeToFitWidth = true
+        addressLabel.minimumScaleFactor = 0.2
     }
 
 

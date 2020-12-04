@@ -16,6 +16,7 @@
 		CB500AE825752FF3005CD813 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500AE725752FF3005CD813 /* User.swift */; };
 		CB500B002575B763005CD813 /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500AFF2575B763005CD813 /* LocationHandler.swift */; };
 		CB500B0425767BB9005CD813 /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B0325767BB9005CD813 /* DriverAnnotation.swift */; };
+		CB500B0A257AF4DA005CD813 /* MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B09257AF4DA005CD813 /* MapKit.swift */; };
 		CB8C0E5625693F3700C714B8 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C0E5525693F3700C714B8 /* LoginController.swift */; };
 		CB8C0E5A256AC92B00C714B8 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C0E59256AC92B00C714B8 /* SignupController.swift */; };
 		CB8C0E5D256BBDFC00C714B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB8C0E5C256BBDFC00C714B8 /* GoogleService-Info.plist */; };
@@ -39,6 +40,7 @@
 		CB500AE725752FF3005CD813 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CB500AFF2575B763005CD813 /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		CB500B0325767BB9005CD813 /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
+		CB500B09257AF4DA005CD813 /* MapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKit.swift; sourceTree = "<group>"; };
 		CB8C0E5525693F3700C714B8 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		CB8C0E59256AC92B00C714B8 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
 		CB8C0E5C256BBDFC00C714B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				CB500AFF2575B763005CD813 /* LocationHandler.swift */,
+				CB500B09257AF4DA005CD813 /* MapKit.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			files = (
 				CB8C0EA42573B56400C714B8 /* LocationInputController.swift in Sources */,
 				CB2550052566D2DC003BC53C /* AppDelegate.swift in Sources */,
+				CB500B0A257AF4DA005CD813 /* MapKit.swift in Sources */,
 				CB8C0EA72574436300C714B8 /* LocationTableViewCell.swift in Sources */,
 				CB8C0E5625693F3700C714B8 /* LoginController.swift in Sources */,
 				CB8C0E89256C768600C714B8 /* HomeController.swift in Sources */,

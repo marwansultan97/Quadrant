@@ -40,7 +40,6 @@ class SignupController: UIViewController {
         
         Authentication.shared.signupEmail(email: email, password: password, values: values, accountType: accountType) { [self] (isSuccess, err) in
             if isSuccess{
-                print("success")
                 // GO TO HOME SCREEN
                 performSegue(withIdentifier: "HomeController", sender: self)
             }else{

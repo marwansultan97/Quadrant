@@ -32,7 +32,6 @@ class LoginController: UIViewController {
         Authentication.shared.loginEmail(email: email, password: password) { (isSuccess, err) in
             if isSuccess {
                 // GO TO HOME SCREEN
-                print("login success")
                 self.performSegue(withIdentifier: "HomeController", sender: self)
             } else {
                 self.showAlert(message: err!.localizedDescription)
