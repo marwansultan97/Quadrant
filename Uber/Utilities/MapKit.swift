@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-class MapKit  {
+class MapKit: NSObject, MKMapViewDelegate  {
     
     static let shared = MapKit()
     

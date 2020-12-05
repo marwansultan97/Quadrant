@@ -97,10 +97,9 @@ extension LocationInputController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 1 {
-            print(indexPath.row)
             guard let placeMark = self.places?[indexPath.row] else {return}
-            delegate?.showAnnotation(place: placeMark)
             navigationController?.popViewController(animated: true)
+            delegate?.showAnnotation(place: placeMark)
         }
     }
     
