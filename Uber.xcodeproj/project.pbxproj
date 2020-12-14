@@ -14,10 +14,13 @@
 		CB25500E2566D2DE003BC53C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB25500D2566D2DE003BC53C /* Assets.xcassets */; };
 		CB2550112566D2DE003BC53C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB25500F2566D2DE003BC53C /* LaunchScreen.storyboard */; };
 		CB500AE825752FF3005CD813 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500AE725752FF3005CD813 /* User.swift */; };
-		CB500B002575B763005CD813 /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500AFF2575B763005CD813 /* LocationHandler.swift */; };
 		CB500B0425767BB9005CD813 /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B0325767BB9005CD813 /* DriverAnnotation.swift */; };
-		CB500B0A257AF4DA005CD813 /* MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B09257AF4DA005CD813 /* MapKit.swift */; };
+		CB500B0A257AF4DA005CD813 /* MapLocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B09257AF4DA005CD813 /* MapLocationServices.swift */; };
 		CB500B0D257BB1D1005CD813 /* HomeControllerExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B0C257BB1D1005CD813 /* HomeControllerExtenstions.swift */; };
+		CB500B35258104FD005CD813 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B34258104FC005CD813 /* Trip.swift */; };
+		CB500B3925824C03005CD813 /* PickupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B3825824C03005CD813 /* PickupController.swift */; };
+		CB500B3C2582DA96005CD813 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B3B2582DA96005CD813 /* Extensions.swift */; };
+		CB500B3F25854827005CD813 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B3E25854827005CD813 /* Enumerations.swift */; };
 		CB8C0E5625693F3700C714B8 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C0E5525693F3700C714B8 /* LoginController.swift */; };
 		CB8C0E5A256AC92B00C714B8 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C0E59256AC92B00C714B8 /* SignupController.swift */; };
 		CB8C0E5D256BBDFC00C714B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB8C0E5C256BBDFC00C714B8 /* GoogleService-Info.plist */; };
@@ -39,10 +42,13 @@
 		CB2550102566D2DE003BC53C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB2550122566D2DE003BC53C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB500AE725752FF3005CD813 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		CB500AFF2575B763005CD813 /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		CB500B0325767BB9005CD813 /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
-		CB500B09257AF4DA005CD813 /* MapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKit.swift; sourceTree = "<group>"; };
+		CB500B09257AF4DA005CD813 /* MapLocationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationServices.swift; sourceTree = "<group>"; };
 		CB500B0C257BB1D1005CD813 /* HomeControllerExtenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeControllerExtenstions.swift; sourceTree = "<group>"; };
+		CB500B34258104FC005CD813 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		CB500B3825824C03005CD813 /* PickupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupController.swift; sourceTree = "<group>"; };
+		CB500B3B2582DA96005CD813 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CB500B3E25854827005CD813 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		CB8C0E5525693F3700C714B8 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		CB8C0E59256AC92B00C714B8 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
 		CB8C0E5C256BBDFC00C714B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -135,6 +141,7 @@
 				CB8C0E59256AC92B00C714B8 /* SignupController.swift */,
 				CB8C0E88256C768600C714B8 /* HomeController.swift */,
 				CB8C0EA32573B56400C714B8 /* LocationInputController.swift */,
+				CB500B3825824C03005CD813 /* PickupController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -144,6 +151,7 @@
 			children = (
 				CB500AE725752FF3005CD813 /* User.swift */,
 				CB500B0325767BB9005CD813 /* DriverAnnotation.swift */,
+				CB500B34258104FC005CD813 /* Trip.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -160,9 +168,10 @@
 		CB8C0E5225693C8200C714B8 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				CB500AFF2575B763005CD813 /* LocationHandler.swift */,
-				CB500B09257AF4DA005CD813 /* MapKit.swift */,
+				CB500B09257AF4DA005CD813 /* MapLocationServices.swift */,
 				CB500B0C257BB1D1005CD813 /* HomeControllerExtenstions.swift */,
+				CB500B3B2582DA96005CD813 /* Extensions.swift */,
+				CB500B3E25854827005CD813 /* Enumerations.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -285,16 +294,19 @@
 				CB8C0EA42573B56400C714B8 /* LocationInputController.swift in Sources */,
 				CB2550052566D2DC003BC53C /* AppDelegate.swift in Sources */,
 				CB500B0D257BB1D1005CD813 /* HomeControllerExtenstions.swift in Sources */,
-				CB500B0A257AF4DA005CD813 /* MapKit.swift in Sources */,
+				CB500B3F25854827005CD813 /* Enumerations.swift in Sources */,
+				CB500B0A257AF4DA005CD813 /* MapLocationServices.swift in Sources */,
 				CB8C0EA72574436300C714B8 /* LocationTableViewCell.swift in Sources */,
 				CB8C0E5625693F3700C714B8 /* LoginController.swift in Sources */,
+				CB500B35258104FD005CD813 /* Trip.swift in Sources */,
 				CB8C0E89256C768600C714B8 /* HomeController.swift in Sources */,
+				CB500B3925824C03005CD813 /* PickupController.swift in Sources */,
 				CB500B0425767BB9005CD813 /* DriverAnnotation.swift in Sources */,
 				CB8C0EAA2575145A00C714B8 /* Service.swift in Sources */,
+				CB500B3C2582DA96005CD813 /* Extensions.swift in Sources */,
 				CB2550072566D2DC003BC53C /* SceneDelegate.swift in Sources */,
 				CB8C0E73256BC24400C714B8 /* Authentication.swift in Sources */,
 				CB500AE825752FF3005CD813 /* User.swift in Sources */,
-				CB500B002575B763005CD813 /* LocationHandler.swift in Sources */,
 				CB8C0E5A256AC92B00C714B8 /* SignupController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,7 +10,7 @@ import Hero
 import MapKit
 
 protocol ShowPlaceDetails: class {
-    func showAnnotation(place: MKPlacemark)
+    func deliverPlaceDetails(place: MKPlacemark)
 }
 
 class LocationInputController: UIViewController {
@@ -99,7 +99,7 @@ extension LocationInputController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 1 {
             guard let placeMark = self.places?[indexPath.row] else {return}
             navigationController?.popViewController(animated: true)
-            delegate?.showAnnotation(place: placeMark)
+            delegate?.deliverPlaceDetails(place: placeMark)
         }
     }
     
@@ -111,7 +111,7 @@ extension LocationInputController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let query = textField.text else { return false }
-        LocationHandler.shared.seachPlacesOnMap(query: query) { (places, err) in
+        MapLocationServices.shared.seachPlacesOnMap(query: query) { (places, err) in
             if err != nil {
                 print("DEBUG: error searching places \(err?.localizedDescription)")
             } else {

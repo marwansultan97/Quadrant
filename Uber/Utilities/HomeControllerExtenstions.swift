@@ -15,38 +15,65 @@ import CoreLocation
 extension HomeController : CLLocationManagerDelegate {
     
     func authorizationStatus() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        switch locationManager?.accuracyAuthorization {
+        switch locationManager.accuracyAuthorization {
         case .reducedAccuracy:
-            locationManager?.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow 'Maps' to use your precise location once")
+            locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow 'Maps' to use your precise location once")
         case .fullAccuracy:
-            locationManager?.startUpdatingLocation()
-        case .none:
-            break
+            locationManager.startUpdatingLocation()
         @unknown default:
             break
         }
         
-        switch locationManager?.authorizationStatus {
+        switch locationManager.authorizationStatus {
         case .denied, .restricted:
             break
         case .authorizedWhenInUse:
-            locationManager?.requestAlwaysAuthorization()
+            locationManager.requestAlwaysAuthorization()
         case .notDetermined:
-            locationManager?.requestWhenInUseAuthorization()
+            locationManager.requestWhenInUseAuthorization()
         case .authorizedAlways:
-            break
-        case .none:
             break
         @unknown default:
             break
         }
     }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        if locationManager.authorizationStatus == .authorizedWhenInUse && locationManager.accuracyAuthorization == .reducedAccuracy {
+            locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow 'Maps' to use your precise location once") { _ in
+                self.locationManager.requestAlwaysAuthorization()
+                self.locationManager.startUpdatingLocation()
+            }
+        } else if locationManager.authorizationStatus == .authorizedAlways && locationManager.accuracyAuthorization == .reducedAccuracy {
+            locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow 'Maps' to use your precise location once") { _ in
+                self.locationManager.startUpdatingLocation()
+            }
+        } else if locationManager.accuracyAuthorization == .fullAccuracy {
+            self.locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation: CLLocation = locations[0]
+        configureMapView(location: userLocation)
+        locationManager.stopUpdatingLocation()
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        self.showAlert(message: error.localizedDescription)
+    }
 }
+
+
 
 //MARK: - Create Custom Annotation for The Drivers
 extension HomeController: MKMapViewDelegate {
 
+    // to make a custom driver annotation
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? DriverAnnotation {
             let annotationTitle = UILabel(frame: CGRect(x: 2, y: -15, width: 50, height: 30))
@@ -61,60 +88,196 @@ extension HomeController: MKMapViewDelegate {
         return nil
     }
     
+    // to drow the route between current location and searched place
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if let route = self.route {
-            let polyline = route.polyline
-            let polylineRenderer = MKPolylineRenderer(overlay: polyline)
-            polylineRenderer.strokeColor = .black
-            polylineRenderer.lineWidth = 5
-            return polylineRenderer
+        
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.systemBlue
+        renderer.lineWidth = 5.0
+        return renderer
+        
+    }
+    
+    // to zoom in and out in map
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
+        if !mapFinishedLoading {
+            mapFinishedLoading = true
+            let annotation = mapView.annotations.filter({ $0.isKind(of: MKUserLocation.self) })
+            mapView.showAnnotations(annotation, animated: true)
+        } else if zoomIn {
+            zoomIn = false
+            let zoomInAnnotations = mapView.annotations.filter({ !$0.isKind(of: DriverAnnotation.self) })
+            mapView.fitAll(in: zoomInAnnotations, andShow: true)
+            animateRideActionViewPassenger(const: 250, alpha: 0)
         }
-        return MKPolylineRenderer()
-
     }
     
 }
 
 
-//MARK: - Show Annotation and Route for the place
+//MARK: - Show Details and Route for the searched place
 extension HomeController: ShowPlaceDetails {
     
-    func showAnnotation(place: MKPlacemark) {
-        self.cornerButtonState = .sideMenu
-        self.cornerButton.setImage(#imageLiteral(resourceName: "icons8-back"), for: .normal)
-        self.whereToView.alpha = 0
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = place.coordinate
-        mapView.addAnnotation(annotation)
-        self.showPlaceRoute(place: place)
+    
+    func deliverPlaceDetails(place: MKPlacemark) {
+        selectedPlace = place
+        cornerButtonState = .back
+        zoomIn = true
+        cornerButton.setImage(#imageLiteral(resourceName: "icons8-back"), for: .normal)
+        whereToView.alpha = 0
+        
+        MapLocationServices.shared.addAnnotation(coordinate: place.coordinate, mapView: self.mapView, animated: true)
 
-        UIView.animate(withDuration: 1) {
-            self.mapView.selectAnnotation(annotation, animated: true)
+        showPlaceRoute(destination: place)
+        configRideActionView(place: place, trip: nil, config: self.rideActionViewState)
+    }
+    
+    
+    func showPlaceRoute(destination: MKPlacemark) {
+        
+        MapLocationServices.shared.showRoute(destination: destination) { (response, err) in
+            self.route = response!.routes.first
+            self.mapView.addOverlay(self.route!.polyline)
         }
     }
     
-    func showPlaceRoute(place: MKPlacemark) {
-        let destination = MKMapItem(placemark: place)
-        let request = MKDirections.Request()
-        request.source = MKMapItem.forCurrentLocation()
-        request.destination = destination
-        request.transportType = .automobile
+
+}
+
+
+//MARK: - show route from Driver Location to Passenger Location with Passenger Details or Dismiss if the trip is cancled by the             passenger
+extension HomeController: PickupControllerDelegate {
+    
+    
+    func searchForOtherTrips(trip: Trip) {
+        self.trip = nil
         
-        let routeRequest = MKDirections(request: request)
-        DispatchQueue.main.async {
-            routeRequest.calculate { (res, err) in
-                guard let response = res else {return}
-                self.route = response.routes.first
-                guard let polyline = self.route?.polyline else {return}
-                self.mapView.addOverlay(polyline)
+        self.fetchTrips()
+        
+        print(self.trip)
+        
+    }
+    
+
+    
+    
+    func dismiss() {
+        animateRideActionViewDriver(const: 0)
+        MapLocationServices.shared.removeAnnotation(mapView: self.mapView)
+    }
+    
+    
+    func showRoute(trip: Trip) {
+        rideActionViewState = .acceptedDriverSide
+        MapLocationServices.shared.addAnnotation(coordinate: trip.pickupCoordinates, mapView: self.mapView, animated: true)
+        zoomIn = true
+        
+        let destination = MKPlacemark(coordinate: trip.pickupCoordinates)
+        
+        MapLocationServices.shared.showRoute(destination: destination) { (response, err) in
+            guard let polyline = response?.routes.first?.polyline else {return}
+            self.mapView.addOverlay(polyline)
+        }
+        
+        configRideActionView(place: nil, trip: trip, config: self.rideActionViewState)
+        
+        Service.shared.isTheTripCancled(uid: trip.passengerUID) { (snapshot) in
+            self.animateRideActionViewDriver(const: 0)
+            MapLocationServices.shared.removeAnnotation(mapView: self.mapView)
+        }
+    }
+
+
+}
+
+extension HomeController {
+    
+    
+    @objc func cancleRide() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        Service.shared.cancleTheTrip(uid: uid) { (err, ref) in
+            self.startActivityIndicator(false, message: nil)
+            MapLocationServices.shared.removeAnnotation(mapView: self.mapView)
+            self.cornerButtonState = .sideMenu
+            self.cornerButton.setImage(#imageLiteral(resourceName: "icons8-menu"), for: .normal)
+            UIView.animate(withDuration: 0.5) {
+                self.whereToView.alpha = 1
+                self.rideActionViewHeight.constant = 0
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    func startActivityIndicator(_ show: Bool, message: String?) {
+        
+        if show {
+            
+            let view = UIView()
+            view.frame = self.view.frame
+            view.backgroundColor = .systemBackground
+            view.alpha = 0
+            view.tag = 1
+            
+            let activityIndicator = UIActivityIndicatorView()
+            activityIndicator.style = .large
+            activityIndicator.hidesWhenStopped = true
+            
+            let label = UILabel()
+            label.text = message
+            label.textColor = .label
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 20)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            
+            let button = UIButton()
+            let attributedTitle = NSAttributedString(string: "Cancle", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemBackground])
+            button.setAttributedTitle(attributedTitle, for: .normal)
+            button.backgroundColor = .label
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.addTarget(self, action: #selector(cancleRide), for: .touchUpInside)
+            
+            
+            
+            view.addSubview(activityIndicator)
+            view.addSubview(label)
+            view.addSubview(button)
+            
+            
+            activityIndicator.center = view.center
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            label.topAnchor.constraint(equalTo: activityIndicator.bottomAnchor, constant: 30).isActive = true
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20).isActive = true
+            button.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            
+            func cancleRide() {
+                
+            }
+            
+            self.view.addSubview(view)
+            
+            activityIndicator.startAnimating()
+            UIView.animate(withDuration: 0.5) {
+                view.alpha = 0.7
+            }
+            
+        } else {
+            self.view.subviews.forEach { (subview) in
+                if subview.tag == 1 {
+                    UIView.animate(withDuration: 0.5) {
+                        subview.alpha = 0
+                    } completion: { _ in
+                        subview.removeFromSuperview()
+                    }
+
+                }
             }
         }
         
         
+        
     }
     
-
-
-    
-    
 }
+

@@ -37,8 +37,8 @@ class Authentication {
             guard let uid = res?.user.uid else {return}
             
             if accountType == 1 {
-                let geofire = GeoFire(firebaseRef: DRIVER_LOCATIONS_REF)
-                guard let location = LocationHandler.shared.locationManager.location else {return}
+                let geofire = GeoFire(firebaseRef: REF_DRIVER_LOCATION)
+                guard let location = MapLocationServices.shared.locationManager.location else {return}
                 geofire.setLocation(location, forKey: uid) { (err) in
                     guard err == nil else {
                         completion(false,err)
