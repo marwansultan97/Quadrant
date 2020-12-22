@@ -32,6 +32,30 @@ extension MKMapView {
         setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 50, left: 20, bottom: 270, right: 20), animated: true)
     }
     
+    func removeAnnotationAndOverlays() {
+        annotations.forEach { (anno) in
+            if let annotation = anno as? MKPointAnnotation {
+                removeAnnotation(annotation)
+            }
+            if let annotation = anno as? DriverAnnotation {
+                removeAnnotation(annotation)
+            }
+        }
+        if overlays.count > 0 {
+            removeOverlay(overlays[0])
+        }
+        
+        let annotation = annotations.filter({ $0.isKind(of: MKUserLocation.self) })
+        showAnnotations(annotation, animated: true)
+    }
+    
+    func addAnnotation(coordinate: CLLocationCoordinate2D) {
+        let anno = MKPointAnnotation()
+        anno.coordinate = coordinate
+        addAnnotation(anno)
+        selectAnnotation(anno, animated: true)
+    }
+    
 }
 
 

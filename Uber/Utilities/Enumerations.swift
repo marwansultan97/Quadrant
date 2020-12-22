@@ -9,12 +9,11 @@ import Foundation
 
 enum RideActionViewConfiguration {
     case requested
-    case acceptedDriverSide
-    case acceptedPassengerSide
-    
-    init() {
-        self = .requested
-    }
+    case accepted
+    case driverArrived
+    case inProgress
+    case arrivedAtDestination
+    case completed
 }
 
 
@@ -25,4 +24,9 @@ enum CornerButtonConfiguration {
     init() {
         self = .sideMenu
     }
+}
+
+enum CircularRegionType: String {
+    case pickup
+    case destination
 }

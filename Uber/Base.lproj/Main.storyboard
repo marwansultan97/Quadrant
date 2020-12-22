@@ -568,7 +568,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="zhW-dV-ju9"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <state key="normal">
                                             <color key="titleColor" systemColor="systemBackgroundColor"/>
                                         </state>
@@ -577,16 +577,16 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdJ-fQ-oca" userLabel="placeName">
-                                        <rect key="frame" x="95" y="10" width="200" height="25"/>
+                                        <rect key="frame" x="35" y="10" width="320" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="NTS-ZB-2ao"/>
-                                            <constraint firstAttribute="width" constant="200" id="QlK-JE-izL"/>
+                                            <constraint firstAttribute="width" constant="320" id="QlK-JE-izL"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5In-Bc-Ntt" userLabel="placeAddress">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Address" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5In-Bc-Ntt" userLabel="placeAddress">
                                         <rect key="frame" x="70" y="35" width="250" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="Vxp-T5-z9F"/>
@@ -652,6 +652,17 @@
                                     <constraint firstItem="SSz-Wz-mye" firstAttribute="top" secondItem="RF9-O9-GtH" secondAttribute="bottom" constant="5" id="sH3-ov-MBB"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMM-4v-PbV">
+                                <rect key="frame" x="340" y="108" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="B04-qf-V6m"/>
+                                    <constraint firstAttribute="height" constant="30" id="DXr-nV-WUo"/>
+                                </constraints>
+                                <state key="normal" image="icons8-search_client 2"/>
+                                <connections>
+                                    <action selector="searchTripsButtonTapped:" destination="hEo-SF-wXb" eventType="touchUpInside" id="6vO-bZ-ZAD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bxg-38-xW3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -665,9 +676,11 @@
                             <constraint firstItem="jl7-jU-xvB" firstAttribute="leading" secondItem="Bxg-38-xW3" secondAttribute="leading" constant="10" id="Q4a-Sn-xYp"/>
                             <constraint firstItem="Bxg-38-xW3" firstAttribute="trailing" secondItem="ZuN-7p-Pbo" secondAttribute="trailing" id="UFz-Nd-RyH"/>
                             <constraint firstItem="jl7-jU-xvB" firstAttribute="top" secondItem="Bxg-38-xW3" secondAttribute="top" constant="10" id="boa-k4-9Cr"/>
+                            <constraint firstItem="Bxg-38-xW3" firstAttribute="trailing" secondItem="BMM-4v-PbV" secondAttribute="trailing" constant="20" id="eBq-8g-aiB"/>
                             <constraint firstItem="K1E-EF-WDs" firstAttribute="leading" secondItem="Bxg-38-xW3" secondAttribute="leading" constant="30" id="hvn-8Z-gVo"/>
                             <constraint firstItem="tHf-H2-Y18" firstAttribute="leading" secondItem="Bxg-38-xW3" secondAttribute="leading" id="iPg-0w-afC"/>
                             <constraint firstItem="Bxg-38-xW3" firstAttribute="bottom" secondItem="tHf-H2-Y18" secondAttribute="bottom" id="jxY-8v-O61"/>
+                            <constraint firstItem="BMM-4v-PbV" firstAttribute="top" secondItem="Bxg-38-xW3" secondAttribute="top" constant="20" id="wCV-mT-3Vz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="trU-yj-EtY"/>
@@ -683,6 +696,7 @@
                         <outlet property="placeName" destination="EdJ-fQ-oca" id="7De-6D-6wD"/>
                         <outlet property="rideActionView" destination="tHf-H2-Y18" id="kee-yG-Ygh"/>
                         <outlet property="rideActionViewHeight" destination="FRt-3A-QiS" id="4qV-wS-AXN"/>
+                        <outlet property="searchTripsButton" destination="BMM-4v-PbV" id="ojR-HN-gAw"/>
                         <outlet property="uberXLabel" destination="SSz-Wz-mye" id="tjc-uC-Fh6"/>
                         <outlet property="whereToView" destination="K1E-EF-WDs" id="nZJ-SP-szB"/>
                         <segue destination="K9m-HR-Udc" kind="show" identifier="LocationInputController" id="kcT-ys-Anp"/>
@@ -885,6 +899,7 @@
         <image name="icons8-menu" width="32" height="32"/>
         <image name="icons8-multiply 2" width="25" height="25"/>
         <image name="icons8-person" width="48" height="48"/>
+        <image name="icons8-search_client 2" width="50" height="50"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

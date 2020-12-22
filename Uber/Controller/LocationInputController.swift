@@ -9,14 +9,14 @@ import UIKit
 import Hero
 import MapKit
 
-protocol ShowPlaceDetails: class {
+protocol LocationInputControllerDelegate: class {
     func deliverPlaceDetails(place: MKPlacemark)
 }
 
 class LocationInputController: UIViewController {
     
     var userFullName: String?
-    var delegate: ShowPlaceDetails?
+    var delegate: LocationInputControllerDelegate?
     var places: [MKPlacemark]? {
         didSet {
             self.tableView.reloadData()
@@ -88,7 +88,7 @@ extension LocationInputController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationTableViewCell
         if indexPath.section == 1 {
-            guard let placeMark = self.places?[indexPath.row] else {return cell}
+            guard let placeMark = self.places?[indexPath.row] else { return UITableViewCell() }
             cell.configureCell(place: placeMark)
         }
         return cell

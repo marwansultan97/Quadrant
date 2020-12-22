@@ -10,17 +10,22 @@ import CoreLocation
 
 enum TripState: Int {
     case requested
+    case waitingToAccept
     case accepted
     case rejected
+    case driverArrived
     case inProgress
-    case done
+    case arriverAtDestination
+    case completed
 }
 
 
 struct Trip {
     
+    
     var pickupCoordinates: CLLocationCoordinate2D!
     var destinationCoordinates: CLLocationCoordinate2D!
+    var destinationName: String!
     let passengerUID: String!
     var driverUID: String?
     var tripState: TripState!
@@ -40,6 +45,8 @@ struct Trip {
             guard let long = destination[1] as? CLLocationDegrees else {return}
             self.destinationCoordinates = CLLocationCoordinate2D(latitude: lat, longitude: long)
         }
+        
+        self.destinationName = values["destinationAddress"] as? String
         
         self.driverUID = values["driverUID"] as? String ?? ""
         

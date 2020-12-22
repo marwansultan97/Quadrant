@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 
 
-//MARK: - Check Location Authorization Status
+//MARK: - Location Manager Methods
 extension HomeController : CLLocationManagerDelegate {
     
     func authorizationStatus() {
@@ -63,14 +63,47 @@ extension HomeController : CLLocationManagerDelegate {
         
     }
     
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.showAlert(message: error.localizedDescription)
+        self.showAlert(title: "ALERT", message: error.localizedDescription)
     }
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        uploadDriverLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
+        if region.identifier == CircularRegionType.pickup.rawValue {
+            print("DEBUG: region is pickup")
+        } else {
+            print("DEBUG: region is destination")
+        }
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        if region.identifier == CircularRegionType.pickup.rawValue {
+            print("DEBUG: did enter pickup region")
+            guard let tripUID = self.acceptedTrip?.passengerUID else {return}
+            rideActionViewState = .driverArrived
+            configRideActionView(place: nil, trip: nil, config: rideActionViewState)
+            Service.shared.updateTripState(uid: tripUID, state: .driverArrived)
+        } else {
+            print("DEBUG: did enter destination region")
+            guard let tripUID = self.acceptedTrip?.passengerUID else {return}
+            rideActionViewState = .arrivedAtDestination
+            configRideActionView(place: nil, trip: nil, config: rideActionViewState)
+            Service.shared.updateTripState(uid: tripUID, state: .arriverAtDestination)
+        }
+        
+    }
+    
+
 }
 
 
 
-//MARK: - Create Custom Annotation for The Drivers
+//MARK: - Map View Methods
 extension HomeController: MKMapViewDelegate {
 
     // to make a custom driver annotation
@@ -97,36 +130,44 @@ extension HomeController: MKMapViewDelegate {
         return renderer
         
     }
+
     
     // to zoom in and out in map
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
-        if !mapFinishedLoading {
-            mapFinishedLoading = true
+        if !zoomInUser {
+            zoomInUser = true
             let annotation = mapView.annotations.filter({ $0.isKind(of: MKUserLocation.self) })
             mapView.showAnnotations(annotation, animated: true)
-        } else if zoomIn {
-            zoomIn = false
+        } else if zoomInUserAndPoint {
+            zoomInUserAndPoint = false
             let zoomInAnnotations = mapView.annotations.filter({ !$0.isKind(of: DriverAnnotation.self) })
             mapView.fitAll(in: zoomInAnnotations, andShow: true)
             animateRideActionViewPassenger(const: 250, alpha: 0)
+        
+        } else if zoomInUserAndDriver {
+            zoomInUserAndDriver = false
+            let zoomInAnnotations = mapView.annotations.filter({ !$0.isKind(of: MKPointAnnotation.self) })
+            mapView.fitAll(in: zoomInAnnotations, andShow: true)
         }
     }
     
 }
 
 
-//MARK: - Show Details and Route for the searched place
-extension HomeController: ShowPlaceDetails {
+//MARK: - Passenger Side Methods
+extension HomeController: LocationInputControllerDelegate {
     
     
     func deliverPlaceDetails(place: MKPlacemark) {
+        self.confirmRideButton.setTitle("CONFIRM REQUEST", for: .normal)
+        self.rideActionViewState = .requested
         selectedPlace = place
         cornerButtonState = .back
-        zoomIn = true
+        zoomInUserAndPoint = true
         cornerButton.setImage(#imageLiteral(resourceName: "icons8-back"), for: .normal)
         whereToView.alpha = 0
         
-        MapLocationServices.shared.addAnnotation(coordinate: place.coordinate, mapView: self.mapView, animated: true)
+        self.mapView.addAnnotation(coordinate: place.coordinate)
 
         showPlaceRoute(destination: place)
         configRideActionView(place: place, trip: nil, config: self.rideActionViewState)
@@ -136,8 +177,8 @@ extension HomeController: ShowPlaceDetails {
     func showPlaceRoute(destination: MKPlacemark) {
         
         MapLocationServices.shared.showRoute(destination: destination) { (response, err) in
-            self.route = response!.routes.first
-            self.mapView.addOverlay(self.route!.polyline)
+            guard let polyline = response?.routes.first?.polyline else {return}
+            self.mapView.addOverlay(polyline)
         }
     }
     
@@ -145,33 +186,31 @@ extension HomeController: ShowPlaceDetails {
 }
 
 
-//MARK: - show route from Driver Location to Passenger Location with Passenger Details or Dismiss if the trip is cancled by the             passenger
+//MARK: - Driver Side Methods
 extension HomeController: PickupControllerDelegate {
     
-    
-    func searchForOtherTrips(trip: Trip) {
-        self.trip = nil
-        
-        self.fetchTrips()
-        
-        print(self.trip)
-        
+    func searchForAnotherTrip() {
+        REF_TRIPS.removeAllObservers()
+        searchTripsButton.tag = 0
+        self.searchTripsButton.transform = CGAffineTransform(scaleX: 1, y: 1)
     }
     
 
-    
-    
     func dismiss() {
-        animateRideActionViewDriver(const: 0)
-        MapLocationServices.shared.removeAnnotation(mapView: self.mapView)
+        REF_TRIPS.removeAllObservers()
+        searchTripsButton.tag = 0
+        self.searchTripsButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.showAlert(title: "Oops!", message: "The passeneger canceled the Trip")
+
     }
     
     
     func showRoute(trip: Trip) {
-        rideActionViewState = .acceptedDriverSide
-        MapLocationServices.shared.addAnnotation(coordinate: trip.pickupCoordinates, mapView: self.mapView, animated: true)
-        zoomIn = true
-        
+        self.acceptedTrip = trip
+        rideActionViewState = .accepted
+        self.mapView.addAnnotation(coordinate: trip.pickupCoordinates)
+        zoomInUserAndPoint = true
+        self.setCircleRegion(identifier: CircularRegionType.pickup.rawValue, coordinate: trip.pickupCoordinates)
         let destination = MKPlacemark(coordinate: trip.pickupCoordinates)
         
         MapLocationServices.shared.showRoute(destination: destination) { (response, err) in
@@ -181,31 +220,35 @@ extension HomeController: PickupControllerDelegate {
         
         configRideActionView(place: nil, trip: trip, config: self.rideActionViewState)
         
+        self.searchTripsButton.alpha = 0
+        
         Service.shared.isTheTripCancled(uid: trip.passengerUID) { (snapshot) in
+            REF_TRIPS.removeAllObservers()
+            self.configureDriverUI()
+            self.searchTripsButton.tag = 0
+            self.searchTripsButton.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.animateRideActionViewDriver(const: 0)
-            MapLocationServices.shared.removeAnnotation(mapView: self.mapView)
+            self.mapView.removeAnnotationAndOverlays()
+            self.showAlert(title: "Oops!", message: "The passeneger canceled the Trip")
         }
     }
 
 
 }
 
+//MARK: - Activity Indicator View
+
 extension HomeController {
     
     
     @objc func cancleRide() {
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        Service.shared.cancleTheTrip(uid: uid) { (err, ref) in
-            self.startActivityIndicator(false, message: nil)
-            MapLocationServices.shared.removeAnnotation(mapView: self.mapView)
-            self.cornerButtonState = .sideMenu
-            self.cornerButton.setImage(#imageLiteral(resourceName: "icons8-menu"), for: .normal)
-            UIView.animate(withDuration: 0.5) {
-                self.whereToView.alpha = 1
-                self.rideActionViewHeight.constant = 0
-                self.view.layoutIfNeeded()
-            }
-        }
+        Service.shared.cancleTheTrip(uid: uid)
+        self.startActivityIndicator(false, message: nil)
+        self.mapView.removeAnnotationAndOverlays()
+        self.cornerButtonState = .sideMenu
+        self.cornerButton.setImage(#imageLiteral(resourceName: "icons8-menu"), for: .normal)
+        self.animateRideActionViewPassenger(const: 0, alpha: 1)
     }
     
     func startActivityIndicator(_ show: Bool, message: String?) {

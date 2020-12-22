@@ -15,23 +15,7 @@ class MapLocationServices {
     
     let locationManager = CLLocationManager()
     
-    
-    func removeAnnotation(mapView: MKMapView) {
-        mapView.annotations.forEach { (anno) in
-            if let annotation = anno as? MKPointAnnotation {
-                mapView.removeAnnotation(annotation)
-            }
-        }
-        if mapView.overlays.count > 0 {
-            mapView.removeOverlay(mapView.overlays[0])
-        }
         
-        let annotation = mapView.annotations.filter({ !$0.isKind(of: DriverAnnotation.self) })
-        mapView.showAnnotations(annotation, animated: true)
-        
-        
-    }
-    
     func seachPlacesOnMap(query: String, completion: @escaping([MKPlacemark]?, Error?)-> Void) {
         guard let coordinations = self.locationManager.location?.coordinate else {return}
         let request = MKLocalSearch.Request()
@@ -70,12 +54,7 @@ class MapLocationServices {
         }
     }
     
-    func addAnnotation(coordinate: CLLocationCoordinate2D, mapView: MKMapView, animated: Bool) {
-        let anno = MKPointAnnotation()
-        anno.coordinate = coordinate
-        mapView.addAnnotation(anno)
-        mapView.selectAnnotation(anno, animated: animated)
-    }
+
 
     
 }
