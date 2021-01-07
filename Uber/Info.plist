@@ -2,21 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationDefaultAccuracyReduced</key>
-	<false/>
-	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
-	<dict>
-		<key>Allow &apos;Maps&apos; to use your precise location once</key>
-		<string>Please allow to get you a ride</string>
-	</dict>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Please allow us to access your location so we can find your rides.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Please allow us to access your location so we can find your rides.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Please allow us to access your location so we can find your rides.</string>
-	<key>NSLocationUsageDescription</key>
-	<string>Please allow us to access your location so we can find your rides.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -35,6 +20,21 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Please allow us to access your location so we can find your rides.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Please allow us to access your location so we can find your rides.</string>
+	<key>NSLocationDefaultAccuracyReduced</key>
+	<false/>
+	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
+	<dict>
+		<key>Allow 'Maps' to use your precise location once</key>
+		<string>Please allow to get you a ride</string>
+	</dict>
+	<key>NSLocationUsageDescription</key>
+	<string>Please allow us to access your location so we can find your rides.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Please allow us to access your location so we can find your rides.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -79,5 +79,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>LSApplicationQueriesSchemes</key>
+        <array>
+            <string>tel</string>
+        </array>
 </dict>
 </plist>

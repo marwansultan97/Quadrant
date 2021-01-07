@@ -18,11 +18,11 @@ enum RideActionViewConfiguration {
 
 
 enum CornerButtonConfiguration {
-    case sideMenu
-    case back
+    case showSideMenu
+    case dismissSideMenu
     
     init() {
-        self = .sideMenu
+        self = .showSideMenu
     }
 }
 

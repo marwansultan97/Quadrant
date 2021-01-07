@@ -11,6 +11,8 @@ import MapKit
 
 class LocationTableViewCell: UITableViewCell {
 
+    static let identifier = "LocationCell"
+    
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     
@@ -20,15 +22,12 @@ class LocationTableViewCell: UITableViewCell {
     }
     
     func configureCell(place: MKPlacemark) {
-//        self.hero.isEnabled = true
-//        self.hero.modifiers = [.translate(x: 50, y: 50, z: 0)]
-        guard let thoroughFare = place.thoroughfare else {return}
-        guard let subThoroughFare = place.subThoroughfare else {return}
-        guard let locality = place.locality else {return}
-        guard let adminArea = place.administrativeArea else {return}
-        locationLabel.text = place.name
-        addressLabel.text = "\(subThoroughFare) \(thoroughFare) \(locality) \(adminArea)"
-        addressLabel.alpha = 0.7
+        let thoroughFare = place.thoroughfare
+        let subThoroughFare = place.subThoroughfare
+        let locality = place.locality
+        let adminArea = place.administrativeArea
+        locationLabel.text = place.name ?? ""
+        addressLabel.text = "\(subThoroughFare ?? "") \(thoroughFare ?? "") \(locality ?? "") \(adminArea ?? "")"
         addressLabel.adjustsFontSizeToFitWidth = true
         addressLabel.minimumScaleFactor = 0.2
     }

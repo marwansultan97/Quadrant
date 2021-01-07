@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 
 
-//MARK: - Location Manager Methods
+//MARK: - Location Manager Delegate Methods
 extension HomeController : CLLocationManagerDelegate {
     
     func authorizationStatus() {
@@ -56,21 +56,18 @@ extension HomeController : CLLocationManagerDelegate {
         }
     }
     
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation: CLLocation = locations[0]
         configureMapView(location: userLocation)
         locationManager.stopUpdatingLocation()
-        
     }
     
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.showAlert(title: "ALERT", message: error.localizedDescription)
+        print("DEBUG: didFailWithError \(error)")
     }
     
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        uploadDriverLocation()
-    }
     
     func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
         if region.identifier == CircularRegionType.pickup.rawValue {
@@ -95,15 +92,10 @@ extension HomeController : CLLocationManagerDelegate {
             configRideActionView(place: nil, trip: nil, config: rideActionViewState)
             Service.shared.updateTripState(uid: tripUID, state: .arriverAtDestination)
         }
-        
     }
-    
-
 }
 
-
-
-//MARK: - Map View Methods
+//MARK: - MapView Delegate Methods
 extension HomeController: MKMapViewDelegate {
 
     // to make a custom driver annotation
@@ -117,20 +109,22 @@ extension HomeController: MKMapViewDelegate {
             annotationView.addSubview(annotationTitle)
             return annotationView
         }
-
         return nil
     }
     
-    // to drow the route between current location and searched place
+    // to draw the route between current location and searched place
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
-        let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.systemBlue
+        let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        renderer.strokeColor = .red
         renderer.lineWidth = 5.0
+        renderer.alpha = 1.0
         return renderer
-        
     }
-
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        uploadDriverLocation()
+    }
     
     // to zoom in and out in map
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
@@ -153,7 +147,6 @@ extension HomeController: MKMapViewDelegate {
     
 }
 
-
 //MARK: - Passenger Side Methods
 extension HomeController: LocationInputControllerDelegate {
     
@@ -162,27 +155,25 @@ extension HomeController: LocationInputControllerDelegate {
         self.confirmRideButton.setTitle("CONFIRM REQUEST", for: .normal)
         self.rideActionViewState = .requested
         selectedPlace = place
-        cornerButtonState = .back
+        cornerButtonState = .dismissSideMenu
         zoomInUserAndPoint = true
         cornerButton.setImage(#imageLiteral(resourceName: "icons8-back"), for: .normal)
         whereToView.alpha = 0
-        
         self.mapView.addAnnotation(coordinate: place.coordinate)
-
         showPlaceRoute(destination: place)
         configRideActionView(place: place, trip: nil, config: self.rideActionViewState)
     }
+    
     
     
     func showPlaceRoute(destination: MKPlacemark) {
         
         MapLocationServices.shared.showRoute(destination: destination) { (response, err) in
             guard let polyline = response?.routes.first?.polyline else {return}
-            self.mapView.addOverlay(polyline)
+            self.mapView.addOverlay(polyline, level: MKOverlayLevel.aboveRoads)
         }
     }
     
-
 }
 
 
@@ -192,14 +183,14 @@ extension HomeController: PickupControllerDelegate {
     func searchForAnotherTrip() {
         REF_TRIPS.removeAllObservers()
         searchTripsButton.tag = 0
-        self.searchTripsButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        searchTripsButton.hideLoading()
     }
     
 
     func dismiss() {
         REF_TRIPS.removeAllObservers()
         searchTripsButton.tag = 0
-        self.searchTripsButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        searchTripsButton.hideLoading()
         self.showAlert(title: "Oops!", message: "The passeneger canceled the Trip")
 
     }
@@ -219,14 +210,12 @@ extension HomeController: PickupControllerDelegate {
         }
         
         configRideActionView(place: nil, trip: trip, config: self.rideActionViewState)
-        
         self.searchTripsButton.alpha = 0
-        
         Service.shared.isTheTripCancled(uid: trip.passengerUID) { (snapshot) in
             REF_TRIPS.removeAllObservers()
             self.configureDriverUI()
             self.searchTripsButton.tag = 0
-            self.searchTripsButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.searchTripsButton.hideLoading()
             self.animateRideActionViewDriver(const: 0)
             self.mapView.removeAnnotationAndOverlays()
             self.showAlert(title: "Oops!", message: "The passeneger canceled the Trip")
@@ -240,13 +229,12 @@ extension HomeController: PickupControllerDelegate {
 
 extension HomeController {
     
-    
     @objc func cancleRide() {
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        Service.shared.cancleTheTrip(uid: uid)
+        REF_TRIPS.child(uid).removeValue()
         self.startActivityIndicator(false, message: nil)
         self.mapView.removeAnnotationAndOverlays()
-        self.cornerButtonState = .sideMenu
+        self.cornerButtonState = .showSideMenu
         self.cornerButton.setImage(#imageLiteral(resourceName: "icons8-menu"), for: .normal)
         self.animateRideActionViewPassenger(const: 0, alpha: 1)
     }
@@ -294,10 +282,6 @@ extension HomeController {
             button.widthAnchor.constraint(equalToConstant: 100).isActive = true
             button.heightAnchor.constraint(equalToConstant: 30).isActive = true
             
-            func cancleRide() {
-                
-            }
-            
             self.view.addSubview(view)
             
             activityIndicator.startAnimating()
@@ -317,9 +301,6 @@ extension HomeController {
                 }
             }
         }
-        
-        
-        
     }
     
 }

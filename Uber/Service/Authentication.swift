@@ -36,28 +36,6 @@ class Authentication {
             }
             guard let uid = res?.user.uid else {return}
             
-            if accountType == 1 {
-                let geofire = GeoFire(firebaseRef: REF_DRIVER_LOCATION)
-                guard let location = MapLocationServices.shared.locationManager.location else {return}
-                geofire.setLocation(location, forKey: uid) { (err) in
-                    guard err == nil else {
-                        completion(false,err)
-                        return
-                    }
-                    
-                    REF_USERS.child(uid).updateChildValues(values) { (err, ref) in
-                        if err != nil {
-                            print("error saving data \(String(describing: err))")
-                            completion(false,err)
-                            return
-                        }
-                        completion(true,nil)
-                    }
-                }
-            }
-
-            
-            
             REF_USERS.child(uid).updateChildValues(values) { (err, ref) in
                 if err != nil {
                     print("error saving data \(String(describing: err))")

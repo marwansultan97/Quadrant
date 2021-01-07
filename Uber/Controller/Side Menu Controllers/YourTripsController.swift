@@ -1,0 +1,70 @@
+//
+//  YourTripsController.swift
+//  Uber
+//
+//  Created by Marwan Osama on 12/27/20.
+//
+
+import UIKit
+import MapKit
+
+class YourTripsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    
+
+    @IBOutlet weak var tableView: UITableView!
+    
+    var user: User?
+    var trips = [Trip]()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureUI()
+        fetchTrips()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+
+    }
+    
+    //MARK: - Configure UI methods
+    
+    func configureUI() {
+        navigationController?.navigationBar.isHidden = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = 180
+        tableView.separatorColor = .label
+        tableView.tableFooterView = UIView()
+    }
+    
+    // MARK: - API Methods
+    func fetchTrips() {
+        Service.shared.fetchCompletedTrips { (trips) in
+            self.trips = trips
+            print("DEBUG: trips are \(trips)")
+            self.tableView.reloadData()
+        }
+    }
+    
+    
+    // MARK: - TableView Methods
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.trips.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: YourTripsTableViewCell.identifier, for: indexPath) as! YourTripsTableViewCell
+        guard self.trips.count != 0 else {return cell}
+        let trip = self.trips[indexPath.row]
+        cell.configureCell(trip: trip, user: self.user!)
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+}

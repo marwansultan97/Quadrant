@@ -27,6 +27,9 @@ struct Trip {
     var destinationCoordinates: CLLocationCoordinate2D!
     var destinationName: String!
     let passengerUID: String!
+    var passengerPhoneNumber: String!
+    var driverPhoneNumber: String?
+    var date: String!
     var driverUID: String?
     var tripState: TripState!
     
@@ -50,12 +53,16 @@ struct Trip {
         
         self.driverUID = values["driverUID"] as? String ?? ""
         
+        self.driverPhoneNumber = values["driverPhoneNumber"] as? String ?? ""
+        
+        self.passengerPhoneNumber = values["passengerPhoneNumber"] as? String ?? ""
+        
+        self.date = values["date"] as? String ?? ""
+        
         if let state = values["state"] as? Int {
             self.tripState = TripState(rawValue: state)
         }
-        
-        
-        
+ 
     }
     
     

@@ -1,56 +1,46 @@
 //
-//  SignupController.swift
+//  LoginController.swift
 //  Uber
 //
-//  Created by Marwan Osama on 11/22/20.
+//  Created by Marwan Osama on 11/21/20.
 //
+
 
 import UIKit
 import FirebaseAuth
 
-class SignupController: UIViewController {
-    
+class LoginController: UIViewController {
     
     @IBOutlet weak var emailTF: UITextField!
     
-    @IBOutlet weak var fullnameTF: UITextField!
-    
     @IBOutlet weak var passwordTF: UITextField!
     
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-    
-    
-    
+    let hud = ProgressHUD.shared
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
+        checkAuth()
         view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(endTextEditing)))
         
-        
+
     }
-    
-    @IBAction func signupButtonTapped(_ sender: UIButton) {
+
+    @IBAction func loginButtonTapped(_ sender: UIButton) {
         
         guard let email = emailTF.text else {return}
         guard let password = passwordTF.text else {return}
-        guard let fullname = fullnameTF.text else {return}
-        let accountType: Int = segmentedControl.selectedSegmentIndex
-        
-        let values: [String:Any] = ["email": email, "password": password, "fullname": fullname, "accountType": accountType]
-        
-        Authentication.shared.signupEmail(email: email, password: password, values: values, accountType: accountType) { [self] (isSuccess, err) in
-            if isSuccess{
+        hud.show(message: "Logging in...")
+        Authentication.shared.loginEmail(email: email, password: password) { (isSuccess, err) in
+            if isSuccess {
                 // GO TO HOME SCREEN
-                performSegue(withIdentifier: "HomeController", sender: self)
-            }else{
+                self.hud.dismiss()
+                self.performSegue(withIdentifier: "HomeController", sender: self)
+            } else {
+                self.hud.dismiss()
                 self.showAlert(message: err!.localizedDescription)
             }
         }
-        
-    }
-    
-    @IBAction func loginButtonTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
     }
     
     func showAlert(message: String) {
@@ -64,6 +54,14 @@ class SignupController: UIViewController {
         view.endEditing(true)
     }
     
-    
-    
+    func checkAuth() {
+        self.view.alpha = 0
+        if Auth.auth().currentUser != nil {
+            performSegue(withIdentifier: "HomeController", sender: self)
+        } else {
+            self.view.alpha = 1
+        }
+    }
+
+
 }
