@@ -1,0 +1,88 @@
+
+
+"Language" = "en";
+
+
+//MARK: - Home
+"OK" = "OK";
+"CONFIRM REQUEST" = "CONFIRM REQUEST";
+"Driver En Route" = "Driver En Route";
+"CANCEL RIDE" = "CANCEL RIDE";
+"En Route To Passenger" = "En Route To Passenger";
+"GET DIRECTIONS" = "GET DIRECTIONS";
+"The Driver Has Arrived" = "The Driver Has Arrived";
+"please meet your driver at pickup location" = "please meet your driver at pickup location";
+"Arrived at passenger location" = "Arrived at passenger location";
+"PICKUP PASSENGER" = "PICKUP PASSENGER";
+"En Route To Destination" = "En Route To Destination";
+"Arrived At Destination" = "Arrived At Destination";
+"ARRIVED AT DESTINATION" = "ARRIVED AT DESTINATION";
+"DROP OFF PASSENGER" = "DROP OFF PASSENGER";
+"Oops!" = "Oops!";
+"a driver rejected your ride, Please search for another driver" = "a driver rejected your ride, Please search for another driver";
+"Trip Completed" = "Trip Completed";
+"we hope you enjoyed your trip" = "we hope you enjoyed your trip";
+"Are you sure you want to logout?" = "Are you sure you want to logout?";
+"Logout" = "Logout";
+"Cancle" = "Cancle";
+"Finding you a ride..." = "Finding you a ride...";
+"Allow 'Maps' to use your precise location once" = "Allow 'Maps' to use your precise location once";
+"The passeneger canceled the Trip" = "The passeneger canceled the Trip";
+
+//MARK: - LocationInput
+
+"Favorite Places" = "Favorite Places";
+"Search Results" = "Search Results";
+"Home" = "Home";
+"Work" = "Work";
+
+//MARK: - Pickup
+"Warning" = "Warning";
+"Do you really want to cancle the trip?" = "Do you really want to cancle the trip?";
+"Yes" = "Yes";
+"No" = "No";
+"Confirmation" = "Confirmation";
+"Do you want to Accept the trip?" = "Do you want to Accept the trip?";
+
+//MARK: - Menu
+"Settings" = "Settings";
+"Log out" = "Log out";
+"Your Trips" = "Your Trips";
+"Connected Successfully!" = "Connected Successfully!";
+"No Internet Connection" = "No Internet Connection";
+
+//MARK: - Settings
+"Favorite Places" = "Favorite Places";
+"Add Home" = "Add Home";
+"Add Work" = "Add Work";
+
+//MARK: - Search
+"Enter place name" = "Enter place name";
+"ERROR!" = "ERROR!";
+"Please try again!" = "Please try again!";
+
+//MARK: - YourTrips
+"From" = "From";
+"To" = "To";
+"Driver Phone number:" = "Driver Phone number:";
+"Passenger Phone number:" = "Passenger Phone number:";
+
+//MARK - Edit
+"First name" = "First name";
+"Surname" = "Surname";
+"Phone number" = "Phone number";
+"Email" = "Email";
+"Password" = "Password";
+"SAVE" = "SAVE";
+"Please wait!" = "Please wait!";
+"Something went wrong... please try again" = "Something went wrong... please try again";
+"ERROR" = "ERROR";
+"Changes Successfully" = "Changes Successfully";
+"Success!" = "Success!";
+"Phone Number" = "Phone Number";
+
+
+"Choose your language" = "Choose your language";
+"English" = "English";
+"Arabic" = "Arabic";
+"Select Language" = "Select Language";

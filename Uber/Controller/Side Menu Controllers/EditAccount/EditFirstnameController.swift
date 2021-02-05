@@ -7,12 +7,15 @@
 
 import UIKit
 
+
 class EditFirstnameController: UIViewController {
     
     var user: User?
     let hud = ProgressHUD.shared
+    var viewModel: EditAccountViewModel?
     
-    init(user: User) {
+    init(user: User, viewModel: EditAccountViewModel) {
+        self.viewModel = viewModel
         self.firstnameTF.text = user.firstname
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,7 +37,7 @@ class EditFirstnameController: UIViewController {
     
     var firstnameLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 25))
-        label.text = "Firstname"
+        label.text = "First name"
         label.alpha = 0.7
         label.font = UIFont.systemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -77,15 +80,15 @@ class EditFirstnameController: UIViewController {
         guard let newFirstname = firstnameTF.text else {return}
         let value: [String:Any] = ["firstname": newFirstname]
         hud.show(message: "Please wait!")
-        Service.shared.changeAccountValues(values: value) { (err, ref) in
+        viewModel!.changeAccountValues(values: value) { (err, ref) in
             guard err == nil else {
                 self.hud.dismiss()
-                self.showAlert(title: "ERROR", message: "Something went wrong.. please try again \(err!.localizedDescription)") { _ in
+                self.showAlert(title: "ERROR", message: "Something went wrong... please try again") { _ in
                 }
                 return
             }
             self.hud.dismiss()
-            self.showAlert(title: "Success", message: "Changed Successfully") { _IOFBF in
+            self.showAlert(title: "Success", message: "Changes Successfully") { _IOFBF in
                 self.navigationController?.popViewController(animated: true)
             }
         }

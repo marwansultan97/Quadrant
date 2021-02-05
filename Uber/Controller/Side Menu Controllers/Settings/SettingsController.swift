@@ -8,14 +8,33 @@
 import UIKit
 import Firebase
 import MapKit
+import Combine
 
 
 class SettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var user: User?
+    var user: User? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     var kindOfPlace: String?
-    var homePlace: MKPlacemark?
-    var workPlace: MKPlacemark?
+    
+    var homePlace: MKPlacemark? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    var workPlace: MKPlacemark? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    var viewModel = SettingsViewModel()
+    var subscribtion = Set<AnyCancellable>()
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -24,14 +43,16 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         configureUI()
         configureTableView()
-        fetchHomePlace()
-        fetchWorkPlace()
-        
+        setSubscribtion()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.fetchHomePlace()
+        viewModel.fetchWorkPlace()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
-
     }
     
     
@@ -46,26 +67,14 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.tableFooterView = UIView()
     }
     
-    //MARK: - API Methods
-    func fetchHomePlace() {
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        Service.shared.fetchHomePlace(uid: uid) { (home) in
-
-            let homePlaceMark = Service.shared.convertFavoritePlaceToPlaceMark(place: home)
-            self.homePlace = homePlaceMark
-            self.tableView.reloadData()
-        }
+    func setSubscribtion() {
+        subscribtion = [
+            viewModel.$user.assign(to: \.user, on: self),
+            viewModel.$homePlace.assign(to: \.homePlace, on: self),
+            viewModel.$workPlace.assign(to: \.workPlace, on: self)
+        ]
     }
     
-    func fetchWorkPlace() {
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        Service.shared.fetchWorkPlace(uid: uid) { (work) in
-
-            let workPlaceMark = Service.shared.convertFavoritePlaceToPlaceMark(place: work)
-            self.workPlace = workPlaceMark
-            self.tableView.reloadData()
-        }
-    }
     
     //MARK: - TableView Methods
     
@@ -100,7 +109,8 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
-            cell.configureCell(user: user!)
+            guard let user = self.user else {return cell}
+            cell.configureCell(user: user)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: FavoritePlacesSettingsTableViewCell.identifier, for: indexPath) as! FavoritePlacesSettingsTableViewCell
@@ -140,33 +150,8 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         if segue.identifier == "SearchFavoritePlacesController" {
             navigationItem.backButtonTitle = ""
             let destinationVC = segue.destination as! SearchFavoritePlacesController
-            destinationVC.delegate = self
             destinationVC.kindOfPlace = self.kindOfPlace
         }
     }
-    
-}
-
-//MARK: - FavoritePlaces Results Delegate
-extension SettingsController: SearchFavoritePlacesControllerDelegate {
-    
-    func showSelectedPlace(kindOfPlace: String, place: MKPlacemark) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Service.shared.updateFavoritePlaces(uid: uid, placeType: kindOfPlace, place: place) { (err, ref) in
-            guard err == nil else {
-                print("DEBUG: Error Uploading Favorite Place \(err)")
-                return
-            }
-            if kindOfPlace == "Home" {
-                self.homePlace = place
-                self.tableView.reloadData()
-            } else {
-                self.workPlace = place
-                self.tableView.reloadData()
-            }
-        }
-    }
-
-    
     
 }

@@ -9,6 +9,7 @@ import UIKit
 import Hero
 import MapKit
 import Firebase
+import Combine
 
 protocol LocationInputControllerDelegate: class {
     func deliverPlaceDetails(place: MKPlacemark)
@@ -17,14 +18,30 @@ protocol LocationInputControllerDelegate: class {
 class LocationInputController: UIViewController {
     
     var userFullName: String?
-    var homePlace: MKPlacemark?
-    var workPlace: MKPlacemark?
+    
+    var homePlace: MKPlacemark? {
+        didSet {
+            guard homePlace != nil else {return}
+            self.tableView.reloadData()
+        }
+    }
+    
+    var workPlace: MKPlacemark? {
+        didSet {
+            guard workPlace != nil else {return}
+            self.tableView.reloadData()
+        }
+    }
+    
     var delegate: LocationInputControllerDelegate?
     var places: [MKPlacemark]? {
         didSet {
             self.tableView.reloadData()
         }
     }
+    
+    var viewModel = LocationInputViewModel()
+    var subscribtion = Set<AnyCancellable>()
     
     
     @IBOutlet weak var locationInputView: UIView!
@@ -41,10 +58,9 @@ class LocationInputController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setSubscribtion()
         configureUI()
         configureTableView()
-        fetchHomePlace()
-        fetchWorkPlace()
         configureTF()
     }
     
@@ -71,27 +87,16 @@ class LocationInputController: UIViewController {
         tableView.hero.isEnabled = true
     }
     
-    //MARK: - API Methods
     
-    func fetchHomePlace() {
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        Service.shared.fetchHomePlace(uid: uid) { (home) in
-
-            let homePlaceMark = Service.shared.convertFavoritePlaceToPlaceMark(place: home)
-            self.homePlace = homePlaceMark
-            self.tableView.reloadData()
-        }
+    func setSubscribtion() {
+        subscribtion = [
+            
+            viewModel.$homePlace.assign(to: \.homePlace, on: self),
+            viewModel.$workPlace.assign(to: \.workPlace, on: self)
+            
+        ]
     }
-    
-    func fetchWorkPlace() {
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        Service.shared.fetchWorkPlace(uid: uid) { (work) in
 
-            let workPlaceMark = Service.shared.convertFavoritePlaceToPlaceMark(place: work)
-            self.workPlace = workPlaceMark
-            self.tableView.reloadData()
-        }
-    }
     
     //MARK: - Button Actions
     
@@ -115,7 +120,7 @@ extension LocationInputController: UITableViewDelegate, UITableViewDataSource {
         let label = UILabel(frame: CGRect(x: 10, y: 2, width: self.tableView.frame.width, height: 19))
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.textColor = .systemBackground
-        label.text = section == 0 ? "Favorite Places" : "Search Results"
+        label.text = section == 0 ? "Favorite Places".localize : "Search Results".localize
         headerView.addSubview(label)
         return headerView
     }

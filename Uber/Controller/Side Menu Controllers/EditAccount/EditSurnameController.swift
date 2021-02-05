@@ -12,7 +12,10 @@ class EditSurnameController: UIViewController {
     var user: User?
     let hud = ProgressHUD.shared
     
-    init(user: User) {
+    var viewModel: EditAccountViewModel?
+    
+    init(user: User, viewModel: EditAccountViewModel) {
+        self.viewModel = viewModel
         self.surnameTF.text = user.surname
         super.init(nibName: nil, bundle: nil)
     }
@@ -103,10 +106,10 @@ class EditSurnameController: UIViewController {
         guard let newSurname = surnameTF.text else {return}
         let value: [String:Any] = ["surname": newSurname]
         hud.show(message: "Please wait!")
-        Service.shared.changeAccountValues(values: value) { (err, ref) in
+        viewModel!.changeAccountValues(values: value) { (err, ref) in
             guard err == nil else {
                 self.hud.dismiss()
-                self.showAlert(title: "ERROR", message: "Something went wrong.. please try again \(err!.localizedDescription)") { _ in
+                self.showAlert(title: "ERROR", message: "Something went wrong... please try again") { _ in
                 }
                 return
             }

@@ -19,11 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
+
             let rootVC = UIStoryboard(name: "Launch", bundle: nil).instantiateInitialViewController()
             window.rootViewController = rootVC
             self.window = window
             window.makeKeyAndVisible()
-            
+
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let rootVC = storyboard.instantiateViewController(identifier: "LoginController")

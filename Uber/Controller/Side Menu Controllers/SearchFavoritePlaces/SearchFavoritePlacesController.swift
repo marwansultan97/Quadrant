@@ -7,26 +7,22 @@
 
 import UIKit
 import MapKit
-
-protocol SearchFavoritePlacesControllerDelegate {
-    func showSelectedPlace(kindOfPlace: String, place: MKPlacemark)
-}
-
+import Firebase
 
 class SearchFavoritePlacesController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    
-    
     @IBOutlet weak var tableView: UITableView!
     
     
     lazy var searchBar: UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
     var places: [MKPlacemark]?
+    
     var selectedPlace: MKPlacemark?
+    
     var kindOfPlace: String?
     
-    var delegate: SearchFavoritePlacesControllerDelegate?
     
+    var viewModel = SearchFavoritePlacesViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +37,7 @@ class SearchFavoritePlacesController: UIViewController, UITableViewDelegate, UIT
     //MARK: - UI Methods
     
     func configureSearchBar() {
-        searchBar.placeholder = "Enter place name"
+        searchBar.placeholder = "Enter place name".localize
         searchBar.delegate = self
         searchBar.returnKeyType = .default
         searchBar.showsCancelButton = true
@@ -51,6 +47,13 @@ class SearchFavoritePlacesController: UIViewController, UITableViewDelegate, UIT
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    func showErrorAlert() {
+        let alert = UIAlertController(title: "ERROR!".localize, message: "Please try again!".localize, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK".localize, style: .default, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -77,9 +80,16 @@ class SearchFavoritePlacesController: UIViewController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let places = self.places else {return}
         let place = places[indexPath.row]
-        navigationController?.popViewController(animated: true)
-        delegate?.showSelectedPlace(kindOfPlace: self.kindOfPlace!, place: place)
+        viewModel.updateFavoritePlaces(placeType: self.kindOfPlace!, place: place) { (err, ref) in
+            guard err == nil else {
+                self.showErrorAlert()
+                return
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
     }
+    
+    
 
 }
 

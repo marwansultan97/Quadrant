@@ -30,10 +30,12 @@ class FavoritePlacesSettingsTableViewCell: UITableViewCell {
         
         placeImage.image = image
         placeImage.tintColor = .label
-        placeTypeLabel.text = placeType
-        placeAddressLabel.text = "Add \(placeType)"
+        placeTypeLabel.text = placeType.localize
+        placeAddressLabel.text = "Add \(placeType)".localize
+        placeAddressLabel.alpha = 0.7
         placeAddressLabel.adjustsFontSizeToFitWidth = true
         guard place != nil else {return}
+        placeAddressLabel.alpha = 1
         placeAddressLabel.text = "\(place!.name ?? "") \(place!.thoroughfare ?? "") \(place!.locality ?? "") \(place!.administrativeArea ?? "")"
         
         

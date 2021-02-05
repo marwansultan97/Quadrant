@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import Combine
 
 class YourTripsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -14,18 +15,32 @@ class YourTripsController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var tableView: UITableView!
     
+    var viewModel = YourTripsViewModel()
+    var subscribtion = Set<AnyCancellable>()
+    
     var user: User?
-    var trips = [Trip]()
+    
+    var trips = [Trip]() {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        fetchTrips()
+        setSubscribtion()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
-
+    }
+    
+    
+    func setSubscribtion() {
+        subscribtion = [
+            viewModel.$trips.assign(to: \.trips, on: self)
+        ]
     }
     
     //MARK: - Configure UI methods
@@ -38,16 +53,7 @@ class YourTripsController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.separatorColor = .label
         tableView.tableFooterView = UIView()
     }
-    
-    // MARK: - API Methods
-    func fetchTrips() {
-        Service.shared.fetchCompletedTrips { (trips) in
-            self.trips = trips
-            print("DEBUG: trips are \(trips)")
-            self.tableView.reloadData()
-        }
-    }
-    
+        
     
     // MARK: - TableView Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

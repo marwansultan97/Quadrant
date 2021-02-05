@@ -82,4 +82,13 @@ extension CLLocationCoordinate2D {
 }
 
 
+extension String {
+    
+    var localize: String {
+        return NSLocalizedString(self, comment: "")
+    }
+    
+}
+
+
 

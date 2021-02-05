@@ -1,0 +1,126 @@
+
+/* Class = "UILabel"; text = "marwansultan97@gmail.com"; ObjectID = "3EF-yp-2iM"; */
+"3EF-yp-2iM.text" = "marwansultan97@gmail.com";
+
+/* Class = "UILabel"; text = "To McDonald's N Stelling Rd  Cupertino CA"; ObjectID = "4Db-1a-wsK"; */
+"4Db-1a-wsK.text" = "To McDonald's N Stelling Rd  Cupertino CA";
+
+/* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "5Ii-PH-Qry"; */
+"5Ii-PH-Qry.text" = "لا تملك حساب؟";
+
+/* Class = "UILabel"; text = "Place Address"; ObjectID = "5In-Bc-Ntt"; */
+"5In-Bc-Ntt.text" = "Place Address";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "7ba-hD-YK0"; */
+"7ba-hD-YK0.text" = "Label";
+
+/* Class = "UILabel"; text = "Marwan Sultan"; ObjectID = "7cZ-19-94I"; */
+"7cZ-19-94I.text" = "Marwan Sultan";
+
+/* Class = "UINavigationItem"; title = "Edit Account"; ObjectID = "7zZ-nh-juD"; */
+"7zZ-nh-juD.title" = "اعدادات الحساب";
+
+/* Class = "UILabel"; text = "Monday, Dec 28, 2020, 8:49 AM"; ObjectID = "9Ol-HE-XRI"; */
+"9Ol-HE-XRI.text" = "Monday, Dec 28, 2020, 8:49 AM";
+
+/* Class = "UIButton"; normalTitle = "Search\n  Trips"; ObjectID = "BMM-4v-PbV"; */
+"BMM-4v-PbV.normalTitle" = "Search\n  Trips";
+
+/* Class = "UILabel"; text = "Driver phone number : 01100509440"; ObjectID = "BXt-3m-6GF"; */
+"BXt-3m-6GF.text" = "Driver phone number : 01100509440";
+
+/* Class = "UILabel"; text = "Would you like to pick up this passenger?"; ObjectID = "DU5-f0-eVf"; */
+"DU5-f0-eVf.text" = "هل ترغب في اصطحاب الراكب";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Ecm-PL-cUv"; */
+"Ecm-PL-cUv.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Place Name"; ObjectID = "EdJ-fQ-oca"; */
+"EdJ-fQ-oca.text" = "Place Name";
+
+/* Class = "UIButton"; normalTitle = "ACCEPT TRIP"; ObjectID = "FrH-es-Y1h"; */
+"FrH-es-Y1h.normalTitle" = "قبول الرحلة";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "Hkf-uy-C1J"; */
+"Hkf-uy-C1J.placeholder" = "ايميل";
+
+/* Class = "UITextField"; placeholder = "Surname"; ObjectID = "Hpm-wB-Hf3"; */
+"Hpm-wB-Hf3.placeholder" = "لقب";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "IyN-U4-ZCf"; */
+"IyN-U4-ZCf.text" = "Label";
+
+/* Class = "UISegmentedControl"; JLm-Cy-X69.segmentTitles[0] = "Rider"; ObjectID = "JLm-Cy-X69"; */
+"JLm-Cy-X69.segmentTitles[0]" = "راكب";
+
+/* Class = "UISegmentedControl"; JLm-Cy-X69.segmentTitles[1] = "Driver"; ObjectID = "JLm-Cy-X69"; */
+"JLm-Cy-X69.segmentTitles[1]" = "سائق";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "LHD-o3-i2F"; */
+"LHD-o3-i2F.normalTitle" = "تسجيل الدخول";
+
+/* Class = "UILabel"; text = "X"; ObjectID = "NPp-o6-pbP"; */
+"NPp-o6-pbP.text" = "X";
+
+/* Class = "UILabel"; text = "UBER"; ObjectID = "OBL-tE-jTL"; */
+"OBL-tE-jTL.text" = "UBER";
+
+/* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "OlZ-MY-xIE"; */
+"OlZ-MY-xIE.normalTitle" = "تسجيل الدخول";
+
+/* Class = "UITextField"; placeholder = "Phone number"; ObjectID = "PQc-mc-V3X"; */
+"PQc-mc-V3X.placeholder" = "رقم المحمول";
+
+/* Class = "UILabel"; text = "Marwan Sultan"; ObjectID = "SIf-MK-yha"; */
+"SIf-MK-yha.text" = "Marwan Sultan";
+
+/* Class = "UILabel"; text = "Uber X"; ObjectID = "SSz-Wz-mye"; */
+"SSz-Wz-mye.text" = "Uber X";
+
+/* Class = "UILabel"; text = "UBER"; ObjectID = "SwA-hG-Jlf"; */
+"SwA-hG-Jlf.text" = "UBER";
+
+/* Class = "UITextField"; placeholder = "First name"; ObjectID = "TBE-hV-cCd"; */
+"TBE-hV-cCd.placeholder" = "الاسم الاول";
+
+/* Class = "UIButton"; normalTitle = "Sign up"; ObjectID = "TvT-CB-gBV"; */
+"TvT-CB-gBV.normalTitle" = "تسجيل";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "UIL-rE-ryM"; */
+"UIL-rE-ryM.title" = "إعدادات";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "aMK-8z-IO2"; */
+"aMK-8z-IO2.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "01100509440"; ObjectID = "elQ-jX-V1d"; */
+"elQ-jX-V1d.text" = "01100509440";
+
+/* Class = "UITextField"; placeholder = "Current location"; ObjectID = "ffU-Cx-pQt"; */
+"ffU-Cx-pQt.placeholder" = "الموقع الحالي";
+
+/* Class = "UITextField"; placeholder = "Enter Destination"; ObjectID = "j78-tx-sWo"; */
+"j78-tx-sWo.placeholder" = "ادخل الوجهة";
+
+/* Class = "UINavigationItem"; title = "Your Trips"; ObjectID = "mcZ-rh-ZsT"; */
+"mcZ-rh-ZsT.title" = "الرحلات";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "nPg-QZ-tdk"; */
+"nPg-QZ-tdk.placeholder" = "باسورد";
+
+/* Class = "UILabel"; text = "Where to?"; ObjectID = "pRY-BG-ZBB"; */
+"pRY-BG-ZBB.text" = "الي اين؟";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "pxK-mh-zR3"; */
+"pxK-mh-zR3.placeholder" = "ايميل";
+
+/* Class = "UILabel"; text = "From McDonald's N Stelling Rd  Cupertino CA "; ObjectID = "s4M-dJ-HQM"; */
+"s4M-dJ-HQM.text" = "From McDonald's N Stelling Rd  Cupertino CA ";
+
+/* Class = "UILabel"; text = "Already have an account?"; ObjectID = "sSa-3P-k44"; */
+"sSa-3P-k44.text" = "هل تملك حساب";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "siq-p6-RYu"; */
+"siq-p6-RYu.title" = "رجوع";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "zQ7-Jp-2HV"; */
+"zQ7-Jp-2HV.normalTitle" = "تسجيل";

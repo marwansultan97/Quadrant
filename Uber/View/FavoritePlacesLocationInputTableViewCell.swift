@@ -30,7 +30,7 @@ class FavoritePlacesLocationInputTableViewCell: UITableViewCell {
         
         placeImage.image = image
         placeImage.tintColor = .label
-        placeTypeLabel.text = placeType
+        placeTypeLabel.text = placeType.localize
         placeAddressLabel.text = ""
         placeAddressLabel.adjustsFontSizeToFitWidth = true
         guard place != nil else {return}

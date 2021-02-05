@@ -43,12 +43,12 @@ extension HomeController : CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if locationManager.authorizationStatus == .authorizedWhenInUse && locationManager.accuracyAuthorization == .reducedAccuracy {
-            locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow 'Maps' to use your precise location once") { _ in
+            locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow 'Maps' to use your precise location once".localize) { _ in
                 self.locationManager.requestAlwaysAuthorization()
                 self.locationManager.startUpdatingLocation()
             }
         } else if locationManager.authorizationStatus == .authorizedAlways && locationManager.accuracyAuthorization == .reducedAccuracy {
-            locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow 'Maps' to use your precise location once") { _ in
+            locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow 'Maps' to use your precise location once".localize) { _ in
                 self.locationManager.startUpdatingLocation()
             }
         } else if locationManager.accuracyAuthorization == .fullAccuracy {
@@ -84,14 +84,20 @@ extension HomeController : CLLocationManagerDelegate {
             guard let tripUID = self.acceptedTrip?.passengerUID else {return}
             rideActionViewState = .driverArrived
             configRideActionView(place: nil, trip: nil, config: rideActionViewState)
-            Service.shared.updateTripState(uid: tripUID, state: .driverArrived)
+            viewModel.updateTripState(uid: tripUID, state: .driverArrived)
         } else {
             print("DEBUG: did enter destination region")
             guard let tripUID = self.acceptedTrip?.passengerUID else {return}
             rideActionViewState = .arrivedAtDestination
             configRideActionView(place: nil, trip: nil, config: rideActionViewState)
-            Service.shared.updateTripState(uid: tripUID, state: .arriverAtDestination)
+            viewModel.updateTripState(uid: tripUID, state: .arriverAtDestination)
         }
+    }
+    
+    
+    func setCircleRegion(identifier: String, coordinate: CLLocationCoordinate2D) {
+        let circleRegion = CLCircularRegion(center: coordinate, radius: 20, identifier: identifier)
+        locationManager.startMonitoring(for: circleRegion)
     }
 }
 
@@ -123,7 +129,7 @@ extension HomeController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        uploadDriverLocation()
+        viewModel.uploadDriverLocation()
     }
     
     // to zoom in and out in map
@@ -152,7 +158,7 @@ extension HomeController: LocationInputControllerDelegate {
     
     
     func deliverPlaceDetails(place: MKPlacemark) {
-        self.confirmRideButton.setTitle("CONFIRM REQUEST", for: .normal)
+        self.confirmRideButton.setTitle("CONFIRM REQUEST".localize, for: .normal)
         self.rideActionViewState = .requested
         selectedPlace = place
         cornerButtonState = .dismissSideMenu
@@ -181,17 +187,17 @@ extension HomeController: LocationInputControllerDelegate {
 extension HomeController: PickupControllerDelegate {
     
     func searchForAnotherTrip() {
-        REF_TRIPS.removeAllObservers()
+        viewModel.removeObservers(ref: REF_TRIPS, child: nil)
         searchTripsButton.tag = 0
         searchTripsButton.hideLoading()
     }
     
 
     func dismiss() {
-        REF_TRIPS.removeAllObservers()
+        viewModel.removeObservers(ref: REF_TRIPS, child: nil)
         searchTripsButton.tag = 0
         searchTripsButton.hideLoading()
-        self.showAlert(title: "Oops!", message: "The passeneger canceled the Trip")
+        self.showAlert(title: "Oops!".localize, message: "The passeneger canceled the Trip".localize)
 
     }
     
@@ -211,14 +217,14 @@ extension HomeController: PickupControllerDelegate {
         
         configRideActionView(place: nil, trip: trip, config: self.rideActionViewState)
         self.searchTripsButton.alpha = 0
-        Service.shared.isTheTripCancled(uid: trip.passengerUID) { (snapshot) in
-            REF_TRIPS.removeAllObservers()
+        viewModel.isTripCanceled(uid: trip.passengerUID) { (snapshot) in
+            self.viewModel.removeObservers(ref: REF_TRIPS, child: nil)
             self.configureDriverUI()
             self.searchTripsButton.tag = 0
             self.searchTripsButton.hideLoading()
             self.animateRideActionViewDriver(const: 0)
             self.mapView.removeAnnotationAndOverlays()
-            self.showAlert(title: "Oops!", message: "The passeneger canceled the Trip")
+            self.showAlert(title: "Oops!".localize, message: "The passeneger canceled the Trip".localize)
         }
     }
 
@@ -261,7 +267,7 @@ extension HomeController {
             label.translatesAutoresizingMaskIntoConstraints = false
             
             let button = UIButton()
-            let attributedTitle = NSAttributedString(string: "Cancle", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemBackground])
+            let attributedTitle = NSAttributedString(string: "Cancle".localize, attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemBackground])
             button.setAttributedTitle(attributedTitle, for: .normal)
             button.backgroundColor = .label
             button.translatesAutoresizingMaskIntoConstraints = false

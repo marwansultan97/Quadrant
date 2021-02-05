@@ -19,6 +19,7 @@ let REF_USER_LOCATION = DB_REF.child("user-location")
 let REF_TRIPS = DB_REF.child("trips")
 let REF_FAVORITE_PLACES = DB_REF.child("favorite-places")
 let REF_COMPLETED_TRIPS = DB_REF.child("completed_trips")
+let REF_TEXT = DB_REF.child("text")
 
 class Service {
     
@@ -69,41 +70,6 @@ class Service {
     }
     
     
-    func changeAccountValues(values: [String:Any], completion: @escaping(Error?, DatabaseReference)-> Void) {
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        REF_USERS.child(uid).updateChildValues(values, withCompletionBlock: completion)
-    }
-    
-    func changeEmail(email: String, password: String, completion: @escaping(Error?)-> Void) {
-        let user = Auth.auth().currentUser
-        var credential: AuthCredential
-        credential = EmailAuthProvider.credential(withEmail: user!.email!, password: password)
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        user?.reauthenticate(with: credential, completion: { (res, err) in
-            if let err = err {
-                print("DEBUG: err credential \(err.localizedDescription)")
-            }
-            print("DEBUG: credential is \(credential.provider)")
-            Auth.auth().currentUser?.updateEmail(to: email, completion: completion)
-            REF_USERS.child(uid).updateChildValues(["email": email])
-            
-        })
-    }
-    
-    func changePassword(email: String, oldPassword: String, newPassword: String, completion: @escaping(Error?)-> Void) {
-        let user = Auth.auth().currentUser
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        var credential: AuthCredential
-        credential = EmailAuthProvider.credential(withEmail: user!.email!, password: oldPassword)
-        user?.reauthenticate(with: credential, completion: { (res, err) in
-            if let err = err {
-                print("DEBUG: err credential \(err.localizedDescription)")
-            }
-            print("DEBUG: credential is \(credential)")
-            Auth.auth().currentUser?.updatePassword(to: newPassword, completion: completion)
-            REF_USERS.child(uid).updateChildValues(["password": newPassword])
-        })
-    }
     
     //MARK: - Passenger Side Backend Methods
     
@@ -159,7 +125,7 @@ class Service {
     }
     
     func observeCurrentTrip(uid: String, completion: @escaping(Trip)-> Void) {
-
+        
         REF_TRIPS.child(uid).observe(.value) { (snapshot) in
             guard let dictionary = snapshot.value as? [String:Any] else {return}
             let passengerUID = snapshot.key
@@ -189,16 +155,9 @@ class Service {
         REF_FAVORITE_PLACES.child(uid).child(placeType).updateChildValues(values, withCompletionBlock: completion)
     }
     
-    func fetchHomePlace(uid: String, completion: @escaping(FavoritePlace)-> Void) {
-        REF_FAVORITE_PLACES.child(uid).child("Home").observeSingleEvent(of: .value) { (snapshot) in
-            guard let dictionary = snapshot.value as? [String:Any] else {return}
-            let homePlace = FavoritePlace(values: dictionary)
-            completion(homePlace)
-        }
-    }
     
-    func fetchWorkPlace(uid: String, completion: @escaping(FavoritePlace)-> Void) {
-        REF_FAVORITE_PLACES.child(uid).child("Work").observeSingleEvent(of: .value) { (snapshot) in
+    func fetchFavouritePlaces(uid: String, childName: String, completion: @escaping(FavoritePlace)-> Void) {
+        REF_FAVORITE_PLACES.child(uid).child(childName).observeSingleEvent(of: .value) { (snapshot) in
             guard let dictionary = snapshot.value as? [String:Any] else {return}
             let homePlace = FavoritePlace(values: dictionary)
             completion(homePlace)
@@ -210,8 +169,8 @@ class Service {
                                                "Thoroughfare": place.thoroughFare ?? "",
                                                "City": place.locality ?? "",
                                                "State": place.adminArea ?? ""]
-        let homePlaceMark = MKPlacemark(coordinate: place.placeCoordinates, addressDictionary: addressDictionary)
-        return homePlaceMark
+        let placeMark = MKPlacemark(coordinate: place.placeCoordinates, addressDictionary: addressDictionary)
+        return placeMark
     }
     
 
