@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="B49-No-cwW">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Launch Controller-->
+        <scene sceneID="R5r-fO-BCI">
+            <objects>
+                <viewController id="B49-No-cwW" customClass="LaunchController" customModule="Uber" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rna-Bh-zKL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oqo-Ad-zF8" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="157" y="424" width="100" height="100"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="X0Z-pv-rO6"/>
+                                    <constraint firstAttribute="height" constant="100" id="co2-b9-UH5"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UBER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="To6-wL-Qxh">
+                                <rect key="frame" x="32" y="244" width="350" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="7J7-zI-0Jg"/>
+                                    <constraint firstAttribute="height" constant="80" id="fkS-Jp-mTM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Bau-hu-yeS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Oqo-Ad-zF8" firstAttribute="centerX" secondItem="rna-Bh-zKL" secondAttribute="centerX" id="1oD-aV-i2Z"/>
+                            <constraint firstItem="To6-wL-Qxh" firstAttribute="centerX" secondItem="rna-Bh-zKL" secondAttribute="centerX" id="SVo-6g-EM6"/>
+                            <constraint firstItem="To6-wL-Qxh" firstAttribute="top" secondItem="Bau-hu-yeS" secondAttribute="top" constant="200" id="U9y-65-frQ"/>
+                            <constraint firstItem="Oqo-Ad-zF8" firstAttribute="top" secondItem="To6-wL-Qxh" secondAttribute="bottom" constant="100" id="VeC-qo-Kl9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="indicator" destination="Oqo-Ad-zF8" id="OAe-P2-Ptr"/>
+                        <outlet property="uberLabel" destination="To6-wL-Qxh" id="7YP-0Y-SZx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BEA-zm-cxV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="157" y="-13"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
