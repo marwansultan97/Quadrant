@@ -40,14 +40,45 @@
                                 <rect key="frame" x="114" y="0.0" width="300" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TNF-ZI-0gD" userLabel="ProfileView">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="170"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="m.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HI6-9N-d1J">
+                                                <rect key="frame" x="15" y="75.5" width="65" height="64"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" red="0.94335803529999995" green="0.1335219543" blue="0.0094775621929999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="65" id="1jO-b1-1Sw"/>
+                                                    <constraint firstAttribute="width" constant="65" id="AkG-y3-oeK"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="marwansultan97@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oS4-ne-v3w">
+                                                <rect key="frame" x="90" y="107" width="200" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marwan Sultan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Hx-0w-ipE">
+                                                <rect key="frame" x="90" y="75" width="200" height="27"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="b7H-gZ-eWP"/>
+                                            <constraint firstAttribute="trailing" secondItem="3Hx-0w-ipE" secondAttribute="trailing" constant="10" id="84A-gu-6Cs"/>
+                                            <constraint firstItem="oS4-ne-v3w" firstAttribute="top" secondItem="3Hx-0w-ipE" secondAttribute="bottom" constant="5" id="Bw4-rk-w47"/>
+                                            <constraint firstItem="HI6-9N-d1J" firstAttribute="leading" secondItem="TNF-ZI-0gD" secondAttribute="leading" constant="15" id="DpJ-m8-TcC"/>
+                                            <constraint firstItem="oS4-ne-v3w" firstAttribute="leading" secondItem="HI6-9N-d1J" secondAttribute="trailing" constant="10" id="E8B-GL-TDe"/>
+                                            <constraint firstItem="HI6-9N-d1J" firstAttribute="top" secondItem="TNF-ZI-0gD" secondAttribute="top" constant="75" id="Jdk-ug-5eD"/>
+                                            <constraint firstItem="3Hx-0w-ipE" firstAttribute="leading" secondItem="HI6-9N-d1J" secondAttribute="trailing" constant="10" id="NPe-95-WCg"/>
+                                            <constraint firstItem="3Hx-0w-ipE" firstAttribute="top" secondItem="TNF-ZI-0gD" secondAttribute="top" constant="75" id="Shq-w1-fvZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="oS4-ne-v3w" secondAttribute="trailing" constant="10" id="Ukl-b4-QNp"/>
+                                            <constraint firstAttribute="height" constant="170" id="b7H-gZ-eWP"/>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hBo-oQ-we3">
-                                        <rect key="frame" x="0.0" y="150" width="300" height="746"/>
+                                        <rect key="frame" x="0.0" y="170" width="300" height="726"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                 </subviews>
@@ -72,6 +103,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="profileEmailLabel" destination="oS4-ne-v3w" id="o71-P3-Erh"/>
+                        <outlet property="profileImageView" destination="HI6-9N-d1J" id="Vmu-L1-Ctt"/>
+                        <outlet property="profileNameLabel" destination="3Hx-0w-ipE" id="doK-U5-tYM"/>
                         <outlet property="profileView" destination="TNF-ZI-0gD" id="elg-Hq-pDm"/>
                         <outlet property="sideMenuWidth" destination="Ufk-fN-4v7" id="OYw-KE-J8K"/>
                         <outlet property="tableView" destination="hBo-oQ-we3" id="KLZ-eJ-Wh2"/>
@@ -79,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n0l-DN-yWs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-593" y="106"/>
+            <point key="canvasLocation" x="-594.20289855072474" y="105.80357142857143"/>
         </scene>
         <!--HomeP View Controller-->
         <scene sceneID="gaJ-o7-NIR">
@@ -303,6 +337,7 @@
         <image name="flag.circle.fill" catalog="system" width="128" height="121"/>
         <image name="icons8-xbox_menu" width="50" height="50"/>
         <image name="location.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="m.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

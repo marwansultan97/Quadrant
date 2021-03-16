@@ -12,6 +12,7 @@ import Firebase
 import Reachability
 import TTGSnackbar
 
+// done
 struct SettingsMenu {
     let icon: UIImage
     let title: String
