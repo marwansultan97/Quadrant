@@ -27,6 +27,6 @@ enum CornerButtonConfiguration {
 }
 
 enum CircularRegionType: String {
-    case pickup
-    case destination
+    case pickup = "Pickup"
+    case destination = "Destination"
 }

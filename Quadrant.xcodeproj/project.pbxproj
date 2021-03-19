@@ -41,6 +41,13 @@
 		CB5C7E2325FD645700B34F62 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5C7E2225FD645700B34F62 /* SignupViewModel.swift */; };
 		CB77A0ED2600EAB2009A6FB6 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77A0EB2600EAB2009A6FB6 /* SideMenuTableViewCell.swift */; };
 		CB77A0EE2600EAB2009A6FB6 /* SideMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB77A0EC2600EAB2009A6FB6 /* SideMenuTableViewCell.xib */; };
+		CB77A0F326012E24009A6FB6 /* HomeDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77A0F226012E24009A6FB6 /* HomeDViewController.swift */; };
+		CB77A0F626012E34009A6FB6 /* HomeD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB77A0F526012E34009A6FB6 /* HomeD.storyboard */; };
+		CB77A0F926012E75009A6FB6 /* SideMenuDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77A0F826012E75009A6FB6 /* SideMenuDViewController.swift */; };
+		CB77A0FD2601436D009A6FB6 /* HomeDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77A0FC2601436D009A6FB6 /* HomeDViewModel.swift */; };
+		CB77A10326018A4C009A6FB6 /* PickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77A10226018A4C009A6FB6 /* PickupViewController.swift */; };
+		CB77A10626018A56009A6FB6 /* Pickup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB77A10526018A56009A6FB6 /* Pickup.storyboard */; };
+		CB77A109260239F3009A6FB6 /* PickupDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77A108260239F2009A6FB6 /* PickupDViewModel.swift */; };
 		CB831DFD2592732A000224DB /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB831DFC2592732A000224DB /* MenuTableViewCell.swift */; };
 		CB831E032592B264000224DB /* EditAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB831E022592B264000224DB /* EditAccountController.swift */; };
 		CB831E062592B292000224DB /* EditAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB831E052592B292000224DB /* EditAccountTableViewCell.swift */; };
@@ -121,6 +128,13 @@
 		CB5C7E2225FD645700B34F62 /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		CB77A0EB2600EAB2009A6FB6 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		CB77A0EC2600EAB2009A6FB6 /* SideMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuTableViewCell.xib; sourceTree = "<group>"; };
+		CB77A0F226012E24009A6FB6 /* HomeDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDViewController.swift; sourceTree = "<group>"; };
+		CB77A0F526012E34009A6FB6 /* HomeD.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeD.storyboard; sourceTree = "<group>"; };
+		CB77A0F826012E75009A6FB6 /* SideMenuDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuDViewController.swift; sourceTree = "<group>"; };
+		CB77A0FC2601436D009A6FB6 /* HomeDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDViewModel.swift; sourceTree = "<group>"; };
+		CB77A10226018A4C009A6FB6 /* PickupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupViewController.swift; sourceTree = "<group>"; };
+		CB77A10526018A56009A6FB6 /* Pickup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pickup.storyboard; sourceTree = "<group>"; };
+		CB77A108260239F2009A6FB6 /* PickupDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupDViewModel.swift; sourceTree = "<group>"; };
 		CB831DFC2592732A000224DB /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		CB831E022592B264000224DB /* EditAccountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountController.swift; sourceTree = "<group>"; };
 		CB831E052592B292000224DB /* EditAccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountTableViewCell.swift; sourceTree = "<group>"; };
@@ -384,6 +398,50 @@
 			path = SideMenuCell;
 			sourceTree = "<group>";
 		};
+		CB77A0F026012DF9009A6FB6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CB77A0F226012E24009A6FB6 /* HomeDViewController.swift */,
+				CB77A0F826012E75009A6FB6 /* SideMenuDViewController.swift */,
+				CB77A0F526012E34009A6FB6 /* HomeD.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CB77A0F126012DFE009A6FB6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CB77A0FC2601436D009A6FB6 /* HomeDViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CB77A0FF26018998009A6FB6 /* PickupScene */ = {
+			isa = PBXGroup;
+			children = (
+				CB77A101260189B8009A6FB6 /* ViewModel */,
+				CB77A100260189B1009A6FB6 /* View */,
+			);
+			path = PickupScene;
+			sourceTree = "<group>";
+		};
+		CB77A100260189B1009A6FB6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CB77A10226018A4C009A6FB6 /* PickupViewController.swift */,
+				CB77A10526018A56009A6FB6 /* Pickup.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CB77A101260189B8009A6FB6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CB77A108260239F2009A6FB6 /* PickupDViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		CB831DFF2592B203000224DB /* Authentication Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,6 +534,7 @@
 		CBDAD50725FE802E007AA22F /* DriverSide */ = {
 			isa = PBXGroup;
 			children = (
+				CB77A0FF26018998009A6FB6 /* PickupScene */,
 				CBDAD50925FE8056007AA22F /* HomeScene */,
 			);
 			path = DriverSide;
@@ -494,6 +553,8 @@
 		CBDAD50925FE8056007AA22F /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
+				CB77A0F126012DFE009A6FB6 /* ViewModel */,
+				CB77A0F026012DF9009A6FB6 /* View */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -653,6 +714,8 @@
 				CB8C0E5D256BBDFC00C714B8 /* GoogleService-Info.plist in Resources */,
 				CB25500E2566D2DE003BC53C /* Assets.xcassets in Resources */,
 				CB5C7E2025FD58AD00B34F62 /* Signup.storyboard in Resources */,
+				CB77A10626018A56009A6FB6 /* Pickup.storyboard in Resources */,
+				CB77A0F626012E34009A6FB6 /* HomeD.storyboard in Resources */,
 				CBDAD51225FE817E007AA22F /* HomeP.storyboard in Resources */,
 				CBDAD52025FECDAE007AA22F /* LocationInput.storyboard in Resources */,
 				CB25500C2566D2DC003BC53C /* Main.storyboard in Resources */,
@@ -721,6 +784,7 @@
 				CBDCB70325953BAD00D80759 /* ProfileTableViewCell.swift in Sources */,
 				CB500B3F25854827005CD813 /* Enumerations.swift in Sources */,
 				CB500B0A257AF4DA005CD813 /* MapLocationServices.swift in Sources */,
+				CB77A0F926012E75009A6FB6 /* SideMenuDViewController.swift in Sources */,
 				CB8C0EA72574436300C714B8 /* LocationTableViewCell.swift in Sources */,
 				CBDAD51D25FECD92007AA22F /* LocationInputViewController.swift in Sources */,
 				CBDCB730259BA09C00D80759 /* EditPasswordController.swift in Sources */,
@@ -733,10 +797,12 @@
 				CB500B3925824C03005CD813 /* PickupController.swift in Sources */,
 				CB500B0425767BB9005CD813 /* DriverAnnotation.swift in Sources */,
 				CBDAD52825FEE14C007AA22F /* LocationInputTableViewCell.swift in Sources */,
+				CB77A109260239F3009A6FB6 /* PickupDViewModel.swift in Sources */,
 				CB5C507325A8E27C000A271D /* PickupViewModel.swift in Sources */,
 				CB8C0EAA2575145A00C714B8 /* Service.swift in Sources */,
 				CB831DFD2592732A000224DB /* MenuTableViewCell.swift in Sources */,
 				CBDCB739259CF74200D80759 /* EditPhonenumberController.swift in Sources */,
+				CB77A0FD2601436D009A6FB6 /* HomeDViewModel.swift in Sources */,
 				CBDCB70F2595576900D80759 /* SearchFavoritePlacesController.swift in Sources */,
 				CB500B3C2582DA96005CD813 /* Extensions.swift in Sources */,
 				CB5C4FE2259EA1EF000A271D /* LoadingButton.swift in Sources */,
@@ -744,6 +810,7 @@
 				CB5C7DB525FCFAB300B34F62 /* LoginViewController.swift in Sources */,
 				CBDAD52C25FEEC1F007AA22F /* LocationInputPViewModel.swift in Sources */,
 				CB5C7E1725FD4EEC00B34F62 /* LoginViewModel.swift in Sources */,
+				CB77A10326018A4C009A6FB6 /* PickupViewController.swift in Sources */,
 				CBDCB733259CF42400D80759 /* EditFirstnameController.swift in Sources */,
 				CB5C508725AA1BA4000A271D /* EditAccountViewModel.swift in Sources */,
 				CB831E062592B292000224DB /* EditAccountTableViewCell.swift in Sources */,
@@ -758,6 +825,7 @@
 				CB5C506A25A77288000A271D /* HomeViewModel.swift in Sources */,
 				CB831E032592B264000224DB /* EditAccountController.swift in Sources */,
 				CB5C508F25AA31D2000A271D /* SearchFavoritePlacesViewModel.swift in Sources */,
+				CB77A0F326012E24009A6FB6 /* HomeDViewController.swift in Sources */,
 				CB5C5020259F955D000A271D /* LaunchController.swift in Sources */,
 				CBDCB736259CF66A00D80759 /* EditSurnameController.swift in Sources */,
 				CB5C7E1C25FD588E00B34F62 /* SignupViewController.swift in Sources */,

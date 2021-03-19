@@ -31,6 +31,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        logout()
         checkAuthenticatedUser()
         configureUI()
         setupEmailTextField()
@@ -136,6 +137,8 @@ class LoginViewController: UIViewController {
                 self?.navigationController?.pushViewController(homeP!, animated: true)
             } else {
                 // Go To Driver Home VC
+                let homeD = UIStoryboard(name: "HomeD", bundle: nil).instantiateInitialViewController()
+                self?.navigationController?.pushViewController(homeD!, animated: true)
             }
             
         }).disposed(by: bag)

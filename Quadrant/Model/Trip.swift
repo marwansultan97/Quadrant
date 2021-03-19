@@ -27,11 +27,13 @@ struct Trip {
     var destinationCoordinates: CLLocationCoordinate2D!
     var destinationName: String!
     let passengerUID: String!
+    var passengerName: String!
     var passengerPhoneNumber: String!
     var driverPhoneNumber: String?
     var date: String!
-    var driverUID: String?
+    var driverName: String?
     var tripState: TripState!
+    var driverUID: String?
     
     
     init(passengerUID: String, values: [String:Any]) {
@@ -51,11 +53,15 @@ struct Trip {
         
         self.destinationName = values["destinationAddress"] as? String
         
-        self.driverUID = values["driverUID"] as? String ?? ""
+        self.driverName = values["driverName"] as? String ?? ""
         
         self.driverPhoneNumber = values["driverPhoneNumber"] as? String ?? ""
         
+        self.passengerName = values["passengerName"] as? String ?? ""
+        
         self.passengerPhoneNumber = values["passengerPhoneNumber"] as? String ?? ""
+        
+        self.driverUID = values["driverUID"] as? String ?? ""
         
         self.date = values["date"] as? String ?? ""
         

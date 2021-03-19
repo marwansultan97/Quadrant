@@ -26,6 +26,7 @@ class Service {
     static let shared = Service()
     let date = Date()
     
+    // done
     func fetchUserData(userID: String, completion: @escaping (User)-> Void) {
         REF_USERS.child(userID).observeSingleEvent(of: .value) { (snapshot) in
             guard let dictionary = snapshot.value as? [String:Any] else {return}
@@ -80,7 +81,7 @@ class Service {
         geofire.setLocation(location, forKey: uid)
     }
 
-    
+    // done
     func driverLocationLive(uid: String, mapView: MKMapView) {
         REF_DRIVER_LOCATION.child(uid).observe(.value) { (snapshot) in
             guard let dictionary = snapshot.value as? [String:Any] else {return}
@@ -105,7 +106,7 @@ class Service {
         }
     }
     
-    
+    // done
     func uploadTrip(pickup: CLLocationCoordinate2D, destination: CLLocationCoordinate2D, destinationAddress: String,  passengerPhoneNumber: String) {
         guard let uid = Auth.auth().currentUser?.uid else {return}
         let dateformmater = DateFormatter()
@@ -124,6 +125,7 @@ class Service {
         
     }
     
+    // done
     func observeCurrentTrip(uid: String, completion: @escaping(Trip)-> Void) {
         
         REF_TRIPS.child(uid).observe(.value) { (snapshot) in
@@ -134,6 +136,7 @@ class Service {
         }
     }
     
+    // done
     func cancleTheTrip(uid: String) {
         REF_TRIPS.child(uid).removeValue()
     }
@@ -155,7 +158,7 @@ class Service {
         REF_FAVORITE_PLACES.child(uid).child(placeType).updateChildValues(values, withCompletionBlock: completion)
     }
     
-    
+    // done
     func fetchFavouritePlaces(uid: String, childName: String, completion: @escaping(FavoritePlace)-> Void) {
         REF_FAVORITE_PLACES.child(uid).child(childName).observeSingleEvent(of: .value) { (snapshot) in
             guard let dictionary = snapshot.value as? [String:Any] else {return}
@@ -164,6 +167,7 @@ class Service {
         }
     }
     
+    // done
     func convertFavoritePlaceToPlaceMark(place: FavoritePlace) -> MKPlacemark  {
         let addressDictionary: [String:Any] = ["Name": place.name ?? "",
                                                "Thoroughfare": place.thoroughFare ?? "",
@@ -180,6 +184,7 @@ class Service {
     
     //MARK: - Driver Side Backend Methods
     
+    // done
     func fetchTrip(location: CLLocation, completion: @escaping(Trip)-> Void) {
         
         REF_TRIPS.queryOrdered(byChild: "state").queryEqual(toValue: TripState.requested.rawValue).observeSingleEvent(of: .childAdded, with: { (snapshot) in
@@ -191,11 +196,12 @@ class Service {
         })
     }
     
+    // done
     func isTheTripCancled(uid: String, completion: @escaping(DataSnapshot)-> Void) {
         REF_TRIPS.child(uid).observeSingleEvent(of: .childRemoved, with: completion)
     }
     
-    
+    // done
     func acceptTheTrip(driverPhoneNumber: String, trip: Trip, completion: @escaping(Error?, DatabaseReference)-> Void) {
         guard let driverUID = Auth.auth().currentUser?.uid else {return}
         guard let passengerUID = trip.passengerUID else {return}
@@ -210,6 +216,7 @@ class Service {
         geofire.setLocation(location, forKey: uid)
     }
     
+    // done
     func updateTripState(uid: String, state: TripState) {
         REF_TRIPS.child(uid).updateChildValues(["state": state.rawValue])
     }

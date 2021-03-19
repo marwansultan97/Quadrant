@@ -31,8 +31,8 @@ class LoadingButton: UIButton {
     }
     
     private func createActivityIndicator() -> NVActivityIndicatorView {
-        let frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        let activityIndicator = NVActivityIndicatorView(frame: frame, type: .ballScaleRippleMultiple, color: .label, padding: nil)
+        let frame = CGRect(x: 0, y: 0, width: 55, height: 55)
+        let activityIndicator = NVActivityIndicatorView(frame: frame, type: .ballScaleRippleMultiple, color: .white, padding: nil)
         return activityIndicator
     }
     

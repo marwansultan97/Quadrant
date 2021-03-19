@@ -39,15 +39,19 @@ extension MKMapView {
             if let annotation = anno as? DriverAnnotation {
                 removeAnnotation(annotation)
             }
-            
+        }
+        if overlays.count > 0 {
+            removeOverlay(overlays[0])
+        }
+    }
+    
+    func centerMapOnUser() {
+        annotations.forEach { (anno) in
             if let annotation = anno as? MKUserLocation {
                 let span = MKCoordinateSpan(latitudeDelta: 0.008, longitudeDelta: 0.008)
                 let region = MKCoordinateRegion(center: annotation.coordinate, span: span)
                 setRegion(region, animated: true)
             }
-        }
-        if overlays.count > 0 {
-            removeOverlay(overlays[0])
         }
     }
     
