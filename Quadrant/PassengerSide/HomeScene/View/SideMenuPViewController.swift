@@ -69,13 +69,18 @@ class SideMenuPViewController: UIViewController {
     private func configureSettingsCells() {
         settingsCells = [
             SettingsMenu(icon: UIImage(systemName: "gearshape")!, title: "Settings", handler: {
-//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SettingsControllerP"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SettingsP"), object: nil)
+                self.sideMenuController?.hideMenu()
             }),
             SettingsMenu(icon: UIImage(systemName: "car")!, title: "Your Trips", handler: {
-//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "YourTripsControllerP"), object: nil)
+                self.sideMenuController?.hideMenu()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "YourTripsP"), object: nil)
+                
             }),
             SettingsMenu(icon: UIImage(systemName: "person.crop.circle.badge.xmark.fill")!, title: "Log out", handler: {
+                self.sideMenuController?.hideMenu()
 //                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SignoutP"), object: nil)
+                print("Logout")
             })
         ]
     }
@@ -107,6 +112,7 @@ extension SideMenuPViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        settingsCells[indexPath.row].handler()
     }
     
     

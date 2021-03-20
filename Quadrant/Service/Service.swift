@@ -141,6 +141,7 @@ class Service {
         REF_TRIPS.child(uid).removeValue()
     }
     
+    // done
     func updateFavoritePlaces(uid: String, placeType: String, place: MKPlacemark, completion: @escaping(Error?, DatabaseReference)-> Void) {
         let name = place.name
         let thoroughFare = place.thoroughfare

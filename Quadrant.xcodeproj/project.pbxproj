@@ -84,6 +84,22 @@
 		CBDCB736259CF66A00D80759 /* EditSurnameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDCB735259CF66A00D80759 /* EditSurnameController.swift */; };
 		CBDCB739259CF74200D80759 /* EditPhonenumberController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDCB738259CF74200D80759 /* EditPhonenumberController.swift */; };
 		CBDCB73C259CF81400D80759 /* EditEmailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDCB73B259CF81400D80759 /* EditEmailController.swift */; };
+		CBFC1597260564EE00347B96 /* YourTripsPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC1596260564EE00347B96 /* YourTripsPViewController.swift */; };
+		CBFC159C2605650700347B96 /* YourTripsP.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBFC159B2605650700347B96 /* YourTripsP.storyboard */; };
+		CBFC15A0260568FE00347B96 /* YourTripsPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC159F260568FE00347B96 /* YourTripsPViewModel.swift */; };
+		CBFC15AC26056D8600347B96 /* TripsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC15AA26056D8600347B96 /* TripsTableViewCell.swift */; };
+		CBFC15AD26056D8600347B96 /* TripsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBFC15AB26056D8600347B96 /* TripsTableViewCell.xib */; };
+		CBFC15B32606071500347B96 /* YourTripsDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC15B22606071500347B96 /* YourTripsDViewController.swift */; };
+		CBFC15B72606072200347B96 /* YourTripsD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBFC15B62606072200347B96 /* YourTripsD.storyboard */; };
+		CBFC15BA2606080900347B96 /* YourTripsDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC15B92606080900347B96 /* YourTripsDViewModel.swift */; };
+		CBFC15C0260614FB00347B96 /* ProfileInfosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC15BE260614FB00347B96 /* ProfileInfosTableViewCell.swift */; };
+		CBFC15C1260614FB00347B96 /* ProfileInfosTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBFC15BF260614FB00347B96 /* ProfileInfosTableViewCell.xib */; };
+		CBFC15C62606343900347B96 /* SettingsPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC15C52606343900347B96 /* SettingsPViewController.swift */; };
+		CBFC15C92606344B00347B96 /* SettingsP.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBFC15C82606344B00347B96 /* SettingsP.storyboard */; };
+		CBFC15CE260635FC00347B96 /* SettingsPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC15CD260635FC00347B96 /* SettingsPViewModel.swift */; };
+		CBFC15D42606705F00347B96 /* SetupFavoritePlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC15D32606705F00347B96 /* SetupFavoritePlaceViewModel.swift */; };
+		CBFC15D8260671CD00347B96 /* SetupFavoritePlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC15D7260671CD00347B96 /* SetupFavoritePlaceViewController.swift */; };
+		CBFC15DB260671D900347B96 /* SetupFavoritePlace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBFC15DA260671D900347B96 /* SetupFavoritePlace.storyboard */; };
 		DC2E119AD4B926296DA3D9D5 /* Pods_Quadrant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD23494840187233A3AE7A51 /* Pods_Quadrant.framework */; };
 /* End PBXBuildFile section */
 
@@ -171,6 +187,22 @@
 		CBDCB735259CF66A00D80759 /* EditSurnameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSurnameController.swift; sourceTree = "<group>"; };
 		CBDCB738259CF74200D80759 /* EditPhonenumberController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhonenumberController.swift; sourceTree = "<group>"; };
 		CBDCB73B259CF81400D80759 /* EditEmailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEmailController.swift; sourceTree = "<group>"; };
+		CBFC1596260564EE00347B96 /* YourTripsPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourTripsPViewController.swift; sourceTree = "<group>"; };
+		CBFC159B2605650700347B96 /* YourTripsP.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = YourTripsP.storyboard; sourceTree = "<group>"; };
+		CBFC159F260568FE00347B96 /* YourTripsPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourTripsPViewModel.swift; sourceTree = "<group>"; };
+		CBFC15AA26056D8600347B96 /* TripsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsTableViewCell.swift; sourceTree = "<group>"; };
+		CBFC15AB26056D8600347B96 /* TripsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripsTableViewCell.xib; sourceTree = "<group>"; };
+		CBFC15B22606071500347B96 /* YourTripsDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourTripsDViewController.swift; sourceTree = "<group>"; };
+		CBFC15B62606072200347B96 /* YourTripsD.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = YourTripsD.storyboard; sourceTree = "<group>"; };
+		CBFC15B92606080900347B96 /* YourTripsDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourTripsDViewModel.swift; sourceTree = "<group>"; };
+		CBFC15BE260614FB00347B96 /* ProfileInfosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfosTableViewCell.swift; sourceTree = "<group>"; };
+		CBFC15BF260614FB00347B96 /* ProfileInfosTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileInfosTableViewCell.xib; sourceTree = "<group>"; };
+		CBFC15C52606343900347B96 /* SettingsPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPViewController.swift; sourceTree = "<group>"; };
+		CBFC15C82606344B00347B96 /* SettingsP.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsP.storyboard; sourceTree = "<group>"; };
+		CBFC15CD260635FC00347B96 /* SettingsPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPViewModel.swift; sourceTree = "<group>"; };
+		CBFC15D32606705F00347B96 /* SetupFavoritePlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupFavoritePlaceViewModel.swift; sourceTree = "<group>"; };
+		CBFC15D7260671CD00347B96 /* SetupFavoritePlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupFavoritePlaceViewController.swift; sourceTree = "<group>"; };
+		CBFC15DA260671D900347B96 /* SetupFavoritePlace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SetupFavoritePlace.storyboard; sourceTree = "<group>"; };
 		DD23494840187233A3AE7A51 /* Pods_Quadrant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quadrant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9CE900035D4FA735CD5067A /* Pods-Uber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Uber.release.xcconfig"; path = "Target Support Files/Pods-Uber/Pods-Uber.release.xcconfig"; sourceTree = "<group>"; };
 		FC36ADEDBA85C218BAC316A6 /* Pods-Quadrant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quadrant.release.xcconfig"; path = "Target Support Files/Pods-Quadrant/Pods-Quadrant.release.xcconfig"; sourceTree = "<group>"; };
@@ -525,6 +557,9 @@
 		CBDAD50625FE801D007AA22F /* PassengerSide */ = {
 			isa = PBXGroup;
 			children = (
+				CBFC15D02606700500347B96 /* SetupFavoritePlaceScene */,
+				CBFC15C32606340000347B96 /* SettingsPScene */,
+				CBFC15932605641C00347B96 /* YourTripsPScene */,
 				CBDAD51825FECD4D007AA22F /* LocationInputScene */,
 				CBDAD50825FE803A007AA22F /* HomeScene */,
 			);
@@ -534,6 +569,7 @@
 		CBDAD50725FE802E007AA22F /* DriverSide */ = {
 			isa = PBXGroup;
 			children = (
+				CBFC15AF260606D500347B96 /* YourTripsDScene */,
 				CB77A0FF26018998009A6FB6 /* PickupScene */,
 				CBDAD50925FE8056007AA22F /* HomeScene */,
 			);
@@ -587,7 +623,6 @@
 		CBDAD51825FECD4D007AA22F /* LocationInputScene */ = {
 			isa = PBXGroup;
 			children = (
-				CBDAD51B25FECD73007AA22F /* Model */,
 				CBDAD51A25FECD6A007AA22F /* ViewModel */,
 				CBDAD51925FECD65007AA22F /* View */,
 			);
@@ -611,16 +646,11 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		CBDAD51B25FECD73007AA22F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		CBDAD52425FEE103007AA22F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				CBFC15BD260614C900347B96 /* ProfileInfosCell */,
+				CBFC15A226056D0400347B96 /* YourTripsCell */,
 				CB77A0EA2600EA94009A6FB6 /* SideMenuCell */,
 				CBDAD52F25FF8618007AA22F /* FavoritePlacesCell */,
 				CBDAD52525FEE109007AA22F /* LocationInputCell */,
@@ -644,6 +674,128 @@
 				CBDAD53125FF863A007AA22F /* FavoritePlacesTableViewCell.xib */,
 			);
 			path = FavoritePlacesCell;
+			sourceTree = "<group>";
+		};
+		CBFC15932605641C00347B96 /* YourTripsPScene */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC1595260564CD00347B96 /* ViewModel */,
+				CBFC15942605643100347B96 /* View */,
+			);
+			path = YourTripsPScene;
+			sourceTree = "<group>";
+		};
+		CBFC15942605643100347B96 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC1596260564EE00347B96 /* YourTripsPViewController.swift */,
+				CBFC159B2605650700347B96 /* YourTripsP.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CBFC1595260564CD00347B96 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC159F260568FE00347B96 /* YourTripsPViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CBFC15A226056D0400347B96 /* YourTripsCell */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC15AA26056D8600347B96 /* TripsTableViewCell.swift */,
+				CBFC15AB26056D8600347B96 /* TripsTableViewCell.xib */,
+			);
+			path = YourTripsCell;
+			sourceTree = "<group>";
+		};
+		CBFC15AF260606D500347B96 /* YourTripsDScene */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC15B1260606EF00347B96 /* ViewModel */,
+				CBFC15B0260606E800347B96 /* View */,
+			);
+			path = YourTripsDScene;
+			sourceTree = "<group>";
+		};
+		CBFC15B0260606E800347B96 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC15B22606071500347B96 /* YourTripsDViewController.swift */,
+				CBFC15B62606072200347B96 /* YourTripsD.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CBFC15B1260606EF00347B96 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC15B92606080900347B96 /* YourTripsDViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CBFC15BD260614C900347B96 /* ProfileInfosCell */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC15BE260614FB00347B96 /* ProfileInfosTableViewCell.swift */,
+				CBFC15BF260614FB00347B96 /* ProfileInfosTableViewCell.xib */,
+			);
+			path = ProfileInfosCell;
+			sourceTree = "<group>";
+		};
+		CBFC15C32606340000347B96 /* SettingsPScene */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC15CB2606347D00347B96 /* ViewModel */,
+				CBFC15CA2606347400347B96 /* View */,
+			);
+			path = SettingsPScene;
+			sourceTree = "<group>";
+		};
+		CBFC15CA2606347400347B96 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC15C52606343900347B96 /* SettingsPViewController.swift */,
+				CBFC15C82606344B00347B96 /* SettingsP.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CBFC15CB2606347D00347B96 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC15CD260635FC00347B96 /* SettingsPViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CBFC15D02606700500347B96 /* SetupFavoritePlaceScene */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC15D22606704500347B96 /* ViewModel */,
+				CBFC15D12606702B00347B96 /* View */,
+			);
+			path = SetupFavoritePlaceScene;
+			sourceTree = "<group>";
+		};
+		CBFC15D12606702B00347B96 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC15D7260671CD00347B96 /* SetupFavoritePlaceViewController.swift */,
+				CBFC15DA260671D900347B96 /* SetupFavoritePlace.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CBFC15D22606704500347B96 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC15D32606705F00347B96 /* SetupFavoritePlaceViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -708,8 +860,11 @@
 			files = (
 				CB2550112566D2DE003BC53C /* LaunchScreen.storyboard in Resources */,
 				CBDAD52925FEE14C007AA22F /* LocationInputTableViewCell.xib in Resources */,
+				CBFC15DB260671D900347B96 /* SetupFavoritePlace.storyboard in Resources */,
+				CBFC15B72606072200347B96 /* YourTripsD.storyboard in Resources */,
 				CB5C50A025AB8168000A271D /* Localizable.strings in Resources */,
 				CB5C7DB825FCFACC00B34F62 /* Login.storyboard in Resources */,
+				CBFC15C1260614FB00347B96 /* ProfileInfosTableViewCell.xib in Resources */,
 				CB5C5024259F9781000A271D /* Launch.storyboard in Resources */,
 				CB8C0E5D256BBDFC00C714B8 /* GoogleService-Info.plist in Resources */,
 				CB25500E2566D2DE003BC53C /* Assets.xcassets in Resources */,
@@ -717,8 +872,11 @@
 				CB77A10626018A56009A6FB6 /* Pickup.storyboard in Resources */,
 				CB77A0F626012E34009A6FB6 /* HomeD.storyboard in Resources */,
 				CBDAD51225FE817E007AA22F /* HomeP.storyboard in Resources */,
+				CBFC15AD26056D8600347B96 /* TripsTableViewCell.xib in Resources */,
 				CBDAD52025FECDAE007AA22F /* LocationInput.storyboard in Resources */,
 				CB25500C2566D2DC003BC53C /* Main.storyboard in Resources */,
+				CBFC15C92606344B00347B96 /* SettingsP.storyboard in Resources */,
+				CBFC159C2605650700347B96 /* YourTripsP.storyboard in Resources */,
 				CBDAD53325FF863A007AA22F /* FavoritePlacesTableViewCell.xib in Resources */,
 				CB77A0EE2600EAB2009A6FB6 /* SideMenuTableViewCell.xib in Resources */,
 			);
@@ -776,6 +934,7 @@
 				CB8C0EA42573B56400C714B8 /* LocationInputController.swift in Sources */,
 				CBDCB721259AB5F700D80759 /* YourTripsTableViewCell.swift in Sources */,
 				CB2550052566D2DC003BC53C /* AppDelegate.swift in Sources */,
+				CBFC1597260564EE00347B96 /* YourTripsPViewController.swift in Sources */,
 				CB500B0D257BB1D1005CD813 /* HomeControllerExtenstions.swift in Sources */,
 				CB5C508C25AA31BC000A271D /* YourTripsViewModel.swift in Sources */,
 				CBDCB73C259CF81400D80759 /* EditEmailController.swift in Sources */,
@@ -787,16 +946,20 @@
 				CB77A0F926012E75009A6FB6 /* SideMenuDViewController.swift in Sources */,
 				CB8C0EA72574436300C714B8 /* LocationTableViewCell.swift in Sources */,
 				CBDAD51D25FECD92007AA22F /* LocationInputViewController.swift in Sources */,
+				CBFC15C62606343900347B96 /* SettingsPViewController.swift in Sources */,
 				CBDCB730259BA09C00D80759 /* EditPasswordController.swift in Sources */,
 				CB5C507725A8E29B000A271D /* LocationInputViewModel.swift in Sources */,
+				CBFC15A0260568FE00347B96 /* YourTripsPViewModel.swift in Sources */,
 				CB77A0ED2600EAB2009A6FB6 /* SideMenuTableViewCell.swift in Sources */,
 				CB8C0E5625693F3700C714B8 /* LoginController.swift in Sources */,
 				CBDAD53225FF863A007AA22F /* FavoritePlacesTableViewCell.swift in Sources */,
 				CB500B35258104FD005CD813 /* Trip.swift in Sources */,
 				CB8C0E89256C768600C714B8 /* HomeController.swift in Sources */,
+				CBFC15B32606071500347B96 /* YourTripsDViewController.swift in Sources */,
 				CB500B3925824C03005CD813 /* PickupController.swift in Sources */,
 				CB500B0425767BB9005CD813 /* DriverAnnotation.swift in Sources */,
 				CBDAD52825FEE14C007AA22F /* LocationInputTableViewCell.swift in Sources */,
+				CBFC15CE260635FC00347B96 /* SettingsPViewModel.swift in Sources */,
 				CB77A109260239F3009A6FB6 /* PickupDViewModel.swift in Sources */,
 				CB5C507325A8E27C000A271D /* PickupViewModel.swift in Sources */,
 				CB8C0EAA2575145A00C714B8 /* Service.swift in Sources */,
@@ -819,17 +982,22 @@
 				CB2550072566D2DC003BC53C /* SceneDelegate.swift in Sources */,
 				CB5C504225A4978D000A271D /* UIViewControllerEX.swift in Sources */,
 				CBDAD50E25FE8156007AA22F /* HomePViewController.swift in Sources */,
+				CBFC15BA2606080900347B96 /* YourTripsDViewModel.swift in Sources */,
 				CBDCB71E259911E800D80759 /* YourTripsController.swift in Sources */,
 				CB8C0E73256BC24400C714B8 /* Authentication.swift in Sources */,
 				CB5C507B25A8F935000A271D /* MenuViewModel.swift in Sources */,
+				CBFC15D42606705F00347B96 /* SetupFavoritePlaceViewModel.swift in Sources */,
 				CB5C506A25A77288000A271D /* HomeViewModel.swift in Sources */,
 				CB831E032592B264000224DB /* EditAccountController.swift in Sources */,
 				CB5C508F25AA31D2000A271D /* SearchFavoritePlacesViewModel.swift in Sources */,
 				CB77A0F326012E24009A6FB6 /* HomeDViewController.swift in Sources */,
+				CBFC15C0260614FB00347B96 /* ProfileInfosTableViewCell.swift in Sources */,
 				CB5C5020259F955D000A271D /* LaunchController.swift in Sources */,
+				CBFC15D8260671CD00347B96 /* SetupFavoritePlaceViewController.swift in Sources */,
 				CBDCB736259CF66A00D80759 /* EditSurnameController.swift in Sources */,
 				CB5C7E1C25FD588E00B34F62 /* SignupViewController.swift in Sources */,
 				CBDCB71A2596B03E00D80759 /* FavoritePlacesLocationInputTableViewCell.swift in Sources */,
+				CBFC15AC26056D8600347B96 /* TripsTableViewCell.swift in Sources */,
 				CBDCB70625953BD000D80759 /* SettingsController.swift in Sources */,
 				CB5C7E2325FD645700B34F62 /* SignupViewModel.swift in Sources */,
 				CB500AE825752FF3005CD813 /* User.swift in Sources */,
@@ -1014,7 +1182,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1038,7 +1206,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

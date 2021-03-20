@@ -35,17 +35,21 @@ class LocationInputViewController: UIViewController {
         bindViewModelData()
         viewModel.fetchHomePlace()
         viewModel.fetchWorkPlace()
+        backButtonTapped()
         
-        backButton.rx.tap.subscribe(onNext: { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
-        }, onDisposed: {
-            print("Disposed")
-        }).disposed(by: bag)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    private func backButtonTapped() {
+        backButton.rx.tap.subscribe(onNext: { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }, onDisposed: {
+            print("Disposed")
+        }).disposed(by: bag)
     }
     
     
@@ -105,6 +109,7 @@ class LocationInputViewController: UIViewController {
 
 }
 
+//MARK: - TabeView Delegate
 extension LocationInputViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -146,7 +151,19 @@ extension LocationInputViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section == 1 {
+        if indexPath.section == 0 {
+            
+            if indexPath.row == 0 {
+                guard viewModel.homePlaceBehavior.value != nil else { return }
+                selectedPlaceMarkBehavior.accept(viewModel.homePlaceBehavior.value)
+                self.dismiss(animated: true)
+            } else {
+                guard viewModel.workPlaceBehavior.value != nil else { return }
+                selectedPlaceMarkBehavior.accept(viewModel.workPlaceBehavior.value)
+                self.dismiss(animated: true)
+            }
+
+        } else {
             let selectedPlaceMark = viewModel.placesBehavior.value[indexPath.row]
             selectedPlaceMarkBehavior.accept(selectedPlaceMark)
             self.dismiss(animated: true)

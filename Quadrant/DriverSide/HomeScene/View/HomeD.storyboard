@@ -210,7 +210,7 @@
                                             <constraint firstItem="eEi-zn-wg9" firstAttribute="leading" secondItem="ehB-UF-yz2" secondAttribute="trailing" constant="10" id="f9V-U0-YQE"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3B-eN-uT4">
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3B-eN-uT4">
                                         <rect key="frame" x="107" y="145.5" width="200" height="40"/>
                                         <color key="backgroundColor" red="0.94335803529999995" green="0.1335219543" blue="0.0094775621929999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -237,6 +237,18 @@
                                             <imageReference key="image" image="xmark" catalog="system" symbolScale="large"/>
                                         </state>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJg-0G-bZj">
+                                        <rect key="frame" x="107" y="145.5" width="200" height="40"/>
+                                        <color key="backgroundColor" red="0.94335803529999995" green="0.1335219543" blue="0.0094775621929999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="X74-lK-sHz"/>
+                                            <constraint firstAttribute="height" constant="40" id="ppO-Cl-mj1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <state key="normal" title="DROP OFF PASSENGER">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rr1-3c-6eo">
                                         <rect key="frame" x="30" y="92" width="354" height="38.5"/>
                                         <string key="text">Arrived At Pickup Location
@@ -246,7 +258,7 @@ Click Button When You Pick Up The Passenger</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="oPe-4H-Och" firstAttribute="top" secondItem="2Hy-0o-YFY" secondAttribute="top" constant="10" id="2Ro-BI-AZS"/>
                                     <constraint firstItem="6wi-iR-z8j" firstAttribute="centerX" secondItem="2Hy-0o-YFY" secondAttribute="centerX" id="5vm-eW-PHd"/>
@@ -259,6 +271,8 @@ Click Button When You Pick Up The Passenger</string>
                                     <constraint firstItem="wS3-Qg-SxX" firstAttribute="centerX" secondItem="2Hy-0o-YFY" secondAttribute="centerX" id="eWf-YK-nCt"/>
                                     <constraint firstItem="rr1-3c-6eo" firstAttribute="leading" secondItem="2Hy-0o-YFY" secondAttribute="leading" constant="30" id="gt3-q2-izR"/>
                                     <constraint firstItem="hUw-UM-mTL" firstAttribute="leading" secondItem="2Hy-0o-YFY" secondAttribute="leading" id="qKi-P0-ZO5"/>
+                                    <constraint firstItem="nJg-0G-bZj" firstAttribute="top" secondItem="rr1-3c-6eo" secondAttribute="bottom" constant="15" id="qnK-rU-TPs"/>
+                                    <constraint firstItem="nJg-0G-bZj" firstAttribute="centerX" secondItem="2Hy-0o-YFY" secondAttribute="centerX" id="rnw-Iv-JTW"/>
                                     <constraint firstItem="BUY-JJ-0in" firstAttribute="top" secondItem="2Hy-0o-YFY" secondAttribute="top" constant="15" id="vbC-kb-sdg"/>
                                     <constraint firstItem="T3B-eN-uT4" firstAttribute="top" secondItem="rr1-3c-6eo" secondAttribute="bottom" constant="15" id="vlX-73-tmx"/>
                                     <constraint firstItem="hUw-UM-mTL" firstAttribute="top" secondItem="2Hy-0o-YFY" secondAttribute="top" constant="15" id="z6D-cr-vQa"/>
@@ -290,6 +304,7 @@ Click Button When You Pick Up The Passenger</string>
                         <outlet property="cancelTripButton" destination="hUw-UM-mTL" id="EGU-tE-pPK"/>
                         <outlet property="destinationAddressLabel" destination="eEi-zn-wg9" id="NKd-jv-ZuB"/>
                         <outlet property="destinationView" destination="6wi-iR-z8j" id="Akw-Wh-Fnp"/>
+                        <outlet property="dropoffPassengerButton" destination="nJg-0G-bZj" id="iX1-2K-RDo"/>
                         <outlet property="mapView" destination="ero-eH-gEe" id="t6o-hB-exw"/>
                         <outlet property="passengerImageView" destination="oPe-4H-Och" id="Blt-3X-DJg"/>
                         <outlet property="passengerNameLabel" destination="wS3-Qg-SxX" id="Iet-IP-sl0"/>
@@ -313,9 +328,6 @@ Click Button When You Pick Up The Passenger</string>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

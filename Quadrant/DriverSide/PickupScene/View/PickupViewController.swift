@@ -65,8 +65,8 @@ class PickupViewController: UIViewController {
     
     private func configureUI() {
         mapView.layer.cornerRadius = mapView.frame.height / 2
-        acceptButton.layer.cornerRadius = acceptButton.frame.height / 2
-        rejectButton.layer.cornerRadius = rejectButton.frame.height / 2
+        acceptButton.layer.cornerRadius = 10
+        rejectButton.layer.cornerRadius = 10
         
         acceptButton.layer.shadowColor = UIColor.gray.cgColor
         acceptButton.layer.shadowOffset = CGSize.zero

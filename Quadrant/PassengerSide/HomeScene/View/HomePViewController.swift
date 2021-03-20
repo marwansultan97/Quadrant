@@ -21,7 +21,7 @@ class HomePViewController: UIViewController {
     @IBOutlet weak var bottomViewHeight: NSLayoutConstraint!
     @IBOutlet weak var destinationLabel: UILabel!
     @IBOutlet weak var closeBottomViewButton: UIButton!
-    @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var requestButton: UIButton!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -36,7 +36,7 @@ class HomePViewController: UIViewController {
     
     private let bag = DisposeBag()
     private var viewModel = HomePViewModel()
-    private let locationManager = CLLocationManager()
+    static let locationManager = CLLocationManager()
     
     private var selectedPlaceMark: MKPlacemark?
     
@@ -52,6 +52,7 @@ class HomePViewController: UIViewController {
         sideMenuButtonTapped()
         closeBottomViewButtonTapped()
         bindViewModelData()
+        addNotificationCenterObservers()
         
     }
     
@@ -61,8 +62,7 @@ class HomePViewController: UIViewController {
     
     private func configureUI() {
         whereButton.layer.cornerRadius = whereButton.frame.height / 2
-        actionButton.layer.cornerRadius = actionButton.frame.height / 2
-        closeBottomViewButton.layer.cornerRadius = closeBottomViewButton.frame.height / 2
+        requestButton.layer.cornerRadius = 10
         bottomViewHeight.constant = 0
         bottomView.layer.cornerRadius = 25
         bottomView.layer.shadowOpacity = 1
@@ -70,16 +70,10 @@ class HomePViewController: UIViewController {
         bottomView.layer.shadowRadius = 20
         bottomView.layer.shadowColor = UIColor.label.cgColor
         
-        actionButton.layer.shadowColor = UIColor.gray.cgColor
-        actionButton.layer.shadowOffset = CGSize.zero
-        actionButton.layer.shadowOpacity = 1
-        actionButton.layer.shadowRadius = 5
-        
-        closeBottomViewButton.layer.shadowColor = UIColor.gray.cgColor
-        closeBottomViewButton.layer.shadowOffset = CGSize.zero
-        closeBottomViewButton.layer.shadowOpacity = 1
-        closeBottomViewButton.layer.shadowRadius = 5
-
+        requestButton.layer.shadowColor = UIColor.gray.cgColor
+        requestButton.layer.shadowOffset = CGSize.zero
+        requestButton.layer.shadowOpacity = 1
+        requestButton.layer.shadowRadius = 5
 
     }
 
@@ -92,51 +86,6 @@ class HomePViewController: UIViewController {
         SideMenuController.preferences.animation.shadowAlpha = 0.5
     }
     
-    private func selectedPlaceShowDetails(place: MKPlacemark) {
-        UIView.animate(withDuration: 0.5, delay: 0.5, options: UIView.AnimationOptions.curveEaseIn) {
-            self.whereButton.alpha = 0
-            self.sideMenuButton.alpha = 0
-            self.bottomViewHeight.constant = 300
-            self.view.layoutIfNeeded()
-        }
-        let thoroughFare = place.thoroughfare
-        let subThoroughFare = place.subThoroughfare
-        let locality = place.locality
-        let adminArea = place.administrativeArea
-        destinationLabel.text = "\(thoroughFare ?? "") \(subThoroughFare ?? "") \(locality ?? "") \(adminArea ?? "")"
-        destinationLabel.adjustsFontSizeToFitWidth = true
-        destinationLabel.minimumScaleFactor = 0.5
-        actionButton.alpha = 1
-        driverInformationsView.alpha = 0
-        mapView.addAndSelectAnnotation(coordinate: place.coordinate)
-        let zoomInAnnotations = mapView.annotations.filter({ $0.isKind(of: MKUserLocation.self) || $0.isKind(of: MKPointAnnotation.self) })
-        mapView.fitAll(in: zoomInAnnotations, andShow: true)
-        viewModel.showRoute(destination: place, locationManager: locationManager)
-    }
-    
-    private func requestTrip() {
-        guard let pickup = locationManager.location?.coordinate else { return }
-        viewModel.uploadTrip(pickup: pickup, destinationPlace: selectedPlaceMark!, user: user!)
-        viewModel.observeCurrentTripState()
-        actionButton.alpha = 0
-    }
-    
-    private func closeBottomView() {
-        dismissHUD()
-        viewModel.removeObserverAndValueTrip()
-        if let driverUID = currentTrip?.driverUID {
-            REF_DRIVER_LOCATION.child(driverUID).removeAllObservers()
-        }
-        mapView.removeAnnotationAndOverlays()
-        mapView.centerMapOnUser()
-        UIView.animate(withDuration: 0.4, delay: 0, options: UIView.AnimationOptions.curveEaseOut) {
-            self.whereButton.alpha = 1
-            self.sideMenuButton.alpha = 1
-            self.bottomViewHeight.constant = 0
-            self.view.layoutIfNeeded()
-        }
-
-    }
     
     private func bindViewModelData() {
         viewModel.routeObservable
@@ -171,7 +120,7 @@ class HomePViewController: UIViewController {
             case .rejected:
                 self.closeBottomView()
                 self.showAlertSheet(title: "Ops!", message: "The Driver Didn't Accept your request, Please try again...")
-                if let driverUID = trip.driverUID {
+                if let driverUID = trip.driverUID , !driverUID.isEmpty  {
                     REF_DRIVER_LOCATION.child(driverUID).removeAllObservers()
                 }
             case .driverArrived:
@@ -218,19 +167,82 @@ class HomePViewController: UIViewController {
     }
     
     private func actionButtonTapped() {
-        actionButton.rx.tap.subscribe(onNext: { [weak self] in
+        requestButton.rx.tap.subscribe(onNext: { [weak self] in
             self?.requestTrip()
         }).disposed(by: bag)
+    }
+    
+    private func selectedPlaceShowDetails(place: MKPlacemark) {
+        sideMenuButton.alpha = 0
+        whereButton.alpha = 0
+        requestButton.alpha = 1
+        callButton.alpha = 0
+        driverInformationsView.alpha = 0
+        closeBottomViewButton.alpha = 1
+        
+        let name = place.name
+        let thoroughFare = place.thoroughfare
+        let subThoroughFare = place.subThoroughfare
+        let locality = place.locality
+        let adminArea = place.administrativeArea
+        destinationLabel.text = "\(name ?? "") \(thoroughFare ?? "") \(subThoroughFare ?? "") \(locality ?? "") \(adminArea ?? "")"
+        
+        UIView.animate(withDuration: 0.5, delay: 0.5, options: UIView.AnimationOptions.curveEaseIn) {
+            self.bottomViewHeight.constant = 200
+            self.view.layoutIfNeeded()
+        }
+        mapView.addAndSelectAnnotation(coordinate: place.coordinate)
+        let zoomInAnnotations = mapView.annotations.filter({ $0.isKind(of: MKUserLocation.self) || $0.isKind(of: MKPointAnnotation.self) })
+        mapView.fitAll(in: zoomInAnnotations, andShow: true)
+        viewModel.showRoute(destination: place, locationManager: HomePViewController.locationManager)
+    }
+    
+    private func requestTrip() {
+        guard let pickup = HomePViewController.locationManager.location?.coordinate else { return }
+        viewModel.uploadTrip(pickup: pickup, destinationPlace: selectedPlaceMark!, user: user!)
+        viewModel.observeCurrentTripState()
+        requestButton.alpha = 0
+        UIView.animate(withDuration: 0.5, delay: 0.5, options: UIView.AnimationOptions.curveEaseIn) {
+            self.bottomViewHeight.constant = 170
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    private func closeBottomView() {
+        dismissHUD()
+        if let driverUID = currentTrip?.driverUID , !driverUID.isEmpty {
+            REF_DRIVER_LOCATION.child(driverUID).removeAllObservers()
+        }
+        if let passengerUID = currentTrip?.passengerUID, !passengerUID.isEmpty {
+            REF_TRIPS.child(passengerUID).removeAllObservers()
+        }
+        viewModel.removeObserverAndValueTrip()
+        mapView.removeAnnotationAndOverlays()
+        mapView.centerMapOnUser()
+        UIView.animate(withDuration: 0.4, delay: 0, options: UIView.AnimationOptions.curveEaseOut) {
+            self.whereButton.alpha = 1
+            self.sideMenuButton.alpha = 1
+            self.bottomViewHeight.constant = 0
+            self.view.layoutIfNeeded()
+        }
+
     }
 
     
     private func tripAccepted(trip: Trip) {
         dismissHUD()
+        callButton.alpha = 1
         driverInformationsView.alpha = 1
         driverNameLabel.text = trip.driverName
         driverStateLabel.text = "Driver En Route"
         let firstChar = trip.driverName!.first?.lowercased()
         self.driverImageView.image = UIImage(systemName: "\(firstChar!).circle")
+        
+        UIView.animate(withDuration: 0.5, delay: 0.5, options: UIView.AnimationOptions.curveEaseIn) {
+            self.bottomViewHeight.constant = 280
+            self.view.layoutIfNeeded()
+        }
+        
         mapView.removeAnnotationAndOverlays()
         viewModel.driverLocationLive(uid: trip.driverUID!, mapView: mapView, completion: {
             let zoomInAnnotations = self.mapView.annotations.filter({ $0.isKind(of: DriverAnnotation.self) || $0.isKind(of: MKUserLocation.self) })
@@ -244,7 +256,9 @@ class HomePViewController: UIViewController {
     }
     
     private func tripInProgress(trip: Trip) {
-        REF_DRIVER_LOCATION.child(trip.passengerUID).removeAllObservers()
+        callButton.alpha = 0
+        closeBottomViewButton.alpha = 0
+        REF_DRIVER_LOCATION.child(trip.driverUID!).removeAllObservers()
         mapView.removeAnnotationAndOverlays()
         mapView.addAndSelectAnnotation(coordinate: trip.destinationCoordinates)
         let zoomInAnnotations = mapView.annotations.filter({ $0.isKind(of: MKUserLocation.self) || $0.isKind(of: MKPointAnnotation.self) })
@@ -266,6 +280,27 @@ class HomePViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    private func addNotificationCenterObservers() {
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(showAlertSignOut), name: NSNotification.Name(rawValue: "signout"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(goToSettingsPController), name: NSNotification.Name(rawValue: "SettingsP"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(goToYourTripsPController), name: NSNotification.Name(rawValue: "YourTripsP"), object: nil)
+    }
+    
+    @objc func goToYourTripsPController() {
+        let yourTripsVC = UIStoryboard(name: "YourTripsP", bundle: nil).instantiateInitialViewController()
+        yourTripsVC?.title = "Completed Trips"
+        self.navigationController?.pushViewController(yourTripsVC!, animated: true)
+    }
+    
+    @objc func goToSettingsPController() {
+        let settingsVC = UIStoryboard(name: "SettingsP", bundle: nil).instantiateInitialViewController()
+        settingsVC?.title = "Settings"
+        self.navigationController?.pushViewController(settingsVC!, animated: true)
+    }
+    
     
 
 }
@@ -274,27 +309,25 @@ class HomePViewController: UIViewController {
 extension HomePViewController: CLLocationManagerDelegate {
     
     private func setupLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        HomePViewController.locationManager.delegate = self
+        HomePViewController.locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         
         case .notDetermined:
-            locationManager.requestAlwaysAuthorization()
+            HomePViewController.locationManager.requestAlwaysAuthorization()
             break
         case .authorizedWhenInUse:
-            locationManager.startUpdatingLocation()
+            HomePViewController.locationManager.startUpdatingLocation()
             break
         case .authorizedAlways:
-            locationManager.startUpdatingLocation()
+            HomePViewController.locationManager.startUpdatingLocation()
             break
         case .restricted:
-            // restricted by e.g. parental controls. User can't enable Location Services
             break
         case .denied:
-            // user denied your app access to Location Services, but can grant access from Settings.app
             break
         default:
             break
@@ -304,7 +337,7 @@ extension HomePViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let passengerLocation = locations.first else { return}
         configureMapView(location: passengerLocation)
-        locationManager.stopUpdatingLocation()
+        HomePViewController.locationManager.stopUpdatingLocation()
     }
         
     
@@ -327,7 +360,7 @@ extension HomePViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
-        renderer.strokeColor = UIColor(hexString: "C90000")
+//        renderer.strokeColor = UIColor(hexString: "C90000")
         renderer.lineWidth = 5.0
         renderer.alpha = 1.0
         return renderer
@@ -339,6 +372,18 @@ extension HomePViewController: MKMapViewDelegate {
             annotationView.image = #imageLiteral(resourceName: "icons8-car_top_view")
             return annotationView
         }
+        
+        if #available(iOS 14.0, *), annotation is MKUserLocation {
+            let reuseIdentifier = "userLocation"
+            if let existingView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) {
+                return existingView
+            }
+            let view = MKUserLocationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            view.zPriority = .max
+            view.isEnabled = false
+            return view
+        }
+        
         return nil
     }
     

@@ -16,6 +16,7 @@ class HomeDViewController: UIViewController {
     
     
     
+    @IBOutlet weak var dropoffPassengerButton: UIButton!
     @IBOutlet weak var cancelTripButton: UIButton!
     @IBOutlet weak var pickupPassengerButton: UIButton!
     @IBOutlet weak var bottomViewHeight: NSLayoutConstraint!
@@ -50,7 +51,8 @@ class HomeDViewController: UIViewController {
         bindViewModelData()
         pickupPassengerButtonTapped()
         cancelTripButtonTapped()
-        
+        dropoffPassengerButtonTapped()
+        addNotificationCenterObservers()
     }
     
 
@@ -60,8 +62,8 @@ class HomeDViewController: UIViewController {
     
     private func configureUI() {
         searchButton.layer.cornerRadius = searchButton.frame.height / 2
-        pickupPassengerButton.layer.cornerRadius = pickupPassengerButton.frame.height / 2
-        pickupPassengerButton.alpha = 0
+        pickupPassengerButton.layer.cornerRadius = 10
+        dropoffPassengerButton.layer.cornerRadius = 10
         bottomViewHeight.constant = 0
         passengerStateLabel.adjustsFontSizeToFitWidth = true
         bottomView.layer.cornerRadius = 25
@@ -122,6 +124,14 @@ class HomeDViewController: UIViewController {
                 REF_TRIPS.removeAllObservers()
                 print("Stop Fetching")
             }
+        }).disposed(by: bag)
+    }
+    
+    private func dropoffPassengerButtonTapped() {
+        dropoffPassengerButton.rx.tap.subscribe(onNext: { [weak self] in
+            self?.arrivedAtDestinationLocation()
+            self?.showAlertSheet(title: "Trip Completed", message: "You Dropped off The Passenger at the required location... Thank You for the Ride!")
+
         }).disposed(by: bag)
     }
     
@@ -191,14 +201,20 @@ class HomeDViewController: UIViewController {
     private func tripAcceptedShowBottomView(trip: Trip) {
         viewModel.isTheTripCancled(uid: trip.passengerUID)
         pickupPassengerButton.alpha = 0
+        dropoffPassengerButton.alpha = 0
         destinationView.alpha = 0
         cancelTripButton.alpha = 1
+        callButton.alpha = 1
+        
+        
         passengerNameLabel.text = trip.passengerName
         passengerStateLabel.text = "En Route To Passenger"
         let firstChar = trip.passengerName.first?.lowercased()
         self.passengerImageView.image = UIImage(systemName: "\(firstChar!).circle.fill")
-        UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseIn) {
-            self.bottomViewHeight.constant = 300
+        
+        
+        UIView.animate(withDuration: 0.5, delay: 0.8, options: .curveEaseIn) {
+            self.bottomViewHeight.constant = 180
             self.view.layoutIfNeeded()
         }
         mapView.addAndSelectAnnotation(coordinate: trip.pickupCoordinates)
@@ -226,16 +242,29 @@ class HomeDViewController: UIViewController {
     private func arriverAtPickupLocation() {
         pickupPassengerButton.alpha = 1
         passengerStateLabel.text = "Arrived At Pickup Location\nClick Button When You Pick Up The Passenger"
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
+            self.bottomViewHeight.constant = 230
+            self.view.layoutIfNeeded()
+        }
+        
+        
         viewModel.updateTripState(uid: currentTrip!.passengerUID, state: .driverArrived)
     }
     
     private func passengerDidEnterStartTrip() {
         viewModel.updateTripState(uid: currentTrip!.passengerUID, state: .inProgress)
         passengerStateLabel.text = "En Route To Destination"
+        callButton.alpha = 0
         destinationView.alpha = 1
         destinationAddressLabel.text = currentTrip?.destinationName
-        callButton.alpha = 0
+        dropoffPassengerButton.alpha = 1
         pickupPassengerButton.alpha = 0
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
+            self.bottomViewHeight.constant = 300
+            self.view.layoutIfNeeded()
+        }
         
         mapView.removeAnnotationAndOverlays()
         mapView.addAndSelectAnnotation(coordinate: currentTrip!.destinationCoordinates)
@@ -247,6 +276,8 @@ class HomeDViewController: UIViewController {
     
     private func arrivedAtDestinationLocation() {
         viewModel.updateTripState(uid: currentTrip!.passengerUID, state: .arriverAtDestination)
+        viewModel.saveCompletedTrip(trip: currentTrip!)
+        
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
             self.bottomViewHeight.constant = 0
             self.view.layoutIfNeeded()
@@ -255,10 +286,7 @@ class HomeDViewController: UIViewController {
         self.searchButton.hideLoading()
         mapView.removeAnnotationAndOverlays()
         mapView.centerMapOnUser()
-        REF_TRIPS.removeAllObservers()
-        viewModel.saveCompletedTrip(trip: currentTrip!)
-        showAlertSheet(title: "Done", message: "You Arrived At Destination Location, Please Drop Off The Passenger")
-        
+        REF_TRIPS.child(currentTrip!.passengerUID).removeAllObservers()
     }
     
     
@@ -272,6 +300,22 @@ class HomeDViewController: UIViewController {
         let action = UIAlertAction.init(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    
+    private func addNotificationCenterObservers() {
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(showAlertSignOut), name: NSNotification.Name(rawValue: "signout"), object: nil)
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(goToSettingsController), name: NSNotification.Name(rawValue: "SettingsController"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(goToYourTripsDController), name: NSNotification.Name(rawValue: "YourTripsD"), object: nil)
+    }
+    
+    @objc func goToYourTripsDController() {
+        let yourTripsVC = UIStoryboard(name: "YourTripsD", bundle: nil).instantiateInitialViewController()
+        yourTripsVC?.title = "Completed Trips"
+        self.navigationController?.pushViewController(yourTripsVC!, animated: true)
     }
     
     
@@ -320,6 +364,7 @@ extension HomeDViewController: CLLocationManagerDelegate {
             arriverAtPickupLocation()
         } else {
             arrivedAtDestinationLocation()
+            showAlertSheet(title: "Done", message: "You Arrived At Destination Location, Please Drop Off The Passenger")
         }
     }
         
@@ -352,6 +397,21 @@ extension HomeDViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         guard let location = userLocation.location else { return }
         viewModel.setDriverLocation(location: location)
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if #available(iOS 14.0, *), annotation is MKUserLocation {
+            let reuseIdentifier = "userLocation"
+            if let existingView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) {
+                return existingView
+            }
+            let view = MKUserLocationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            view.zPriority = .max
+            view.isEnabled = false
+            return view
+        }
+        
+        return nil
     }
     
     

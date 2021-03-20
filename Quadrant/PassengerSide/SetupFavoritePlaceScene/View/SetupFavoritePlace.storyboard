@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7cQ-Yr-fRd">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Setup Favorite Place View Controller-->
+        <scene sceneID="AO6-VN-oSW">
+            <objects>
+                <viewController id="7cQ-Yr-fRd" customClass="SetupFavoritePlaceViewController" customModule="Quadrant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="18K-z9-Zd3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search places or make your current location as HOME" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9L-Se-B7F">
+                                <rect key="frame" x="82" y="144" width="250" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="Eu3-aT-c92"/>
+                                    <constraint firstAttribute="height" constant="50" id="yPN-Li-1K2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TC-3p-jYf">
+                                <rect key="frame" x="87" y="214" width="240" height="40"/>
+                                <color key="backgroundColor" red="0.94335803529999995" green="0.1335219543" blue="0.0094775621929999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="2FG-90-zu1"/>
+                                    <constraint firstAttribute="width" constant="240" id="SyT-pW-Bof"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="Current Location as HOME">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="imz-mX-efr">
+                                <rect key="frame" x="0.0" y="54" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gaY-Es-GLy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7TC-3p-jYf" firstAttribute="centerX" secondItem="18K-z9-Zd3" secondAttribute="centerX" id="36m-gy-M2Y"/>
+                            <constraint firstItem="U9L-Se-B7F" firstAttribute="top" secondItem="gaY-Es-GLy" secondAttribute="top" constant="100" id="8go-Dc-ht6"/>
+                            <constraint firstItem="gaY-Es-GLy" firstAttribute="bottom" secondItem="imz-mX-efr" secondAttribute="bottom" id="Rfd-vb-lyJ"/>
+                            <constraint firstItem="gaY-Es-GLy" firstAttribute="trailing" secondItem="imz-mX-efr" secondAttribute="trailing" id="Rwi-9f-lal"/>
+                            <constraint firstItem="7TC-3p-jYf" firstAttribute="top" secondItem="U9L-Se-B7F" secondAttribute="bottom" constant="20" id="T7E-jT-WPA"/>
+                            <constraint firstItem="U9L-Se-B7F" firstAttribute="centerX" secondItem="18K-z9-Zd3" secondAttribute="centerX" id="YBO-NV-oSd"/>
+                            <constraint firstItem="imz-mX-efr" firstAttribute="leading" secondItem="gaY-Es-GLy" secondAttribute="leading" id="xEJ-tg-4vv"/>
+                            <constraint firstItem="imz-mX-efr" firstAttribute="top" secondItem="gaY-Es-GLy" secondAttribute="top" constant="10" id="xR0-O5-lem"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="currentLocationLabel" destination="U9L-Se-B7F" id="W2K-t8-6L0"/>
+                        <outlet property="currentPlaceButton" destination="7TC-3p-jYf" id="uts-ht-ZLd"/>
+                        <outlet property="tableView" destination="imz-mX-efr" id="2Yk-HU-KL8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0JP-bO-Flc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-177" y="133"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

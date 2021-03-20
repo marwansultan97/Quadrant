@@ -34,14 +34,14 @@ class FavoritePlacesTableViewCell: UITableViewCell {
         case .home:
             placeImage.image = UIImage(systemName: "house.fill")
             placeTypeLabel.text = "Home"
-            placeAddressLabel.text = "You can add Home Place in the Settings"
+            placeAddressLabel.text = "You can add Home Place"
             placeAddressLabel.adjustsFontSizeToFitWidth = true
             guard place != nil else {return}
             placeAddressLabel.text = "\(place!.name ?? "") \(place!.thoroughfare ?? "") \(place!.locality ?? "") \(place!.administrativeArea ?? "")"
         case .work:
             placeImage.image = UIImage(systemName: "case.fill")
             placeTypeLabel.text = "Work"
-            placeAddressLabel.text = ""
+            placeAddressLabel.text = "You can add Work Place"
             placeAddressLabel.adjustsFontSizeToFitWidth = true
             guard place != nil else {return}
             placeAddressLabel.text = "\(place!.name ?? "") \(place!.thoroughfare ?? "") \(place!.locality ?? "") \(place!.administrativeArea ?? "")"
