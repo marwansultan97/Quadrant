@@ -41,39 +41,38 @@ class SetupFavoritePlaceViewModel {
         }
     }
     
-//    func updateCurrentFavoritePlace(placeType: FavoritePlaceUseCase) {
-//        guard let location = HomePViewController.locationManager.location
-//        let name = place.name
-//        let thoroughFare = place.thoroughfare
-//        let locality = place.locality
-//        let adminArea = place.administrativeArea
-//
-//        let placeCoordinates = [place.coordinate.latitude, place.coordinate.longitude]
-//
-//        let values: [String:Any] = ["placeCoordinates": placeCoordinates,
-//                                    "name": name ?? "",
-//                                    "thoroughFare": thoroughFare ?? "",
-//                                    "locality": locality ?? "",
-//                                    "adminArea": adminArea ?? ""]
-//        REF_FAVORITE_PLACES.child(uid).child(placeType.rawValue).updateChildValues(values) { [weak self] (err, ref) in
-//            if let err = err {
-//                print(err)
-//                return
-//            }
-//            self?.isUpdateSuccess.accept(true)
-//        }
-//
-//    }
-    func reverseGeoCode() {
+
+    func updateCurrentLocationAsFav(placeType: FavoritePlaceUseCase) {
         let geocoder = CLGeocoder()
         let location = HomePViewController.locationManager.location
-        geocoder.reverseGeocodeLocation(location!) { (placeMarks, err) in
+        geocoder.reverseGeocodeLocation(location!) { [weak self] (placeMarks, err) in
+            guard let self = self else { return }
             guard err == nil else {
                 print("DEBUG: err geocoding \(err!.localizedDescription)")
                 return
             }
-            guard let pm = placeMarks?.first else {return}
-            print(pm.name, pm.location?.coordinate, pm.administrativeArea)
+            guard let place = placeMarks?.first else {return}
+            guard let location = place.location else { return }
+            let name = place.name
+            let thoroughFare = place.thoroughfare
+            let locality = place.locality
+            let adminArea = place.administrativeArea
+            
+            let placeCoordinates = [location.coordinate.latitude, location.coordinate.longitude]
+            
+            let values: [String:Any] = ["placeCoordinates": placeCoordinates,
+                                        "name": name ?? "",
+                                        "thoroughFare": thoroughFare ?? "",
+                                        "locality": locality ?? "",
+                                        "adminArea": adminArea ?? ""]
+            REF_FAVORITE_PLACES.child(self.uid).child(placeType.rawValue).updateChildValues(values) { (err, ref) in
+                if let err = err {
+                    print(err)
+                    return
+                }
+                self.isUpdateSuccess.accept(true)
+            }
+
         }
     }
     

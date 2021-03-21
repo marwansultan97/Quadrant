@@ -12,7 +12,7 @@ import UIKit
 import Firebase
 import Combine
 
-
+@available(iOS 13.0, *)
 class EditAccountViewModel {
     
     @Published var user: User?

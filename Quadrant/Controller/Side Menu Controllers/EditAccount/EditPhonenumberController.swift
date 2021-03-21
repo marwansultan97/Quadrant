@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+@available(iOS 13.0, *)
 class EditPhonenumberController: UIViewController {
     
     var user: User?

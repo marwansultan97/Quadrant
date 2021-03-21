@@ -120,7 +120,10 @@ extension SettingsPViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             
-            print("Edit Account")
+            
+            let vc = UIStoryboard(name: "EditAccountP", bundle: nil).instantiateInitialViewController() as? EditAccountPViewController
+            vc?.title = "Edit Account"
+            self.navigationController?.pushViewController(vc!, animated: true)
             
         } else {
             

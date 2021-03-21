@@ -71,8 +71,7 @@ class SideMenuDViewController: UIViewController {
         settingsCells = [
             SettingsMenu(icon: UIImage(systemName: "gearshape")!, title: "Settings", handler: {
                 self.sideMenuController?.hideMenu()
-                print("Settings")
-//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SettingsControllerP"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SettingsD"), object: nil)
             }),
             SettingsMenu(icon: UIImage(systemName: "car")!, title: "Your Trips", handler: {
                 self.sideMenuController?.hideMenu()

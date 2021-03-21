@@ -29,7 +29,7 @@ class FavoritePlacesLocationInputTableViewCell: UITableViewCell {
     func configureCell(place: MKPlacemark?, image: UIImage, placeType: String) {
         
         placeImage.image = image
-        placeImage.tintColor = .label
+        placeImage.tintColor = .black
         placeTypeLabel.text = placeType.localize
         placeAddressLabel.text = ""
         placeAddressLabel.adjustsFontSizeToFitWidth = true

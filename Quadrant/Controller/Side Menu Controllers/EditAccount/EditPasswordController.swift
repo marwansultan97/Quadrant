@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+@available(iOS 13.0, *)
 class EditPasswordController: UIViewController {
     
     var user: User?

@@ -102,11 +102,19 @@ class SetupFavoritePlaceViewController: UIViewController {
         }, onDisposed: {
             print("Button Disposed")
         }).disposed(by: bag)
+        
+        viewModel.isUpdateSuccess.subscribe(onNext: { [weak self] isUpdateSuccess in
+            if isUpdateSuccess {
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }).disposed(by: bag)
+        
     }
     
     private func currentLocationButtonTapped() {
         currentPlaceButton.rx.tap.subscribe(onNext: { [weak self] in
-            self?.viewModel.reverseGeoCode()
+            guard let self = self else { return }
+            self.viewModel.updateCurrentLocationAsFav(placeType: self.useCase!)
         }).disposed(by: bag)
     }
         
@@ -131,6 +139,13 @@ extension SetupFavoritePlaceViewController: UITableViewDelegate, UITableViewData
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.textLabel?.text = "\(name ?? "") \(thoroughFare ?? "") \(subThoroughFare ?? "") \(locality ?? "") \(adminArea ?? "")"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard !viewModel.placesBehavior.value.isEmpty else { return }
+        let place = viewModel.placesBehavior.value[indexPath.row]
+        viewModel.updateFavoritePlaces(placeType: useCase!, place: place)
     }
     
     

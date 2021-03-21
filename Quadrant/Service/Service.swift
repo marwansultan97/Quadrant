@@ -88,7 +88,7 @@ class Service {
             guard let location = dictionary["l"] as? NSArray else {return}
             guard let lat = location[0] as? CLLocationDegrees else {return}
             guard let long = location[1] as? CLLocationDegrees else {return}
-            var driverCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            let driverCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat, longitude: long)
             let annotation = DriverAnnotation(fullname: "", uid: uid, coordinate: driverCoordinate)
             var isDriverPlaceChanged: Bool {
                 return mapView.annotations.contains { (anno) -> Bool in
@@ -145,7 +145,7 @@ class Service {
     func updateFavoritePlaces(uid: String, placeType: String, place: MKPlacemark, completion: @escaping(Error?, DatabaseReference)-> Void) {
         let name = place.name
         let thoroughFare = place.thoroughfare
-        let subThoroughFare = place.subThoroughfare
+//        let subThoroughFare = place.subThoroughfare
         let locality = place.locality
         let adminArea = place.administrativeArea
         

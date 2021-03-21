@@ -10,7 +10,7 @@ import Firebase
 import MapKit
 import CoreLocation
 
-
+@available(iOS 13.0, *)
 //MARK: - Location Manager Delegate Methods
 extension HomeController : CLLocationManagerDelegate {
     
@@ -102,6 +102,7 @@ extension HomeController : CLLocationManagerDelegate {
 }
 
 //MARK: - MapView Delegate Methods
+@available(iOS 13.0, *)
 extension HomeController: MKMapViewDelegate {
 
     // to make a custom driver annotation
@@ -154,6 +155,7 @@ extension HomeController: MKMapViewDelegate {
 }
 
 //MARK: - Passenger Side Methods
+@available(iOS 13.0, *)
 extension HomeController: LocationInputControllerDelegate {
     
     
@@ -184,6 +186,7 @@ extension HomeController: LocationInputControllerDelegate {
 
 
 //MARK: - Driver Side Methods
+@available(iOS 13.0, *)
 extension HomeController: PickupControllerDelegate {
     
     func searchForAnotherTrip() {

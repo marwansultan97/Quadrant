@@ -12,6 +12,7 @@ import SideMenuSwift
 import RxCocoa
 import RxSwift
 
+@available(iOS 13.0, *)
 class HomeDViewController: UIViewController {
     
     
@@ -307,7 +308,7 @@ class HomeDViewController: UIViewController {
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(showAlertSignOut), name: NSNotification.Name(rawValue: "signout"), object: nil)
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(goToSettingsController), name: NSNotification.Name(rawValue: "SettingsController"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(goToSettingsDController), name: NSNotification.Name(rawValue: "SettingsD"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(goToYourTripsDController), name: NSNotification.Name(rawValue: "YourTripsD"), object: nil)
     }
@@ -318,18 +319,25 @@ class HomeDViewController: UIViewController {
         self.navigationController?.pushViewController(yourTripsVC!, animated: true)
     }
     
+    @objc func goToSettingsDController() {
+        let settingsVC = UIStoryboard(name: "SettingsD", bundle: nil).instantiateInitialViewController()
+        settingsVC?.title = "Settings"
+        self.navigationController?.pushViewController(settingsVC!, animated: true)
+    }
+    
     
 }
 
 
 //MARK: - Location Manager Delegate
+@available(iOS 13.0, *)
 extension HomeDViewController: CLLocationManagerDelegate {
     
     private func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
-    
+    @available(iOS 14.0, *)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         
@@ -352,7 +360,8 @@ extension HomeDViewController: CLLocationManagerDelegate {
             break
         }
     }
-    
+    @available(iOS 13.0, *)
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let passengerLocation = locations.first else { return}
         configureMapView(location: passengerLocation)
@@ -372,6 +381,7 @@ extension HomeDViewController: CLLocationManagerDelegate {
 }
 
 //MARK: - MKMap View Delegate
+@available(iOS 13.0, *)
 extension HomeDViewController: MKMapViewDelegate {
     
     // Called when location did update

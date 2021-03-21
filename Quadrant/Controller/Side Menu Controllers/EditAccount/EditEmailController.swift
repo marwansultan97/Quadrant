@@ -7,7 +7,7 @@
 
 import UIKit
 
-
+@available(iOS 13.0, *)
 class EditEmailController: UIViewController {
     
     var user: User?

@@ -14,7 +14,7 @@ import SVProgressHUD
 import Combine
 
 
-
+@available(iOS 13.0, *)
 class HomeController: UIViewController {
     
     
@@ -262,7 +262,7 @@ class HomeController: UIViewController {
             self.animateRideActionViewPassenger(const: 250, alpha: 0)
             self.cornerButton.alpha = 0
             self.driverPhoneNumber = passengerTrip?.driverPhoneNumber
-            print("DEBUG: phone number driver \(self.driverPhoneNumber)")
+            print("DEBUG: phone number driver \(self.driverPhoneNumber!)")
 
         case.rejected:
             self.showAlert(title: "Oops!".localize, message: "a driver rejected your ride, Please search for another driver".localize)

@@ -15,7 +15,7 @@ struct EditAccountOptions {
 import UIKit
 import Firebase
 import Combine
-
+@available(iOS 13.0, *)
 class EditAccountController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 

@@ -12,7 +12,7 @@ enum FavoritePlaceType {
     case home
     case work
 }
-
+@available(iOS 13.0, *)
 class FavoritePlacesTableViewCell: UITableViewCell {
 
     @IBOutlet weak var placeAddressLabel: UILabel!
