@@ -18,6 +18,8 @@ class HomeDViewModel {
     
     let uid = Auth.auth().currentUser?.uid
     
+    var isSignedOut = BehaviorRelay<Bool>(value: false)
+    
     private var userSubject = PublishSubject<User>()
     var userObservable: Observable<User> {
         return userSubject.asObservable()
@@ -113,6 +115,15 @@ class HomeDViewModel {
                                     "passengerPhoneNumber": passengerPhoneNumber,
                                     "date": timeStamp]
         REF_COMPLETED_TRIPS.child(uid!).childByAutoId().updateChildValues(values)
+    }
+    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            self.isSignedOut.accept(true)
+        } catch let err {
+            print(err)
+        }
     }
     
     

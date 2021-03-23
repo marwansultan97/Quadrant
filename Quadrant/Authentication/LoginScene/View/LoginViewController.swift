@@ -3,12 +3,10 @@
 //  Uber
 //
 //  Created by Marwan Osama on 3/13/21.
-//
 
 import UIKit
 import RxSwift
 import RxCocoa
-import ChameleonFramework
 import Firebase
 
 class LoginViewController: UIViewController {
@@ -86,15 +84,15 @@ class LoginViewController: UIViewController {
         
         emailTF.rx.controlEvent(.editingDidBegin).asControlEvent().subscribe(onNext: {
             UIView.animate(withDuration: 0.5) {
-                self.emailContainer.layer.borderColor = UIColor(hexString: "C90000")?.cgColor
-                self.emailIcon.tintColor = UIColor(hexString: "C90000")
+                self.emailContainer.layer.borderColor = UIColor(rgb: 0xEB0000).cgColor
+                self.emailIcon.image = UIImage(named: "SF_envelope_open_fill-1")
             }
         }).disposed(by: bag)
         
         emailTF.rx.controlEvent(.editingDidEnd).asControlEvent().subscribe(onNext: {
             UIView.animate(withDuration: 0.5) {
                 self.emailContainer.layer.borderColor = UIColor.gray.cgColor
-                self.emailIcon.tintColor = UIColor.gray
+                self.emailIcon.image = UIImage(named: "SF_envelope_open_fill")
             }
         }).disposed(by: bag)
     }
@@ -104,15 +102,15 @@ class LoginViewController: UIViewController {
         
         passwordTF.rx.controlEvent(.editingDidBegin).asControlEvent().subscribe(onNext: {
             UIView.animate(withDuration: 0.5) {
-                self.passwordContainer.layer.borderColor = UIColor(hexString: "C90000")?.cgColor
-                self.passwordIcon.tintColor = UIColor(hexString: "C90000")
+                self.passwordContainer.layer.borderColor = UIColor(rgb: 0xEB0000).cgColor
+                self.passwordIcon.image = UIImage(named: "SF_lock_circle-1")
             }
         }).disposed(by: bag)
         
         passwordTF.rx.controlEvent(.editingDidEnd).asControlEvent().subscribe(onNext: {
             UIView.animate(withDuration: 0.5) {
                 self.passwordContainer.layer.borderColor = UIColor.gray.cgColor
-                self.passwordIcon.tintColor = UIColor.gray
+                self.passwordIcon.image = UIImage(named: "SF_lock_circle")
             }
         }).disposed(by: bag)
     }
@@ -136,7 +134,6 @@ class LoginViewController: UIViewController {
                 let homeP = UIStoryboard(name: "HomeP", bundle: nil).instantiateInitialViewController()
                 self?.navigationController?.pushViewController(homeP!, animated: true)
             } else {
-                // Go To Driver Home VC
                 let homeD = UIStoryboard(name: "HomeD", bundle: nil).instantiateInitialViewController()
                 self?.navigationController?.pushViewController(homeD!, animated: true)
             }
@@ -147,7 +144,7 @@ class LoginViewController: UIViewController {
     private func loginButtonTapped() {
         viewModel.isLoginButtonEnabled.subscribe(onNext: { (isEnabled) in
             self.loginButton.isEnabled = isEnabled
-            self.loginButton.backgroundColor = isEnabled ? UIColor(hexString: "C90000") : UIColor(hexString: "C90000")?.darken(byPercentage: 0.2)
+            self.loginButton.backgroundColor = isEnabled ? UIColor(rgb: 0xEB0000) : UIColor(rgb: 0x600000)
         }).disposed(by: bag)
         
         loginButton.rx.tap.subscribe(onNext: { [weak self] in

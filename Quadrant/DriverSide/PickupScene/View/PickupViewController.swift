@@ -123,9 +123,9 @@ class PickupViewController: UIViewController {
     }
     
     func configureLayerAnimations() {
-        self.trackLayer = setCircleLayers(strokeColor: .systemGray3, fillColor: .clear)
-        self.progressLayer = setCircleLayers(strokeColor: .label, fillColor: .clear)
-        self.pulsatingLayer = setCircleLayers(strokeColor: .clear, fillColor: UIColor(hexString: "C90000"))
+        self.trackLayer = setCircleLayers(strokeColor: .lightGray, fillColor: .clear)
+        self.progressLayer = setCircleLayers(strokeColor: .black, fillColor: .clear)
+        self.pulsatingLayer = setCircleLayers(strokeColor: .clear, fillColor: UIColor(rgb: 0xEB0000))
         
         pulsatingView.layer.addSublayer(pulsatingLayer)
         pulsatingView.layer.addSublayer(trackLayer)

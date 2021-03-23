@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7cQ-Yr-fRd">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -39,26 +40,37 @@
                                 </state>
                             </button>
                             <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="imz-mX-efr">
-                                <rect key="frame" x="0.0" y="54" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="89" width="414" height="773"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="wOx-6G-S6n">
+                                <rect key="frame" x="0.0" y="44" width="414" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="9Jq-3B-uYe"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gaY-Es-GLy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="7TC-3p-jYf" firstAttribute="centerX" secondItem="18K-z9-Zd3" secondAttribute="centerX" id="36m-gy-M2Y"/>
+                            <constraint firstItem="imz-mX-efr" firstAttribute="top" secondItem="wOx-6G-S6n" secondAttribute="bottom" id="8ge-Tf-eAh"/>
                             <constraint firstItem="U9L-Se-B7F" firstAttribute="top" secondItem="gaY-Es-GLy" secondAttribute="top" constant="100" id="8go-Dc-ht6"/>
+                            <constraint firstItem="wOx-6G-S6n" firstAttribute="trailing" secondItem="gaY-Es-GLy" secondAttribute="trailing" id="Oc3-YT-aZt"/>
                             <constraint firstItem="gaY-Es-GLy" firstAttribute="bottom" secondItem="imz-mX-efr" secondAttribute="bottom" id="Rfd-vb-lyJ"/>
                             <constraint firstItem="gaY-Es-GLy" firstAttribute="trailing" secondItem="imz-mX-efr" secondAttribute="trailing" id="Rwi-9f-lal"/>
                             <constraint firstItem="7TC-3p-jYf" firstAttribute="top" secondItem="U9L-Se-B7F" secondAttribute="bottom" constant="20" id="T7E-jT-WPA"/>
                             <constraint firstItem="U9L-Se-B7F" firstAttribute="centerX" secondItem="18K-z9-Zd3" secondAttribute="centerX" id="YBO-NV-oSd"/>
+                            <constraint firstItem="wOx-6G-S6n" firstAttribute="leading" secondItem="gaY-Es-GLy" secondAttribute="leading" id="jrX-6o-3DZ"/>
+                            <constraint firstItem="wOx-6G-S6n" firstAttribute="top" secondItem="gaY-Es-GLy" secondAttribute="top" id="mRB-Yy-Ibd"/>
                             <constraint firstItem="imz-mX-efr" firstAttribute="leading" secondItem="gaY-Es-GLy" secondAttribute="leading" id="xEJ-tg-4vv"/>
-                            <constraint firstItem="imz-mX-efr" firstAttribute="top" secondItem="gaY-Es-GLy" secondAttribute="top" constant="10" id="xR0-O5-lem"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="currentLocationLabel" destination="U9L-Se-B7F" id="W2K-t8-6L0"/>
                         <outlet property="currentPlaceButton" destination="7TC-3p-jYf" id="uts-ht-ZLd"/>
+                        <outlet property="searchBar" destination="wOx-6G-S6n" id="Rvv-eN-FOE"/>
                         <outlet property="tableView" destination="imz-mX-efr" id="2Yk-HU-KL8"/>
                     </connections>
                 </viewController>

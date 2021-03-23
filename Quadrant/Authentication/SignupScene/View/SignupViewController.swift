@@ -8,7 +8,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import ChameleonFramework
 
 class SignupViewController: UIViewController {
     
@@ -98,8 +97,8 @@ class SignupViewController: UIViewController {
         emailTF.rx.controlEvent(.editingDidBegin).asControlEvent().subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             UIView.animate(withDuration: 0.5) {
-                self.emailContainer.layer.borderColor = UIColor(hexString: "C90000")?.cgColor
-                self.emailIcon.tintColor = UIColor(hexString: "C90000")
+                self.emailContainer.layer.borderColor = UIColor(rgb: 0xEB0000).cgColor
+                self.emailIcon.image = UIImage(named: "SF_envelope_open_fill-1")
             }
         }).disposed(by: bag)
         
@@ -107,7 +106,7 @@ class SignupViewController: UIViewController {
             guard let self = self else { return }
             UIView.animate(withDuration: 0.5) {
                 self.emailContainer.layer.borderColor = UIColor.gray.cgColor
-                self.emailIcon.tintColor = UIColor.gray
+                self.emailIcon.image = UIImage(named: "SF_envelope_open_fill")
             }
         }).disposed(by: bag)
     }
@@ -118,8 +117,8 @@ class SignupViewController: UIViewController {
         passwordTF.rx.controlEvent(.editingDidBegin).asControlEvent().subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             UIView.animate(withDuration: 0.5) {
-                self.passwordContainer.layer.borderColor = UIColor(hexString: "C90000")?.cgColor
-                self.passwordIcon.tintColor = UIColor(hexString: "C90000")
+                self.passwordContainer.layer.borderColor = UIColor(rgb: 0xEB0000).cgColor
+                self.passwordIcon.image = UIImage(named: "SF_lock_circle-1")
             }
         }).disposed(by: bag)
         
@@ -127,7 +126,7 @@ class SignupViewController: UIViewController {
             guard let self = self else { return }
             UIView.animate(withDuration: 0.5) {
                 self.passwordContainer.layer.borderColor = UIColor.gray.cgColor
-                self.passwordIcon.tintColor = UIColor.gray
+                self.passwordIcon.image = UIImage(named: "SF_lock_circle")
             }
         }).disposed(by: bag)
     }
@@ -138,8 +137,8 @@ class SignupViewController: UIViewController {
         firstnameTF.rx.controlEvent(.editingDidBegin).asControlEvent().subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             UIView.animate(withDuration: 0.5) {
-                self.firstnameContainer.layer.borderColor = UIColor(hexString: "C90000")?.cgColor
-                self.firstnameIcon.tintColor = UIColor(hexString: "C90000")
+                self.firstnameContainer.layer.borderColor = UIColor(rgb: 0xEB0000).cgColor
+                self.firstnameIcon.image = UIImage(named: "SF_person_icloud_fill-1")
             }
         }).disposed(by: bag)
         
@@ -147,7 +146,7 @@ class SignupViewController: UIViewController {
             guard let self = self else { return }
             UIView.animate(withDuration: 0.5) {
                 self.firstnameContainer.layer.borderColor = UIColor.gray.cgColor
-                self.firstnameIcon.tintColor = UIColor.gray
+                self.firstnameIcon.image = UIImage(named: "SF_person_icloud_fill")
             }
         }).disposed(by: bag)
     }
@@ -158,8 +157,8 @@ class SignupViewController: UIViewController {
         surnameTF.rx.controlEvent(.editingDidBegin).asControlEvent().subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             UIView.animate(withDuration: 0.5) {
-                self.surnameContainer.layer.borderColor = UIColor(hexString: "C90000")?.cgColor
-                self.surnameIcon.tintColor = UIColor(hexString: "C90000")
+                self.surnameContainer.layer.borderColor = UIColor(rgb: 0xEB0000).cgColor
+                self.surnameIcon.image = UIImage(named: "SF_person-1")
             }
         }).disposed(by: bag)
         
@@ -167,7 +166,7 @@ class SignupViewController: UIViewController {
             guard let self = self else { return }
             UIView.animate(withDuration: 0.5) {
                 self.surnameContainer.layer.borderColor = UIColor.gray.cgColor
-                self.surnameIcon.tintColor = UIColor.gray
+                self.surnameIcon.image = UIImage(named: "SF_person")
             }
         }).disposed(by: bag)
     }
@@ -184,8 +183,8 @@ class SignupViewController: UIViewController {
         phonenumberTF.rx.controlEvent(.editingDidBegin).asControlEvent().subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             UIView.animate(withDuration: 0.5) {
-                self.phonenumberContainer.layer.borderColor = UIColor(hexString: "C90000")?.cgColor
-                self.phonenumberIcon.tintColor = UIColor(hexString: "C90000")
+                self.phonenumberContainer.layer.borderColor = UIColor(rgb: 0xEB0000).cgColor
+                self.phonenumberIcon.image = UIImage(named: "SF_phone_fill-1")
             }
         }).disposed(by: bag)
         
@@ -193,7 +192,7 @@ class SignupViewController: UIViewController {
             guard let self = self else { return }
             UIView.animate(withDuration: 0.5) {
                 self.phonenumberContainer.layer.borderColor = UIColor.gray.cgColor
-                self.phonenumberIcon.tintColor = UIColor.gray
+                self.phonenumberIcon.image = UIImage(named: "SF_phone_fill")
             }
         }).disposed(by: bag)
     }
@@ -215,9 +214,11 @@ class SignupViewController: UIViewController {
         viewModel.userObservable.subscribe(onNext: { [weak self] user in
             self?.showSuccess(message: "Signed up Successfully", dismissDelay: 1)
             if user.accountType == .passenger {
-                // Go To Passenger Home VC
+                let homeP = UIStoryboard(name: "HomeP", bundle: nil).instantiateInitialViewController()
+                self?.navigationController?.pushViewController(homeP!, animated: true)
             } else {
-                // Go To Driver Home VC
+                let homeD = UIStoryboard(name: "HomeD", bundle: nil).instantiateInitialViewController()
+                self?.navigationController?.pushViewController(homeD!, animated: true)
             }
             
         }).disposed(by: bag)
@@ -231,7 +232,7 @@ class SignupViewController: UIViewController {
         viewModel.isSignupButtonEnabled.subscribe(onNext: { [weak self] (isEnabled) in
             guard let self = self else { return }
             self.signupButton.isEnabled = isEnabled
-            self.signupButton.backgroundColor = isEnabled ? UIColor(hexString: "C90000") : UIColor(hexString: "C90000")?.darken(byPercentage: 0.2)
+            self.signupButton.backgroundColor = isEnabled ? UIColor(rgb: 0xEB0000) : UIColor(rgb: 0x600000)
         }).disposed(by: bag)
         
         signupButton.rx.tap.subscribe(onNext: { [weak self] in

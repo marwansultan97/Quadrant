@@ -26,9 +26,9 @@ class ProfileInfosTableViewCell: UITableViewCell {
     }
     
     func configureCell(user: User) {
-        let firstChar = user.firstname.first?.lowercased()
+        let firstChar = user.firstname.first!.lowercased()
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
-        profileImageView.image = UIImage(systemName: "\(firstChar!).circle.fill")
+        profileImageView.image = UIImage(named: "SF_\(firstChar)_circle")
         fullnameLabel.text = "\(user.firstname) \(user.surname)"
         phoneNumberLabel.text = user.phonenumber
     }

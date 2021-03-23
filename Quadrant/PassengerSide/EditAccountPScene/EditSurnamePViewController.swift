@@ -26,7 +26,7 @@ class EditSurnamePViewController: UIViewController {
         
     }
     
-
+    
     private func configureSaveButton() {
         
         surnameTF.rx.text.orEmpty
@@ -35,14 +35,14 @@ class EditSurnamePViewController: UIViewController {
                 return trimmedText
             })
             .subscribe(onNext: { [weak self] text in
-            if text.isEmpty {
-                self?.saveButton.isEnabled = false
-                self?.saveButton.backgroundColor = UIColor(hexString: "C90000")?.darken(byPercentage: 0.2)
-            } else {
-                self?.saveButton.isEnabled = true
-                self?.saveButton.backgroundColor = UIColor(hexString: "C90000")
-            }
-        }).disposed(by: bag)
+                if text.isEmpty {
+                    self?.saveButton.isEnabled = false
+                    self?.saveButton.backgroundColor = UIColor(rgb: 0x600000)
+                } else {
+                    self?.saveButton.isEnabled = true
+                    self?.saveButton.backgroundColor = UIColor(rgb: 0xEB0000)
+                }
+            }).disposed(by: bag)
         
         
         saveButton.rx.tap

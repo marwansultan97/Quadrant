@@ -28,20 +28,22 @@ class EditFirstnamePViewController: UIViewController {
     
     private func configureSaveButton() {
         
+        saveButton.layer.cornerRadius = 15
+        
         firstnameTF.rx.text.orEmpty
             .map({ (text) -> String in
                 let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
                 return trimmedText
             })
             .subscribe(onNext: { [weak self] text in
-            if text.isEmpty {
-                self?.saveButton.isEnabled = false
-                self?.saveButton.backgroundColor = UIColor(hexString: "C90000")?.darken(byPercentage: 0.2)
-            } else {
-                self?.saveButton.isEnabled = true
-                self?.saveButton.backgroundColor = UIColor(hexString: "C90000")
-            }
-        }).disposed(by: bag)
+                if text.isEmpty {
+                    self?.saveButton.isEnabled = false
+                    self?.saveButton.backgroundColor = UIColor(rgb: 0x600000)
+                } else {
+                    self?.saveButton.isEnabled = true
+                    self?.saveButton.backgroundColor = UIColor(rgb: 0xEB0000)
+                }
+            }).disposed(by: bag)
         
         
         saveButton.rx.tap

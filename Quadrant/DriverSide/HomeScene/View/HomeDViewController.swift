@@ -12,7 +12,6 @@ import SideMenuSwift
 import RxCocoa
 import RxSwift
 
-@available(iOS 13.0, *)
 class HomeDViewController: UIViewController {
     
     
@@ -66,12 +65,18 @@ class HomeDViewController: UIViewController {
         pickupPassengerButton.layer.cornerRadius = 10
         dropoffPassengerButton.layer.cornerRadius = 10
         bottomViewHeight.constant = 0
+        
         passengerStateLabel.adjustsFontSizeToFitWidth = true
-        bottomView.layer.cornerRadius = 25
+        
+        
         bottomView.layer.shadowOpacity = 1
         bottomView.layer.shadowOffset = CGSize(width: 10, height: 10)
         bottomView.layer.shadowRadius = 20
-        bottomView.layer.shadowColor = UIColor.label.cgColor
+        
+        let path = UIBezierPath(roundedRect: bottomView.bounds, byRoundingCorners: [.topLeft , .topRight], cornerRadii: CGSize(width: 25, height: 25))
+        let layer = CAShapeLayer()
+        layer.path = path.cgPath
+        bottomView.layer.mask = layer
     }
 
     private func configureSideMenu() {
@@ -173,6 +178,12 @@ class HomeDViewController: UIViewController {
     
     private func bindViewModelData() {
         
+        viewModel.isSignedOut.subscribe(onNext: { [weak self] isSignedOut in
+            if isSignedOut {
+                self?.navigationController?.popToRootViewController(animated: true)
+            }
+        }).disposed(by: bag)
+        
         viewModel.polylineObservable
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] polyline in
@@ -210,8 +221,8 @@ class HomeDViewController: UIViewController {
         
         passengerNameLabel.text = trip.passengerName
         passengerStateLabel.text = "En Route To Passenger"
-        let firstChar = trip.passengerName.first?.lowercased()
-        self.passengerImageView.image = UIImage(systemName: "\(firstChar!).circle.fill")
+        let firstChar = trip.passengerName.first!.lowercased()
+        self.passengerImageView.image = UIImage(named: "SF_\(firstChar)_circle")
         
         
         UIView.animate(withDuration: 0.5, delay: 0.8, options: .curveEaseIn) {
@@ -306,7 +317,7 @@ class HomeDViewController: UIViewController {
     
     private func addNotificationCenterObservers() {
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(showAlertSignOut), name: NSNotification.Name(rawValue: "signout"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(logout), name: NSNotification.Name(rawValue: "SignoutD"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(goToSettingsDController), name: NSNotification.Name(rawValue: "SettingsD"), object: nil)
         
@@ -325,17 +336,34 @@ class HomeDViewController: UIViewController {
         self.navigationController?.pushViewController(settingsVC!, animated: true)
     }
     
+    @objc func logout() {
+        let alert = UIAlertController(title: "Sign out", message: "Do you really want to sign out?", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Sign out", style: .destructive) { _ in
+            self.viewModel.signOut()
+        }
+        let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
     
 }
 
 
 //MARK: - Location Manager Delegate
-@available(iOS 13.0, *)
 extension HomeDViewController: CLLocationManagerDelegate {
     
     private func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        if #available(iOS 14.0, *) {
+            
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        }
     }
     @available(iOS 14.0, *)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -360,7 +388,6 @@ extension HomeDViewController: CLLocationManagerDelegate {
             break
         }
     }
-    @available(iOS 13.0, *)
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let passengerLocation = locations.first else { return}
@@ -381,7 +408,6 @@ extension HomeDViewController: CLLocationManagerDelegate {
 }
 
 //MARK: - MKMap View Delegate
-@available(iOS 13.0, *)
 extension HomeDViewController: MKMapViewDelegate {
     
     // Called when location did update
@@ -398,7 +424,7 @@ extension HomeDViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
-        renderer.strokeColor = UIColor(hexString: "C90000")
+        renderer.strokeColor = UIColor(rgb: 0xEB0000)
         renderer.lineWidth = 4.0
         renderer.alpha = 1.0
         return renderer

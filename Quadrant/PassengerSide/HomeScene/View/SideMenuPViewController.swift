@@ -9,7 +9,6 @@ import UIKit
 import RxCocoa
 import RxSwift
 import Firebase
-import ChameleonFramework
 
 class SideMenuPViewController: UIViewController {
 
@@ -38,6 +37,19 @@ class SideMenuPViewController: UIViewController {
         configureSettingsCells()
     }
     
+    override func viewDidLayoutSubviews() {
+        sideMenuWidth.constant = self.view.frame.width/4 * 3
+        
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.orange.cgColor, UIColor.yellow.cgColor]
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 1, y: 1)
+        gradient.frame = profileView.bounds
+        profileView.layer.masksToBounds = true
+        profileView.layer.insertSublayer(gradient, at: 0)
+
+    }
+    
     private func fetchUserData() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
@@ -48,17 +60,13 @@ class SideMenuPViewController: UIViewController {
             let user = User(uid: uid, dictionary: dictionary)
             self.profileNameLabel.text = "\(user.firstname) \(user.surname)"
             self.profileEmailLabel.text = user.email
-            let firstChar = user.firstname.first?.lowercased()
-            self.profileImageView.image = UIImage(systemName: "\(firstChar!).circle")
+            let firstChar = user.firstname.first!.lowercased()
+            self.profileImageView.image = UIImage(named: "SF_\(firstChar)_circle")
         }
     }
     
 
     private func configureUI() {
-        sideMenuWidth.constant = self.view.frame.width/4 * 3
-        profileView.backgroundColor = UIColor(gradientStyle: .leftToRight,
-                                              withFrame: profileView.frame,
-                                              andColors: [FlatOrangeDark().darken(byPercentage: 0.1)!,                                         FlatOrange().darken(byPercentage: 0.1)!])
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
         profileImageView.layer.borderWidth = 1.5
         profileImageView.layer.borderColor = UIColor.black.cgColor
@@ -68,19 +76,18 @@ class SideMenuPViewController: UIViewController {
     
     private func configureSettingsCells() {
         settingsCells = [
-            SettingsMenu(icon: UIImage(systemName: "gearshape")!, title: "Settings", handler: {
+            SettingsMenu(icon: UIImage(named: "SF_gear")!, title: "Settings", handler: {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SettingsP"), object: nil)
                 self.sideMenuController?.hideMenu()
             }),
-            SettingsMenu(icon: UIImage(systemName: "car")!, title: "Your Trips", handler: {
+            SettingsMenu(icon: UIImage(named: "SF_car_fill")!, title: "Your Trips", handler: {
                 self.sideMenuController?.hideMenu()
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "YourTripsP"), object: nil)
                 
             }),
-            SettingsMenu(icon: UIImage(systemName: "person.crop.circle.badge.xmark.fill")!, title: "Log out", handler: {
+            SettingsMenu(icon: UIImage(named: "SF_person_crop_circle_badge_plus")!, title: "Log out", handler: {
                 self.sideMenuController?.hideMenu()
-//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SignoutP"), object: nil)
-                print("Logout")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SignoutP"), object: nil)
             })
         ]
     }

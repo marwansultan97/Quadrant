@@ -12,7 +12,6 @@ enum FavoritePlaceType {
     case home
     case work
 }
-@available(iOS 13.0, *)
 class FavoritePlacesTableViewCell: UITableViewCell {
 
     @IBOutlet weak var placeAddressLabel: UILabel!
@@ -32,14 +31,14 @@ class FavoritePlacesTableViewCell: UITableViewCell {
     func configureCell(place: MKPlacemark?) {
         switch self.placeType {
         case .home:
-            placeImage.image = UIImage(systemName: "house.fill")
+            placeImage.image = UIImage(named: "SF_house")
             placeTypeLabel.text = "Home"
             placeAddressLabel.text = "You can add Home Place"
             placeAddressLabel.adjustsFontSizeToFitWidth = true
             guard place != nil else {return}
             placeAddressLabel.text = "\(place!.name ?? "") \(place!.thoroughfare ?? "") \(place!.locality ?? "") \(place!.administrativeArea ?? "")"
         case .work:
-            placeImage.image = UIImage(systemName: "case.fill")
+            placeImage.image = UIImage(named: "SF_briefcase")
             placeTypeLabel.text = "Work"
             placeAddressLabel.text = "You can add Work Place"
             placeAddressLabel.adjustsFontSizeToFitWidth = true

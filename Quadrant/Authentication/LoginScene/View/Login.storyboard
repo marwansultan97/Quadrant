@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iNP-Cq-G4f">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -46,7 +47,7 @@
                                 <rect key="frame" x="32" y="186" width="350" height="50"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mGY-GF-9dk">
-                                        <rect key="frame" x="65" y="7.5" width="250" height="35"/>
+                                        <rect key="frame" x="55" y="7.5" width="250" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="FHK-hd-XhR"/>
                                             <constraint firstAttribute="width" constant="250" id="GFt-JA-guZ"/>
@@ -54,12 +55,12 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="envelope" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Hyt-5o-YPl">
-                                        <rect key="frame" x="10" y="6.5" width="40" height="36.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SF_envelope_open_fill" translatesAutoresizingMaskIntoConstraints="NO" id="Hyt-5o-YPl">
+                                        <rect key="frame" x="10" y="10" width="30" height="30"/>
                                         <color key="tintColor" systemColor="systemGrayColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="eFV-IS-PhO"/>
-                                            <constraint firstAttribute="height" constant="40" id="qe1-a2-Fug"/>
+                                            <constraint firstAttribute="width" constant="30" id="eFV-IS-PhO"/>
+                                            <constraint firstAttribute="height" constant="30" id="qe1-a2-Fug"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -76,16 +77,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPb-sd-zKr" userLabel="passwordContainer">
                                 <rect key="frame" x="32" y="256" width="350" height="50"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.shield" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="5qe-Gv-thN">
-                                        <rect key="frame" x="10" y="5.5" width="40" height="39"/>
-                                        <color key="tintColor" systemColor="systemGrayColor"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SF_lock_circle" translatesAutoresizingMaskIntoConstraints="NO" id="5qe-Gv-thN">
+                                        <rect key="frame" x="10" y="10" width="30" height="30"/>
+                                        <color key="tintColor" red="0.4823529411764706" green="0.4823529411764706" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="6Yv-aa-ftu"/>
-                                            <constraint firstAttribute="width" constant="40" id="Fqe-Ao-oly"/>
+                                            <constraint firstAttribute="height" constant="30" id="6Yv-aa-ftu"/>
+                                            <constraint firstAttribute="width" constant="30" id="Fqe-Ao-oly"/>
                                         </constraints>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dun-Hl-zTg">
-                                        <rect key="frame" x="65" y="7.5" width="250" height="35"/>
+                                        <rect key="frame" x="55" y="7.5" width="250" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="LEC-H9-px9"/>
                                             <constraint firstAttribute="width" constant="250" id="br5-6E-8us"/>
@@ -94,13 +95,13 @@
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GM5-of-7hm">
-                                        <rect key="frame" x="315" y="12.5" width="25" height="25"/>
+                                        <rect key="frame" x="305" y="12.5" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="JKC-Ar-a0y"/>
                                             <constraint firstAttribute="width" constant="25" id="KLM-Rf-vcq"/>
                                         </constraints>
                                         <color key="tintColor" systemColor="systemGrayColor"/>
-                                        <state key="normal" image="eye" catalog="system"/>
+                                        <state key="normal" image="SF_eye_slash_fill"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -190,9 +191,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="envelope" catalog="system" width="128" height="93"/>
-        <image name="eye" catalog="system" width="128" height="81"/>
-        <image name="lock.shield" catalog="system" width="128" height="118"/>
+        <image name="SF_envelope_open_fill" width="44" height="44"/>
+        <image name="SF_eye_slash_fill" width="44" height="44"/>
+        <image name="SF_lock_circle" width="44" height="44"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

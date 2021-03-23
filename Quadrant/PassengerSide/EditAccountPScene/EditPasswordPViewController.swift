@@ -59,10 +59,10 @@ class EditPasswordPViewController: UIViewController {
         isButtonEnabled.subscribe(onNext: { [weak self] isEnabled in
             if isEnabled {
                 self?.saveButton.isEnabled = true
-                self?.saveButton.backgroundColor = UIColor(hexString: "C90000")
+                self?.saveButton.backgroundColor = UIColor(rgb: 0xEB0000)
             } else {
                 self?.saveButton.isEnabled = false
-                self?.saveButton.backgroundColor = UIColor(hexString: "C90000")?.darken(byPercentage: 0.2)
+                self?.saveButton.backgroundColor = UIColor(rgb: 0x600000)
             }
         }).disposed(by: bag)
         

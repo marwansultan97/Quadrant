@@ -62,18 +62,20 @@ class HomePViewController: UIViewController {
     
     private func configureUI() {
         whereButton.layer.cornerRadius = whereButton.frame.height / 2
-        requestButton.layer.cornerRadius = 10
+        requestButton.layer.cornerRadius = requestButton.frame.height / 2
         bottomViewHeight.constant = 0
-        bottomView.layer.cornerRadius = 25
         bottomView.layer.shadowOpacity = 1
         bottomView.layer.shadowOffset = CGSize(width: 10, height: 10)
         bottomView.layer.shadowRadius = 20
-        bottomView.layer.shadowColor = UIColor.label.cgColor
         
-        requestButton.layer.shadowColor = UIColor.gray.cgColor
+        let path = UIBezierPath(roundedRect: bottomView.bounds, byRoundingCorners: [.topLeft , .topRight], cornerRadii: CGSize(width: 25, height: 25))
+        let layer = CAShapeLayer()
+        layer.path = path.cgPath
+        bottomView.layer.mask = layer
+        
         requestButton.layer.shadowOffset = CGSize.zero
         requestButton.layer.shadowOpacity = 1
-        requestButton.layer.shadowRadius = 5
+        requestButton.layer.shadowRadius = 3
 
     }
 
@@ -88,6 +90,13 @@ class HomePViewController: UIViewController {
     
     
     private func bindViewModelData() {
+        
+        viewModel.isSignedOut.subscribe(onNext: { [weak self] isSignedOut in
+            if isSignedOut {
+                self?.navigationController?.popToRootViewController(animated: true)
+            }
+        }).disposed(by: bag)
+        
         viewModel.routeObservable
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] route in
@@ -235,8 +244,8 @@ class HomePViewController: UIViewController {
         driverInformationsView.alpha = 1
         driverNameLabel.text = trip.driverName
         driverStateLabel.text = "Driver En Route"
-        let firstChar = trip.driverName!.first?.lowercased()
-        self.driverImageView.image = UIImage(systemName: "\(firstChar!).circle")
+        let firstChar = trip.driverName!.first!.lowercased()
+        self.driverImageView.image = UIImage(named: "SF_\(firstChar)_circle")
         
         UIView.animate(withDuration: 0.5, delay: 0.5, options: UIView.AnimationOptions.curveEaseIn) {
             self.bottomViewHeight.constant = 280
@@ -282,7 +291,7 @@ class HomePViewController: UIViewController {
     
     private func addNotificationCenterObservers() {
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(showAlertSignOut), name: NSNotification.Name(rawValue: "signout"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(logout), name: NSNotification.Name(rawValue: "SignoutP"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(goToSettingsPController), name: NSNotification.Name(rawValue: "SettingsP"), object: nil)
         
@@ -301,6 +310,18 @@ class HomePViewController: UIViewController {
         self.navigationController?.pushViewController(settingsVC!, animated: true)
     }
     
+    @objc func logout() {
+        let alert = UIAlertController(title: "Sign out", message: "Do you really want to sign out?", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Sign out", style: .destructive) { _ in
+            self.viewModel.signOut()
+        }
+        let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
     
 
 }
@@ -311,8 +332,15 @@ extension HomePViewController: CLLocationManagerDelegate {
     private func setupLocationManager() {
         HomePViewController.locationManager.delegate = self
         HomePViewController.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        if #available(iOS 14.0, *) {
+            
+        } else {
+            HomePViewController.locationManager.requestWhenInUseAuthorization()
+            HomePViewController.locationManager.startUpdatingLocation()
+        }
     }
     
+    @available(iOS 14.0, *)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         

@@ -85,7 +85,7 @@ extension SettingsPViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 30))
-        headerView.backgroundColor = UIColor(hexString: "C90000")
+        headerView.backgroundColor = UIColor(rgb: 0xEB0000)
         headerView.alpha = 0.7
         let label = UILabel(frame: CGRect(x: 10, y: 5, width: self.tableView.frame.width, height: 20))
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)

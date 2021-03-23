@@ -46,8 +46,8 @@ class EditAccountPViewController: UIViewController {
         userSubject.subscribe(onNext: { [weak self] user in
             guard let self = self else { return }
             
-            let firstchar = user.firstname.first?.lowercased()
-//            self.profileImageView.image = UIImage(systemName: "\(firstchar!).circle.fill")
+            let firstchar = user.firstname.first!.lowercased()
+            self.profileImageView.image = UIImage(named: "SF_\(firstchar)_circle")
             
             self.accountOptions = [
                 EditAccountOption(title: "Firstname", value: user.firstname, handler: {

@@ -18,6 +18,7 @@ enum FavoritePlaceUseCase: String {
 
 class SetupFavoritePlaceViewController: UIViewController {
 
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var currentLocationLabel: UILabel!
     @IBOutlet weak var currentPlaceButton: UIButton!
@@ -28,7 +29,6 @@ class SetupFavoritePlaceViewController: UIViewController {
     private let bag = DisposeBag()
     private var viewModel = SetupFavoritePlaceViewModel()
     
-    private var searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +43,10 @@ class SetupFavoritePlaceViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
+        configureSearchController()
         
     }
-    override func viewDidAppear(_ animated: Bool) {
-        configureSearchController()
-    }
+
     
     private func configureUI() {
         title = useCase!.rawValue + " Place"
@@ -57,22 +56,18 @@ class SetupFavoritePlaceViewController: UIViewController {
     }
     
     private func configureSearchController() {
-        navigationItem.searchController = searchController
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.tintColor = UIColor(hexString: "C90000")
+        searchBar.tintColor = UIColor(rgb: 0xEB0000)
+        searchBar.backgroundImage = UIImage()
         
-
-        searchController.searchBar.searchTextField.rx.controlEvent(.editingDidEndOnExit)
+        
+        searchBar.rx.cancelButtonClicked
             .subscribe(onNext: { [weak self] in
+                self?.viewModel.placesBehavior.accept([])
+                self?.searchBar.text = ""
                 self?.view.endEditing(true)
             }).disposed(by: bag)
         
-        searchController.searchBar.rx.cancelButtonClicked
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.placesBehavior.accept([])
-            }).disposed(by: bag)
-        
-        searchController.searchBar.rx.text.orEmpty
+        searchBar.rx.text.orEmpty
             .observe(on: MainScheduler.instance)
             .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] query in
