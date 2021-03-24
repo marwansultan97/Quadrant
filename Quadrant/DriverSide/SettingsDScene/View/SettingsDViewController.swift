@@ -11,6 +11,7 @@ import RxSwift
 
 class SettingsDViewController: UIViewController {
 
+    //MARK: - View Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -37,6 +38,7 @@ class SettingsDViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    //MARK: - TableView Configurations
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -46,6 +48,7 @@ class SettingsDViewController: UIViewController {
 
     }
     
+    //MARK: - ViewModel Binding
     private func bindViewModelData() {
         
         viewModel.isLoadingBehavior
@@ -66,6 +69,7 @@ class SettingsDViewController: UIViewController {
 
 }
 
+//MARK: - TableView Delegates
 extension SettingsDViewController: UITableViewDelegate, UITableViewDataSource {
 
     
@@ -84,7 +88,7 @@ extension SettingsDViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let vc = UIStoryboard(name: "EditAccountP", bundle: nil).instantiateInitialViewController() as? EditAccountPViewController
+        let vc = UIStoryboard(name: "EditAccount", bundle: nil).instantiateInitialViewController() as? EditAccountViewController
         vc?.title = "Edit Account"
         self.navigationController?.pushViewController(vc!, animated: true)
         

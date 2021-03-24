@@ -11,7 +11,8 @@ import RxSwift
 import MapKit
 
 class LocationInputViewController: UIViewController {
-
+    
+    //MARK: - View Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var destinationTF: UITextField!
     @IBOutlet weak var backButton: UIButton!
@@ -36,8 +37,6 @@ class LocationInputViewController: UIViewController {
         viewModel.fetchHomePlace()
         viewModel.fetchWorkPlace()
         backButtonTapped()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +51,7 @@ class LocationInputViewController: UIViewController {
         }).disposed(by: bag)
     }
     
-    
+    //MARK: - TextField Configurations
     private func configureTextField() {
         destinationTF.rx.text.orEmpty
             .observe(on: MainScheduler.instance)
@@ -64,6 +63,7 @@ class LocationInputViewController: UIViewController {
             }).disposed(by: bag)
     }
     
+    //MARK: - ViewModel Binging
     private func bindViewModelData() {
         viewModel.placesBehavior.subscribe(onNext: { [weak self] _ in
             self?.tableView.reloadData()
@@ -97,6 +97,7 @@ class LocationInputViewController: UIViewController {
         
     }
 
+    //MARK: - TableView Configurations
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self

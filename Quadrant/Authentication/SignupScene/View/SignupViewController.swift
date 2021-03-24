@@ -62,7 +62,7 @@ class SignupViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
-
+    //MARK: - UI Configurations
     private func configureUI() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         
@@ -197,6 +197,7 @@ class SignupViewController: UIViewController {
         }).disposed(by: bag)
     }
     
+    //MARK: - ViewModel Binding
     private func bindViewModel() {
         viewModel.isLoadingBehavior.subscribe(onNext: { [weak self] isLoading in
             if isLoading {
@@ -224,6 +225,7 @@ class SignupViewController: UIViewController {
         }).disposed(by: bag)
     }
     
+    //MARK: - Buttons Configurations
     private func setupSegmentedControl() {
         segmentedControl.rx.selectedSegmentIndex.bind(to: viewModel.accountTypeBehavior).disposed(by: bag)
     }

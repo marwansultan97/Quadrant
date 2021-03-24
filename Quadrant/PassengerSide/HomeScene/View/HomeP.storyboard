@@ -20,6 +20,7 @@
                         <viewLayoutGuide key="safeArea" id="eVG-3Q-S5l"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <segue destination="UZh-OT-k0I" kind="custom" identifier="SideMenu.Content" customClass="SideMenuSegue" customModule="SideMenuSwift" id="YSf-cN-fpp"/>
                         <segue destination="3Va-At-hHT" kind="custom" identifier="SideMenu.Menu" customClass="SideMenuSegue" customModule="SideMenuSwift" id="y4Q-QD-N8q"/>
@@ -129,7 +130,7 @@
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vv2-tg-fuk">
                                 <rect key="frame" x="82" y="762" width="250" height="60"/>
-                                <color key="backgroundColor" red="0.94335803529999995" green="0.1335219543" blue="0.0094775621929999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.0" blue="0.0" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="GiS-uH-awt"/>
                                     <constraint firstAttribute="width" constant="250" id="djG-9d-WHg"/>
@@ -147,7 +148,7 @@
                                 </constraints>
                                 <color key="tintColor" red="0.94335803525702" green="0.13352195427927249" blue="0.0094775621928383045" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal">
-                                    <imageReference key="image" image="icons8-xbox_menu" symbolScale="large"/>
+                                    <imageReference key="image" image="SF_line_horizontal_3" symbolScale="large"/>
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Moe-hc-Qzn">
@@ -331,10 +332,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="SF_line_horizontal_3" width="44" height="44"/>
         <image name="SF_location" width="44" height="44"/>
         <image name="SF_phone_down_circle-1" width="32" height="32"/>
         <image name="SF_xmark_square_fill" width="16" height="16"/>
-        <image name="icons8-xbox_menu" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

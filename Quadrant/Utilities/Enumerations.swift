@@ -17,15 +17,6 @@ enum RideActionViewConfiguration {
 }
 
 
-enum CornerButtonConfiguration {
-    case showSideMenu
-    case dismissSideMenu
-    
-    init() {
-        self = .showSideMenu
-    }
-}
-
 enum CircularRegionType: String {
     case pickup = "Pickup"
     case destination = "Destination"

@@ -42,9 +42,22 @@ extension UIViewController {
         SVProgressHUD.showError(withStatus: message)
     }
     
+    func removePreviousVCInNavigationStack() {
+        guard let navigationController = self.navigationController else { return }
+        var navigationArray = navigationController.viewControllers
+        guard navigationArray.count > 1 else { return }
+        navigationArray.remove(at: navigationArray.count - 2)
+        self.navigationController?.viewControllers = navigationArray
+    }
     
-
+    func removeAllPreviousVCInNavigationStack() {
+        guard let navigationController = self.navigationController else { return }
+        var navigationArray = navigationController.viewControllers
+        let temp = navigationArray.last
+        navigationArray.removeAll()
+        navigationArray.append(temp!)
+        self.navigationController?.viewControllers = navigationArray
+    }
+    
     
 }
-
-

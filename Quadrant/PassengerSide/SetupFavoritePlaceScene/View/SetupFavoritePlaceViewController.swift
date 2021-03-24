@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import MapKit
 
-
+//MARK: - UseCases
 enum FavoritePlaceUseCase: String {
     case home = "Home"
     case work = "Work"
@@ -18,6 +18,7 @@ enum FavoritePlaceUseCase: String {
 
 class SetupFavoritePlaceViewController: UIViewController {
 
+    //MARK: - View Outlets
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var currentLocationLabel: UILabel!
@@ -43,11 +44,11 @@ class SetupFavoritePlaceViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
-        configureSearchController()
+        configureSearchBar()
         
     }
 
-    
+    //MARK: - UI Configurations
     private func configureUI() {
         title = useCase!.rawValue + " Place"
         currentLocationLabel.text = "Search places or make your current location as \(useCase!.rawValue)"
@@ -55,10 +56,11 @@ class SetupFavoritePlaceViewController: UIViewController {
         currentPlaceButton.layer.cornerRadius = 10
     }
     
-    private func configureSearchController() {
+    //MARK: - SearchBar Configurations
+    private func configureSearchBar() {
+        searchBar.showsCancelButton = true
         searchBar.tintColor = UIColor(rgb: 0xEB0000)
         searchBar.backgroundImage = UIImage()
-        
         
         searchBar.rx.cancelButtonClicked
             .subscribe(onNext: { [weak self] in
@@ -79,6 +81,7 @@ class SetupFavoritePlaceViewController: UIViewController {
             }).disposed(by: bag)
     }
     
+    //MARK: - TableView Configurations
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -86,6 +89,7 @@ class SetupFavoritePlaceViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
+    //MARK: - ViewModel Binding
     private func bindViewModelData() {
         viewModel.placesBehavior.subscribe(onNext: { [weak self] places in
             if places.isEmpty {
@@ -106,6 +110,7 @@ class SetupFavoritePlaceViewController: UIViewController {
         
     }
     
+    //MARK: - Buttons Configurations
     private func currentLocationButtonTapped() {
         currentPlaceButton.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
@@ -116,6 +121,7 @@ class SetupFavoritePlaceViewController: UIViewController {
 
 }
 
+//MARK: - TableView Delegates
 extension SetupFavoritePlaceViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

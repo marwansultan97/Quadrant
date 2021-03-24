@@ -11,7 +11,7 @@ import RxSwift
 
 class YourTripsDViewController: UIViewController {
     
-
+    //MARK: - View Outlets
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var noTripsLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
@@ -38,6 +38,7 @@ class YourTripsDViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    //MARK: - TableView Configurations
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -46,6 +47,7 @@ class YourTripsDViewController: UIViewController {
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
     
+    //MARK: - ViewModel Binding
     private func bindViewModelData() {
         
         viewModel.tripsBehavior.subscribe(onNext: { [weak self] _ in

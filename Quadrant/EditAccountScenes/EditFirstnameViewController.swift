@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import Firebase
 
-class EditFirstnamePViewController: UIViewController {
+class EditFirstnameViewController: UIViewController {
     
     
     @IBOutlet weak var firstnameTF: UITextField!

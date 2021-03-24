@@ -14,6 +14,7 @@ import CoreLocation
 
 class HomePViewController: UIViewController {
 
+    //MARK: - View Outlets
     @IBOutlet weak var sideMenuButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var whereButton: UIButton!
@@ -42,7 +43,8 @@ class HomePViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        removeAllPreviousVCInNavigationStack()
         viewModel.fetchUser()
         configureUI()
         setupLocationManager()
@@ -60,18 +62,18 @@ class HomePViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    //MARK: - UI Configurations
     private func configureUI() {
         whereButton.layer.cornerRadius = whereButton.frame.height / 2
         requestButton.layer.cornerRadius = requestButton.frame.height / 2
         bottomViewHeight.constant = 0
+        
+        bottomView.layer.cornerRadius = 25
         bottomView.layer.shadowOpacity = 1
         bottomView.layer.shadowOffset = CGSize(width: 10, height: 10)
         bottomView.layer.shadowRadius = 20
         
-        let path = UIBezierPath(roundedRect: bottomView.bounds, byRoundingCorners: [.topLeft , .topRight], cornerRadii: CGSize(width: 25, height: 25))
-        let layer = CAShapeLayer()
-        layer.path = path.cgPath
-        bottomView.layer.mask = layer
+        
         
         requestButton.layer.shadowOffset = CGSize.zero
         requestButton.layer.shadowOpacity = 1
@@ -89,11 +91,13 @@ class HomePViewController: UIViewController {
     }
     
     
+    //MARK: - View Model Binding
     private func bindViewModelData() {
         
         viewModel.isSignedOut.subscribe(onNext: { [weak self] isSignedOut in
             if isSignedOut {
-                self?.navigationController?.popToRootViewController(animated: true)
+                let loginVC = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
+                self?.navigationController?.pushViewController(loginVC!, animated: true)
             }
         }).disposed(by: bag)
         
@@ -146,6 +150,7 @@ class HomePViewController: UIViewController {
         }).disposed(by: bag)
     }
     
+    //MARK: - Buttons Configurations
     private func whereButtonTapped() {
         whereButton.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
@@ -181,6 +186,9 @@ class HomePViewController: UIViewController {
         }).disposed(by: bag)
     }
     
+    
+    
+    //MARK: - Trip Life Cycle Functions
     private func selectedPlaceShowDetails(place: MKPlacemark) {
         sideMenuButton.alpha = 0
         whereButton.alpha = 0
@@ -234,7 +242,6 @@ class HomePViewController: UIViewController {
             self.bottomViewHeight.constant = 0
             self.view.layoutIfNeeded()
         }
-
     }
 
     
@@ -289,6 +296,8 @@ class HomePViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    
+    // MARK: - Navigation and Side Menu Controllers
     private func addNotificationCenterObservers() {
         
         NotificationCenter.default.addObserver(self, selector: #selector(logout), name: NSNotification.Name(rawValue: "SignoutP"), object: nil)

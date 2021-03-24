@@ -29,8 +29,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        logout()
-        checkAuthenticatedUser()
+        removeAllPreviousVCInNavigationStack()
         configureUI()
         setupEmailTextField()
         setupPasswordTextField()
@@ -46,27 +45,8 @@ class LoginViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
-    func logout() {
-        Authentication.shared.signOut { (sucess, err) in
-            if let err = err {
-                print(err)
-                return
-            }
-            print("UserLogged Out")
-        }
-    }
     
-    private func checkAuthenticatedUser() {
-        self.view.alpha = 0
-        if Auth.auth().currentUser != nil {
-            viewModel.fetchUserData()
-        } else {
-            self.view.alpha = 1
-        }
-    }
-    
-    
-    
+    //MARK: - UI Configurations
     private func configureUI() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         
@@ -115,6 +95,7 @@ class LoginViewController: UIViewController {
         }).disposed(by: bag)
     }
     
+    //MARK: - ViewModel Binding
     private func bindViewModel() {
         viewModel.isLoadingBehavior.subscribe(onNext: { [weak self] isLoading in
             if isLoading {
@@ -141,6 +122,7 @@ class LoginViewController: UIViewController {
         }).disposed(by: bag)
     }
     
+    //MARK: - Buttons Configurations
     private func loginButtonTapped() {
         viewModel.isLoginButtonEnabled.subscribe(onNext: { (isEnabled) in
             self.loginButton.isEnabled = isEnabled

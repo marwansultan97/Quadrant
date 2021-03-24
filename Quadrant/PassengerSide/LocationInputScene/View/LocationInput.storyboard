@@ -2,8 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hF4-mE-sBX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -37,9 +37,7 @@
                                             <constraint firstAttribute="height" constant="40" id="lqn-hU-PY8"/>
                                         </constraints>
                                         <color key="tintColor" red="0.94335803529999995" green="0.1335219543" blue="0.0094775621929999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal">
-                                            <imageReference key="image" image="arrow.down" catalog="system" symbolScale="large"/>
-                                        </state>
+                                        <state key="normal" image="Material_Expand_More"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pickup Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rV-i4-0r1">
                                         <rect key="frame" x="95" y="98" width="135" height="20"/>
@@ -50,7 +48,7 @@
                                         <color key="textColor" systemColor="systemGrayColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-marker" translatesAutoresizingMaskIntoConstraints="NO" id="hZS-v8-6iX">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SF_location" translatesAutoresizingMaskIntoConstraints="NO" id="hZS-v8-6iX">
                                         <rect key="frame" x="45" y="124" width="30" height="30"/>
                                         <color key="tintColor" red="0.94335803529999995" green="0.1335219543" blue="0.0094775621929999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -58,7 +56,7 @@
                                             <constraint firstAttribute="width" constant="30" id="bTy-mw-YEo"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Current Location" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OHV-h3-jYv">
+                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Current Location" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OHV-h3-jYv">
                                         <rect key="frame" x="95" y="123" width="230" height="35"/>
                                         <color key="backgroundColor" systemColor="placeholderTextColor"/>
                                         <constraints>
@@ -76,8 +74,8 @@
                                             <constraint firstAttribute="width" constant="1" id="Kxv-tm-lN1"/>
                                         </constraints>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Bs2-BZ-gmF">
-                                        <rect key="frame" x="45" y="204.5" width="30" height="28.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SF_flag" translatesAutoresizingMaskIntoConstraints="NO" id="Bs2-BZ-gmF">
+                                        <rect key="frame" x="45" y="204" width="30" height="30"/>
                                         <color key="tintColor" red="0.94335803529999995" green="0.1335219543" blue="0.0094775621929999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="E7n-D0-X3D"/>
@@ -164,9 +162,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.down" catalog="system" width="120" height="128"/>
-        <image name="flag.fill" catalog="system" width="128" height="121"/>
-        <image name="icons8-marker" width="48" height="48"/>
+        <image name="Material_Expand_More" width="44" height="44"/>
+        <image name="SF_flag" width="44" height="44"/>
+        <image name="SF_location" width="44" height="44"/>
         <systemColor name="placeholderTextColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

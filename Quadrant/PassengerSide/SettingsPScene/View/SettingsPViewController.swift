@@ -11,7 +11,7 @@ import RxSwift
 
 class SettingsPViewController: UIViewController {
 
-    
+    //MARK: - View Outlets
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -27,7 +27,6 @@ class SettingsPViewController: UIViewController {
         
         configureTableView()
         bindViewModelData()
-        
 
     }
     
@@ -39,9 +38,10 @@ class SettingsPViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
+//        navigationController?.navigationBar.isHidden = true
     }
     
+    //MARK: - TableView Configurations
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -51,6 +51,7 @@ class SettingsPViewController: UIViewController {
         tableView.register(UINib(nibName: favoritePlacesCellIdentifier, bundle: nil), forCellReuseIdentifier: favoritePlacesCellIdentifier)
     }
     
+    //MARK: - ViewModel Binding
     private func bindViewModelData() {
         
         viewModel.isLoadingBehavior
@@ -65,14 +66,12 @@ class SettingsPViewController: UIViewController {
                     self?.tableView.reloadData()
                 }
             }).disposed(by: bag)
-        
     }
-    
 
-    
 
 }
 
+//MARK: - TableViewDelegate
 extension SettingsPViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -121,7 +120,7 @@ extension SettingsPViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             
             
-            let vc = UIStoryboard(name: "EditAccountP", bundle: nil).instantiateInitialViewController() as? EditAccountPViewController
+            let vc = UIStoryboard(name: "EditAccount", bundle: nil).instantiateInitialViewController() as? EditAccountViewController
             vc?.title = "Edit Account"
             self.navigationController?.pushViewController(vc!, animated: true)
             

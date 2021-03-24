@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 import Firebase
 
-class EditPasswordPViewController: UIViewController {
+class EditPasswordViewController: UIViewController {
     
     
     @IBOutlet weak var oldPasswordTF: UITextField!

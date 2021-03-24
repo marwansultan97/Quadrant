@@ -16,7 +16,7 @@ struct EditAccountOption {
     let handler: (()->())
 }
 
-class EditAccountPViewController: UIViewController {
+class EditAccountViewController: UIViewController {
     
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -94,7 +94,7 @@ class EditAccountPViewController: UIViewController {
     
 }
 
-extension EditAccountPViewController: UITableViewDelegate, UITableViewDataSource {
+extension EditAccountViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return accountOptions.count

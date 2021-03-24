@@ -41,7 +41,7 @@ class SideMenuPViewController: UIViewController {
         sideMenuWidth.constant = self.view.frame.width/4 * 3
         
         let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.orange.cgColor, UIColor.yellow.cgColor]
+        gradient.colors = [UIColor(rgb: 0xF9530B).cgColor, UIColor(rgb: 0xFF9005).cgColor]
         gradient.startPoint = CGPoint(x: 0, y: 0)
         gradient.endPoint = CGPoint(x: 1, y: 1)
         gradient.frame = profileView.bounds

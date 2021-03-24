@@ -75,19 +75,6 @@ class LoginViewModel {
     }
     
     
-    func fetchUserData() {
-        
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        REF_USERS.child(uid).observeSingleEvent(of: .value) { [weak self] (snapshot) in
-            guard let self = self else { return }
-            guard let dictionary = snapshot.value as? [String:Any] else {return}
-            let uid = snapshot.key
-            let user = User(uid: uid, dictionary: dictionary)
-            self.userSubject.onNext(user)
-        }
-    }
-    
     
     
 }

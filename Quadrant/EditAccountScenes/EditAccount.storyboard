@@ -2,16 +2,17 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kD7-E3-sYl">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Edit FirstnameP View Controller-->
+        <!--Edit Firstname View Controller-->
         <scene sceneID="k2h-Wa-HHn">
             <objects>
-                <viewController id="yW9-WT-SyA" customClass="EditFirstnamePViewController" customModule="Quadrant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yW9-WT-SyA" customClass="EditFirstnameViewController" customModule="Quadrant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qlG-XN-YUG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -66,10 +67,10 @@
             </objects>
             <point key="canvasLocation" x="-1181.1594202898552" y="809.59821428571422"/>
         </scene>
-        <!--Edit SurnameP View Controller-->
+        <!--Edit Surname View Controller-->
         <scene sceneID="oUf-Dr-6hy">
             <objects>
-                <viewController id="JKn-8S-hme" customClass="EditSurnamePViewController" customModule="Quadrant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JKn-8S-hme" customClass="EditSurnameViewController" customModule="Quadrant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L0q-VX-5r2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,10 +125,10 @@
             </objects>
             <point key="canvasLocation" x="-461" y="887"/>
         </scene>
-        <!--Edit PhonenumberP View Controller-->
+        <!--Edit Phonenumber View Controller-->
         <scene sceneID="neG-9d-dhg">
             <objects>
-                <viewController id="ls7-C4-iRy" customClass="EditPhonenumberPViewController" customModule="Quadrant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ls7-C4-iRy" customClass="EditPhonenumberViewController" customModule="Quadrant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J83-oi-Was">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -182,10 +183,10 @@
             </objects>
             <point key="canvasLocation" x="271" y="887"/>
         </scene>
-        <!--Edit PasswordP View Controller-->
+        <!--Edit Password View Controller-->
         <scene sceneID="oKI-Yj-9eP">
             <objects>
-                <viewController id="p1l-DV-MfB" customClass="EditPasswordPViewController" customModule="Quadrant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="p1l-DV-MfB" customClass="EditPasswordViewController" customModule="Quadrant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="70C-fD-zUV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -253,10 +254,10 @@
             </objects>
             <point key="canvasLocation" x="1001" y="810"/>
         </scene>
-        <!--Edit AccountP View Controller-->
+        <!--Edit Account View Controller-->
         <scene sceneID="J5N-Mp-aPT">
             <objects>
-                <viewController id="kD7-E3-sYl" customClass="EditAccountPViewController" customModule="Quadrant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kD7-E3-sYl" customClass="EditAccountViewController" customModule="Quadrant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cq1-HU-lvH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -318,7 +319,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IPG-a6-zhd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-165.21739130434784" y="97.767857142857139"/>
+            <point key="canvasLocation" x="120" y="74"/>
         </scene>
     </scenes>
     <resources>

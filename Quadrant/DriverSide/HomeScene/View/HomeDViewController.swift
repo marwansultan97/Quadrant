@@ -15,7 +15,7 @@ import RxSwift
 class HomeDViewController: UIViewController {
     
     
-    
+    //MARK: - View Outlets
     @IBOutlet weak var dropoffPassengerButton: UIButton!
     @IBOutlet weak var cancelTripButton: UIButton!
     @IBOutlet weak var pickupPassengerButton: UIButton!
@@ -42,6 +42,7 @@ class HomeDViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        removeAllPreviousVCInNavigationStack()
         viewModel.fetchUser()
         configureUI()
         configureSideMenu()
@@ -60,6 +61,7 @@ class HomeDViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    //MARK: - UI Configurations
     private func configureUI() {
         searchButton.layer.cornerRadius = searchButton.frame.height / 2
         pickupPassengerButton.layer.cornerRadius = 10
@@ -68,15 +70,10 @@ class HomeDViewController: UIViewController {
         
         passengerStateLabel.adjustsFontSizeToFitWidth = true
         
-        
+        bottomView.layer.cornerRadius = 25
         bottomView.layer.shadowOpacity = 1
         bottomView.layer.shadowOffset = CGSize(width: 10, height: 10)
         bottomView.layer.shadowRadius = 20
-        
-        let path = UIBezierPath(roundedRect: bottomView.bounds, byRoundingCorners: [.topLeft , .topRight], cornerRadii: CGSize(width: 25, height: 25))
-        let layer = CAShapeLayer()
-        layer.path = path.cgPath
-        bottomView.layer.mask = layer
     }
 
     private func configureSideMenu() {
@@ -88,6 +85,7 @@ class HomeDViewController: UIViewController {
         SideMenuController.preferences.animation.shadowAlpha = 0.5
     }
     
+    //MARK: - Buttons Configurations
     private func sideMenuButtonTapped() {
         sideMenuButton.rx.tap.subscribe(onNext: { [weak self] in
             self?.sideMenuController?.revealMenu()
@@ -141,46 +139,14 @@ class HomeDViewController: UIViewController {
         }).disposed(by: bag)
     }
     
-    private func goToPickupController(trip: Trip) {
-        let pickupVC = UIStoryboard(name: "Pickup", bundle: nil).instantiateInitialViewController() as? PickupViewController
-        pickupVC?.trip = trip
-        pickupVC?.driverUser = self.user
-        pickupVC?.modalPresentationStyle = .fullScreen
-        
-        pickupVC?.isCanceledBehavior
-            .subscribe(onNext: { [weak self] isCanceled in
-                if isCanceled {
-                    self?.searchButton.tag = 0
-                    self?.searchButton.hideLoading()
-                    self?.showAlertSheet(title: "Ops!", message: "The Passeneger canceled the Trip")
-                    REF_TRIPS.removeAllObservers()
-                }
-            }).disposed(by: bag)
-        
-        pickupVC?.isRejectedBehavior
-            .subscribe(onNext: { [weak self] isRejected in
-                if isRejected {
-                    self?.searchButton.tag = 0
-                    self?.searchButton.hideLoading()
-                    REF_TRIPS.removeAllObservers()
-                }
-            }).disposed(by: bag)
-        
-        pickupVC?.isAcceptedBehavior
-            .filter({ $0 != nil })
-            .subscribe(onNext: { [weak self] trip in
-                self?.currentTrip = trip
-                self?.tripAcceptedShowBottomView(trip: trip!)
-            }).disposed(by: bag)
-        
-        self.present(pickupVC!, animated: true)
-    }
     
+    //MARK: - ViewModel Binding
     private func bindViewModelData() {
         
         viewModel.isSignedOut.subscribe(onNext: { [weak self] isSignedOut in
             if isSignedOut {
-                self?.navigationController?.popToRootViewController(animated: true)
+                let loginVC = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
+                self?.navigationController?.pushViewController(loginVC!, animated: true)
             }
         }).disposed(by: bag)
         
@@ -209,6 +175,43 @@ class HomeDViewController: UIViewController {
             }).disposed(by: bag)
         
     }
+    
+    //MARK: - Trip LifeCycle Functions
+    private func goToPickupController(trip: Trip) {
+        let pickupVC = UIStoryboard(name: "Pickup", bundle: nil).instantiateInitialViewController() as? PickupViewController
+        pickupVC?.trip = trip
+        pickupVC?.driverUser = self.user
+        pickupVC?.modalPresentationStyle = .fullScreen
+        
+        pickupVC?.isCanceledBehavior
+            .subscribe(onNext: { [weak self] isCanceled in
+                if isCanceled {
+                    self?.searchButton.tag = 0
+                    self?.searchButton.hideLoading()
+                    self?.showAlertSheet(title: "Ops!", message: "The Passeneger canceled the Trip")
+                    REF_TRIPS.child(trip.passengerUID).removeAllObservers()
+                }
+            }).disposed(by: bag)
+        
+        pickupVC?.isRejectedBehavior
+            .subscribe(onNext: { [weak self] isRejected in
+                if isRejected {
+                    REF_TRIPS.child(trip.passengerUID).removeAllObservers()
+                    self?.searchButton.tag = 0
+                    self?.searchButton.hideLoading()
+                }
+            }).disposed(by: bag)
+        
+        pickupVC?.isAcceptedBehavior
+            .filter({ $0 != nil })
+            .subscribe(onNext: { [weak self] trip in
+                self?.currentTrip = trip
+                self?.tripAcceptedShowBottomView(trip: trip!)
+            }).disposed(by: bag)
+        
+        self.present(pickupVC!, animated: true)
+    }
+    
     
     private func tripAcceptedShowBottomView(trip: Trip) {
         viewModel.isTheTripCancled(uid: trip.passengerUID)
@@ -315,6 +318,7 @@ class HomeDViewController: UIViewController {
     }
     
     
+    //MARK: - Navigation And SideMenu View Controllers
     private func addNotificationCenterObservers() {
         
         NotificationCenter.default.addObserver(self, selector: #selector(logout), name: NSNotification.Name(rawValue: "SignoutD"), object: nil)

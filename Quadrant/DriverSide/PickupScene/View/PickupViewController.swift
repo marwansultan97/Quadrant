@@ -12,7 +12,7 @@ import RxSwift
 
 class PickupViewController: UIViewController {
     
-    
+    //MARK: - View Outlets
     @IBOutlet weak var pulsatingView: UIView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var acceptButton: UIButton!
@@ -63,6 +63,7 @@ class PickupViewController: UIViewController {
         }).disposed(by: bag)
     }
     
+    //MARK: - UI Configurations
     private func configureUI() {
         mapView.layer.cornerRadius = mapView.frame.height / 2
         acceptButton.layer.cornerRadius = 10
@@ -80,6 +81,7 @@ class PickupViewController: UIViewController {
         
     }
     
+    //MARK: - MapView Configurations
     private func configureMapView() {
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: self.trip!.pickupCoordinates, span: span)
@@ -89,7 +91,8 @@ class PickupViewController: UIViewController {
         mapView.showAnnotations(zoomInAnnotations, animated: true)
     }
     
-
+    
+    //MARK: - Buttons Configurations
     private func acceptButtonTapped() {
         acceptButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -104,6 +107,7 @@ class PickupViewController: UIViewController {
             }).disposed(by: bag)
     }
     
+    //MARK: - Timer Configurations
     private func setTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
         timer!.fire()
@@ -122,6 +126,7 @@ class PickupViewController: UIViewController {
         }
     }
     
+    //MARK: - Animations Configurations
     func configureLayerAnimations() {
         self.trackLayer = setCircleLayers(strokeColor: .lightGray, fillColor: .clear)
         self.progressLayer = setCircleLayers(strokeColor: .black, fillColor: .clear)
@@ -173,6 +178,7 @@ class PickupViewController: UIViewController {
         progressLayer.add(animation, forKey: "animateProgress")
     }
     
+    //MARK: - Accept&Reject Trip
     private func showWarningAlert() {
         let alert = UIAlertController(title: "Warning", message: "Do you really want to reject the trip?", preferredStyle: .alert)
         let action1 = UIAlertAction(title: "Yes", style: .destructive) { _ in

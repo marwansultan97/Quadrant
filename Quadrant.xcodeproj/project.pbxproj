@@ -13,12 +13,9 @@
 		CB2550112566D2DE003BC53C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB25500F2566D2DE003BC53C /* LaunchScreen.storyboard */; };
 		CB500AE825752FF3005CD813 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500AE725752FF3005CD813 /* User.swift */; };
 		CB500B0425767BB9005CD813 /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B0325767BB9005CD813 /* DriverAnnotation.swift */; };
-		CB500B0A257AF4DA005CD813 /* MapLocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B09257AF4DA005CD813 /* MapLocationServices.swift */; };
 		CB500B35258104FD005CD813 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B34258104FC005CD813 /* Trip.swift */; };
-		CB500B3C2582DA96005CD813 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B3B2582DA96005CD813 /* Extensions.swift */; };
 		CB500B3F25854827005CD813 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B3E25854827005CD813 /* Enumerations.swift */; };
 		CB5C4FE2259EA1EF000A271D /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5C4FE1259EA1EF000A271D /* LoadingButton.swift */; };
-		CB5C5024259F9781000A271D /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB5C5023259F9781000A271D /* Launch.storyboard */; };
 		CB5C504225A4978D000A271D /* UIViewControllerEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5C504125A4978D000A271D /* UIViewControllerEX.swift */; };
 		CB5C50A025AB8168000A271D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB5C50A225AB8168000A271D /* Localizable.strings */; };
 		CB5C7DB525FCFAB300B34F62 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5C7DB425FCFAB300B34F62 /* LoginViewController.swift */; };
@@ -37,8 +34,6 @@
 		CB77A10626018A56009A6FB6 /* Pickup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB77A10526018A56009A6FB6 /* Pickup.storyboard */; };
 		CB77A109260239F3009A6FB6 /* PickupDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77A108260239F2009A6FB6 /* PickupDViewModel.swift */; };
 		CB8C0E5D256BBDFC00C714B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB8C0E5C256BBDFC00C714B8 /* GoogleService-Info.plist */; };
-		CB8C0E73256BC24400C714B8 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C0E72256BC24400C714B8 /* Authentication.swift */; };
-		CB8C0EAA2575145A00C714B8 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C0EA92575145A00C714B8 /* Service.swift */; };
 		CBDAD50E25FE8156007AA22F /* HomePViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAD50D25FE8156007AA22F /* HomePViewController.swift */; };
 		CBDAD51225FE817E007AA22F /* HomeP.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBDAD51125FE817E007AA22F /* HomeP.storyboard */; };
 		CBDAD51525FE906D007AA22F /* SideMenuPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAD51425FE906D007AA22F /* SideMenuPViewController.swift */; };
@@ -51,15 +46,20 @@
 		CBDAD53325FF863A007AA22F /* FavoritePlacesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDAD53125FF863A007AA22F /* FavoritePlacesTableViewCell.xib */; };
 		CBDAD55525FFF19B007AA22F /* HomePViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAD55425FFF19B007AA22F /* HomePViewModel.swift */; };
 		CBDCB7132596026600D80759 /* FavoritePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDCB7122596026600D80759 /* FavoritePlace.swift */; };
+		CBEBB3A4260B7C3B0047CCC6 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEBB3A3260B7C3B0047CCC6 /* LaunchViewController.swift */; };
+		CBEBB3A7260B7C450047CCC6 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBEBB3A6260B7C450047CCC6 /* Launch.storyboard */; };
 		CBF0AF6C2607E9F70030B5F8 /* SettingsDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF0AF6B2607E9F70030B5F8 /* SettingsDViewController.swift */; };
 		CBF0AF6F2607EA030030B5F8 /* SettingsD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBF0AF6E2607EA030030B5F8 /* SettingsD.storyboard */; };
 		CBF0AF722607EA150030B5F8 /* SettingsDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF0AF712607EA150030B5F8 /* SettingsDViewModel.swift */; };
-		CBF6FA3B260783F300FDE153 /* EditAccountPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6FA3A260783F300FDE153 /* EditAccountPViewController.swift */; };
-		CBF6FA3F2607841200FDE153 /* EditAccountP.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBF6FA3E2607841200FDE153 /* EditAccountP.storyboard */; };
-		CBF6FA422607845300FDE153 /* EditFirstnamePViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6FA412607845300FDE153 /* EditFirstnamePViewController.swift */; };
-		CBF6FA452607846000FDE153 /* EditSurnamePViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6FA442607846000FDE153 /* EditSurnamePViewController.swift */; };
-		CBF6FA482607847100FDE153 /* EditPhonenumberPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6FA472607847100FDE153 /* EditPhonenumberPViewController.swift */; };
-		CBF6FA4B2607848100FDE153 /* EditPasswordPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6FA4A2607848100FDE153 /* EditPasswordPViewController.swift */; };
+		CBF48A6D260AAA9A0061976D /* UIColorEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF48A6C260AAA9A0061976D /* UIColorEX.swift */; };
+		CBF48A70260AAABA0061976D /* MKMapViewEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF48A6F260AAABA0061976D /* MKMapViewEX.swift */; };
+		CBF48A75260AB3EF0061976D /* FirebaseRefrences.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF48A74260AB3EF0061976D /* FirebaseRefrences.swift */; };
+		CBF6FA3B260783F300FDE153 /* EditAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6FA3A260783F300FDE153 /* EditAccountViewController.swift */; };
+		CBF6FA3F2607841200FDE153 /* EditAccount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBF6FA3E2607841200FDE153 /* EditAccount.storyboard */; };
+		CBF6FA422607845300FDE153 /* EditFirstnameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6FA412607845300FDE153 /* EditFirstnameViewController.swift */; };
+		CBF6FA452607846000FDE153 /* EditSurnameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6FA442607846000FDE153 /* EditSurnameViewController.swift */; };
+		CBF6FA482607847100FDE153 /* EditPhonenumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6FA472607847100FDE153 /* EditPhonenumberViewController.swift */; };
+		CBF6FA4B2607848100FDE153 /* EditPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6FA4A2607848100FDE153 /* EditPasswordViewController.swift */; };
 		CBF6FA50260791AB00FDE153 /* EditAccountsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6FA4E260791AB00FDE153 /* EditAccountsTableViewCell.swift */; };
 		CBF6FA51260791AB00FDE153 /* EditAccountsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBF6FA4F260791AB00FDE153 /* EditAccountsTableViewCell.xib */; };
 		CBFC1597260564EE00347B96 /* YourTripsPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC1596260564EE00347B96 /* YourTripsPViewController.swift */; };
@@ -92,12 +92,9 @@
 		CB2550122566D2DE003BC53C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB500AE725752FF3005CD813 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CB500B0325767BB9005CD813 /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
-		CB500B09257AF4DA005CD813 /* MapLocationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationServices.swift; sourceTree = "<group>"; };
 		CB500B34258104FC005CD813 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
-		CB500B3B2582DA96005CD813 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CB500B3E25854827005CD813 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		CB5C4FE1259EA1EF000A271D /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
-		CB5C5023259F9781000A271D /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		CB5C504125A4978D000A271D /* UIViewControllerEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerEX.swift; sourceTree = "<group>"; };
 		CB5C50A125AB8168000A271D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CB5C50A425AB816B000A271D /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -117,8 +114,6 @@
 		CB77A10526018A56009A6FB6 /* Pickup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pickup.storyboard; sourceTree = "<group>"; };
 		CB77A108260239F2009A6FB6 /* PickupDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupDViewModel.swift; sourceTree = "<group>"; };
 		CB8C0E5C256BBDFC00C714B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		CB8C0E72256BC24400C714B8 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
-		CB8C0EA92575145A00C714B8 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		CBDAD50D25FE8156007AA22F /* HomePViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePViewController.swift; sourceTree = "<group>"; };
 		CBDAD51125FE817E007AA22F /* HomeP.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeP.storyboard; sourceTree = "<group>"; };
 		CBDAD51425FE906D007AA22F /* SideMenuPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuPViewController.swift; sourceTree = "<group>"; };
@@ -131,15 +126,20 @@
 		CBDAD53125FF863A007AA22F /* FavoritePlacesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritePlacesTableViewCell.xib; sourceTree = "<group>"; };
 		CBDAD55425FFF19B007AA22F /* HomePViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePViewModel.swift; sourceTree = "<group>"; };
 		CBDCB7122596026600D80759 /* FavoritePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePlace.swift; sourceTree = "<group>"; };
+		CBEBB3A3260B7C3B0047CCC6 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		CBEBB3A6260B7C450047CCC6 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		CBF0AF6B2607E9F70030B5F8 /* SettingsDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDViewController.swift; sourceTree = "<group>"; };
 		CBF0AF6E2607EA030030B5F8 /* SettingsD.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsD.storyboard; sourceTree = "<group>"; };
 		CBF0AF712607EA150030B5F8 /* SettingsDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDViewModel.swift; sourceTree = "<group>"; };
-		CBF6FA3A260783F300FDE153 /* EditAccountPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountPViewController.swift; sourceTree = "<group>"; };
-		CBF6FA3E2607841200FDE153 /* EditAccountP.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditAccountP.storyboard; sourceTree = "<group>"; };
-		CBF6FA412607845300FDE153 /* EditFirstnamePViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFirstnamePViewController.swift; sourceTree = "<group>"; };
-		CBF6FA442607846000FDE153 /* EditSurnamePViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSurnamePViewController.swift; sourceTree = "<group>"; };
-		CBF6FA472607847100FDE153 /* EditPhonenumberPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhonenumberPViewController.swift; sourceTree = "<group>"; };
-		CBF6FA4A2607848100FDE153 /* EditPasswordPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPasswordPViewController.swift; sourceTree = "<group>"; };
+		CBF48A6C260AAA9A0061976D /* UIColorEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorEX.swift; sourceTree = "<group>"; };
+		CBF48A6F260AAABA0061976D /* MKMapViewEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewEX.swift; sourceTree = "<group>"; };
+		CBF48A74260AB3EF0061976D /* FirebaseRefrences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRefrences.swift; sourceTree = "<group>"; };
+		CBF6FA3A260783F300FDE153 /* EditAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountViewController.swift; sourceTree = "<group>"; };
+		CBF6FA3E2607841200FDE153 /* EditAccount.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditAccount.storyboard; sourceTree = "<group>"; };
+		CBF6FA412607845300FDE153 /* EditFirstnameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFirstnameViewController.swift; sourceTree = "<group>"; };
+		CBF6FA442607846000FDE153 /* EditSurnameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSurnameViewController.swift; sourceTree = "<group>"; };
+		CBF6FA472607847100FDE153 /* EditPhonenumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhonenumberViewController.swift; sourceTree = "<group>"; };
+		CBF6FA4A2607848100FDE153 /* EditPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPasswordViewController.swift; sourceTree = "<group>"; };
 		CBF6FA4E260791AB00FDE153 /* EditAccountsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountsTableViewCell.swift; sourceTree = "<group>"; };
 		CBF6FA4F260791AB00FDE153 /* EditAccountsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditAccountsTableViewCell.xib; sourceTree = "<group>"; };
 		CBFC1596260564EE00347B96 /* YourTripsPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourTripsPViewController.swift; sourceTree = "<group>"; };
@@ -215,12 +215,13 @@
 		CB2550032566D2DC003BC53C /* Quadrant */ = {
 			isa = PBXGroup;
 			children = (
+				CBEBB3A2260B7C230047CCC6 /* LaunchScene */,
 				CBDAD52425FEE103007AA22F /* Cells */,
+				CBF6FA382607832900FDE153 /* EditAccountScenes */,
 				CBDAD50725FE802E007AA22F /* DriverSide */,
 				CBDAD50625FE801D007AA22F /* PassengerSide */,
 				CB5C7DAE25FCF9C700B34F62 /* Authentication */,
 				CB8C0E5225693C8200C714B8 /* Utilities */,
-				CB8C0E5125693C7F00C714B8 /* Service */,
 				CB8C0E5025693C7D00C714B8 /* Model */,
 				CB2550042566D2DC003BC53C /* AppDelegate.swift */,
 				CB2550062566D2DC003BC53C /* SceneDelegate.swift */,
@@ -228,7 +229,6 @@
 				CB25500F2566D2DE003BC53C /* LaunchScreen.storyboard */,
 				CB2550122566D2DE003BC53C /* Info.plist */,
 				CB8C0E5C256BBDFC00C714B8 /* GoogleService-Info.plist */,
-				CB5C5023259F9781000A271D /* Launch.storyboard */,
 				CB5C50A225AB8168000A271D /* Localizable.strings */,
 			);
 			path = Quadrant;
@@ -359,23 +359,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		CB8C0E5125693C7F00C714B8 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				CB8C0E72256BC24400C714B8 /* Authentication.swift */,
-				CB8C0EA92575145A00C714B8 /* Service.swift */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
 		CB8C0E5225693C8200C714B8 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				CB500B09257AF4DA005CD813 /* MapLocationServices.swift */,
-				CB500B3B2582DA96005CD813 /* Extensions.swift */,
 				CB500B3E25854827005CD813 /* Enumerations.swift */,
 				CB5C4FE1259EA1EF000A271D /* LoadingButton.swift */,
 				CB5C504125A4978D000A271D /* UIViewControllerEX.swift */,
+				CBF48A6C260AAA9A0061976D /* UIColorEX.swift */,
+				CBF48A6F260AAABA0061976D /* MKMapViewEX.swift */,
+				CBF48A74260AB3EF0061976D /* FirebaseRefrences.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -383,7 +375,6 @@
 		CBDAD50625FE801D007AA22F /* PassengerSide */ = {
 			isa = PBXGroup;
 			children = (
-				CBF6FA382607832900FDE153 /* EditAccountPScene */,
 				CBFC15D02606700500347B96 /* SetupFavoritePlaceScene */,
 				CBFC15C32606340000347B96 /* SettingsPScene */,
 				CBFC15932605641C00347B96 /* YourTripsPScene */,
@@ -497,6 +488,15 @@
 			path = FavoritePlacesCell;
 			sourceTree = "<group>";
 		};
+		CBEBB3A2260B7C230047CCC6 /* LaunchScene */ = {
+			isa = PBXGroup;
+			children = (
+				CBEBB3A3260B7C3B0047CCC6 /* LaunchViewController.swift */,
+				CBEBB3A6260B7C450047CCC6 /* Launch.storyboard */,
+			);
+			path = LaunchScene;
+			sourceTree = "<group>";
+		};
 		CBF0AF682607E9C90030B5F8 /* SettingsDScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,17 +523,17 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		CBF6FA382607832900FDE153 /* EditAccountPScene */ = {
+		CBF6FA382607832900FDE153 /* EditAccountScenes */ = {
 			isa = PBXGroup;
 			children = (
-				CBF6FA3A260783F300FDE153 /* EditAccountPViewController.swift */,
-				CBF6FA3E2607841200FDE153 /* EditAccountP.storyboard */,
-				CBF6FA412607845300FDE153 /* EditFirstnamePViewController.swift */,
-				CBF6FA442607846000FDE153 /* EditSurnamePViewController.swift */,
-				CBF6FA472607847100FDE153 /* EditPhonenumberPViewController.swift */,
-				CBF6FA4A2607848100FDE153 /* EditPasswordPViewController.swift */,
+				CBF6FA3A260783F300FDE153 /* EditAccountViewController.swift */,
+				CBF6FA3E2607841200FDE153 /* EditAccount.storyboard */,
+				CBF6FA412607845300FDE153 /* EditFirstnameViewController.swift */,
+				CBF6FA442607846000FDE153 /* EditSurnameViewController.swift */,
+				CBF6FA472607847100FDE153 /* EditPhonenumberViewController.swift */,
+				CBF6FA4A2607848100FDE153 /* EditPasswordViewController.swift */,
 			);
-			path = EditAccountPScene;
+			path = EditAccountScenes;
 			sourceTree = "<group>";
 		};
 		CBF6FA4D2607915500FDE153 /* EditAccountCell */ = {
@@ -736,15 +736,15 @@
 				CB5C7DB825FCFACC00B34F62 /* Login.storyboard in Resources */,
 				CBFC15C1260614FB00347B96 /* ProfileInfosTableViewCell.xib in Resources */,
 				CBF0AF6F2607EA030030B5F8 /* SettingsD.storyboard in Resources */,
-				CB5C5024259F9781000A271D /* Launch.storyboard in Resources */,
 				CB8C0E5D256BBDFC00C714B8 /* GoogleService-Info.plist in Resources */,
+				CBEBB3A7260B7C450047CCC6 /* Launch.storyboard in Resources */,
 				CB25500E2566D2DE003BC53C /* Assets.xcassets in Resources */,
 				CB5C7E2025FD58AD00B34F62 /* Signup.storyboard in Resources */,
 				CB77A10626018A56009A6FB6 /* Pickup.storyboard in Resources */,
 				CB77A0F626012E34009A6FB6 /* HomeD.storyboard in Resources */,
 				CBDAD51225FE817E007AA22F /* HomeP.storyboard in Resources */,
 				CBFC15AD26056D8600347B96 /* TripsTableViewCell.xib in Resources */,
-				CBF6FA3F2607841200FDE153 /* EditAccountP.storyboard in Resources */,
+				CBF6FA3F2607841200FDE153 /* EditAccount.storyboard in Resources */,
 				CBDAD52025FECDAE007AA22F /* LocationInput.storyboard in Resources */,
 				CBFC15C92606344B00347B96 /* SettingsP.storyboard in Resources */,
 				CBFC159C2605650700347B96 /* YourTripsP.storyboard in Resources */,
@@ -805,12 +805,12 @@
 				CB2550052566D2DC003BC53C /* AppDelegate.swift in Sources */,
 				CBFC1597260564EE00347B96 /* YourTripsPViewController.swift in Sources */,
 				CBDCB7132596026600D80759 /* FavoritePlace.swift in Sources */,
-				CBF6FA4B2607848100FDE153 /* EditPasswordPViewController.swift in Sources */,
+				CBF6FA4B2607848100FDE153 /* EditPasswordViewController.swift in Sources */,
+				CBF48A6D260AAA9A0061976D /* UIColorEX.swift in Sources */,
 				CB500B3F25854827005CD813 /* Enumerations.swift in Sources */,
-				CB500B0A257AF4DA005CD813 /* MapLocationServices.swift in Sources */,
 				CB77A0F926012E75009A6FB6 /* SideMenuDViewController.swift in Sources */,
 				CBDAD51D25FECD92007AA22F /* LocationInputViewController.swift in Sources */,
-				CBF6FA422607845300FDE153 /* EditFirstnamePViewController.swift in Sources */,
+				CBF6FA422607845300FDE153 /* EditFirstnameViewController.swift in Sources */,
 				CBFC15C62606343900347B96 /* SettingsPViewController.swift in Sources */,
 				CBF0AF722607EA150030B5F8 /* SettingsDViewModel.swift in Sources */,
 				CBFC15A0260568FE00347B96 /* YourTripsPViewModel.swift in Sources */,
@@ -819,12 +819,11 @@
 				CB500B35258104FD005CD813 /* Trip.swift in Sources */,
 				CBFC15B32606071500347B96 /* YourTripsDViewController.swift in Sources */,
 				CB500B0425767BB9005CD813 /* DriverAnnotation.swift in Sources */,
+				CBF48A70260AAABA0061976D /* MKMapViewEX.swift in Sources */,
 				CBDAD52825FEE14C007AA22F /* LocationInputTableViewCell.swift in Sources */,
 				CBFC15CE260635FC00347B96 /* SettingsPViewModel.swift in Sources */,
 				CB77A109260239F3009A6FB6 /* PickupDViewModel.swift in Sources */,
-				CB8C0EAA2575145A00C714B8 /* Service.swift in Sources */,
 				CB77A0FD2601436D009A6FB6 /* HomeDViewModel.swift in Sources */,
-				CB500B3C2582DA96005CD813 /* Extensions.swift in Sources */,
 				CB5C4FE2259EA1EF000A271D /* LoadingButton.swift in Sources */,
 				CBDAD51525FE906D007AA22F /* SideMenuPViewController.swift in Sources */,
 				CB5C7DB525FCFAB300B34F62 /* LoginViewController.swift in Sources */,
@@ -834,19 +833,20 @@
 				CBF0AF6C2607E9F70030B5F8 /* SettingsDViewController.swift in Sources */,
 				CBDAD55525FFF19B007AA22F /* HomePViewModel.swift in Sources */,
 				CB2550072566D2DC003BC53C /* SceneDelegate.swift in Sources */,
+				CBEBB3A4260B7C3B0047CCC6 /* LaunchViewController.swift in Sources */,
 				CB5C504225A4978D000A271D /* UIViewControllerEX.swift in Sources */,
-				CBF6FA452607846000FDE153 /* EditSurnamePViewController.swift in Sources */,
+				CBF6FA452607846000FDE153 /* EditSurnameViewController.swift in Sources */,
 				CBDAD50E25FE8156007AA22F /* HomePViewController.swift in Sources */,
 				CBFC15BA2606080900347B96 /* YourTripsDViewModel.swift in Sources */,
-				CB8C0E73256BC24400C714B8 /* Authentication.swift in Sources */,
 				CBFC15D42606705F00347B96 /* SetupFavoritePlaceViewModel.swift in Sources */,
-				CBF6FA3B260783F300FDE153 /* EditAccountPViewController.swift in Sources */,
+				CBF6FA3B260783F300FDE153 /* EditAccountViewController.swift in Sources */,
 				CB77A0F326012E24009A6FB6 /* HomeDViewController.swift in Sources */,
+				CBF48A75260AB3EF0061976D /* FirebaseRefrences.swift in Sources */,
 				CBFC15C0260614FB00347B96 /* ProfileInfosTableViewCell.swift in Sources */,
 				CBFC15D8260671CD00347B96 /* SetupFavoritePlaceViewController.swift in Sources */,
 				CB5C7E1C25FD588E00B34F62 /* SignupViewController.swift in Sources */,
 				CBFC15AC26056D8600347B96 /* TripsTableViewCell.swift in Sources */,
-				CBF6FA482607847100FDE153 /* EditPhonenumberPViewController.swift in Sources */,
+				CBF6FA482607847100FDE153 /* EditPhonenumberViewController.swift in Sources */,
 				CB5C7E2325FD645700B34F62 /* SignupViewModel.swift in Sources */,
 				CB500AE825752FF3005CD813 /* User.swift in Sources */,
 				CBF6FA50260791AB00FDE153 /* EditAccountsTableViewCell.swift in Sources */,
