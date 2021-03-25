@@ -40,15 +40,15 @@ extension MKMapView {
                 removeAnnotation(annotation)
             }
         }
-        if overlays.count > 0 {
-            removeOverlay(overlays[0])
+        overlays.forEach { (overlay) in
+            removeOverlay(overlay)
         }
     }
     
     func centerMapOnUser() {
         annotations.forEach { (anno) in
             if let annotation = anno as? MKUserLocation {
-                let span = MKCoordinateSpan(latitudeDelta: 0.008, longitudeDelta: 0.008)
+                let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
                 let region = MKCoordinateRegion(center: annotation.coordinate, span: span)
                 setRegion(region, animated: true)
             }

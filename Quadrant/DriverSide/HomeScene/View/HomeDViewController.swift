@@ -54,6 +54,7 @@ class HomeDViewController: UIViewController {
         cancelTripButtonTapped()
         dropoffPassengerButtonTapped()
         addNotificationCenterObservers()
+        addPanGesture()
     }
     
 
@@ -83,6 +84,11 @@ class HomeDViewController: UIViewController {
         SideMenuController.preferences.basic.shouldRespectLanguageDirection = true
         SideMenuController.preferences.animation.shadowColor = UIColor.black
         SideMenuController.preferences.animation.shadowAlpha = 0.5
+    }
+    
+    func addPanGesture() {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(moveBottomView(_:)))
+        bottomView.addGestureRecognizer(pan)
     }
     
     //MARK: - Buttons Configurations
@@ -174,6 +180,27 @@ class HomeDViewController: UIViewController {
                 }
             }).disposed(by: bag)
         
+    }
+    
+    //MARK: - UIPanGesture
+    @objc func moveBottomView( _ gesture: UIPanGestureRecognizer) {
+        switch gesture.state {
+        case .changed:
+            let yTranslate = gesture.translation(in: bottomView).y
+            UIView.animate(withDuration: 0) {
+                self.bottomViewHeight.constant = self.bottomViewHeight.constant - yTranslate
+                gesture.setTranslation(.zero, in: self.bottomView)
+            }
+        case .ended:
+            if self.bottomViewHeight.constant > self.view.frame.height / 2 || self.bottomViewHeight.constant < 100 {
+                UIView.animate(withDuration: 0.5) {
+                    self.bottomViewHeight.constant = 200
+                    self.view.layoutIfNeeded()
+                }
+            }
+        default:
+            break
+        }
     }
     
     //MARK: - Trip LifeCycle Functions
@@ -418,7 +445,7 @@ extension HomeDViewController: MKMapViewDelegate {
     func configureMapView(location: CLLocation) {
         mapView.delegate = self
         let coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.02)
         let region: MKCoordinateRegion = MKCoordinateRegion(center: coordinate, span: span)
         self.mapView.setRegion(region, animated: true)
         self.mapView.showsUserLocation = true
@@ -429,8 +456,8 @@ extension HomeDViewController: MKMapViewDelegate {
         
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         renderer.strokeColor = UIColor(rgb: 0xEB0000)
-        renderer.lineWidth = 4.0
-        renderer.alpha = 1.0
+        renderer.lineWidth = 5.0
+        renderer.alpha = 0.5
         return renderer
     }
     

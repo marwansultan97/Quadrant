@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dcK-tb-E93">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -17,20 +18,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would you like to pick up this passenger?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbC-kx-4yb">
-                                <rect key="frame" x="82" y="494" width="250" height="60"/>
+                                <rect key="frame" x="82" y="449" width="250" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="VZp-rl-7cX"/>
-                                    <constraint firstAttribute="height" constant="60" id="lDd-H7-Ul2"/>
+                                    <constraint firstAttribute="height" constant="60" id="9j7-MM-FQB"/>
+                                    <constraint firstAttribute="width" constant="250" id="YSd-Ys-Grj"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFX-Sx-FvL">
-                                <rect key="frame" x="92" y="574" width="230" height="50"/>
+                                <rect key="frame" x="92" y="529" width="230" height="50"/>
                                 <color key="backgroundColor" red="0.94335803529999995" green="0.1335219543" blue="0.0094775621929999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="9xN-H7-27r"/>
-                                    <constraint firstAttribute="width" constant="230" id="zhz-OH-0jB"/>
+                                    <constraint firstAttribute="width" constant="230" id="SX6-1V-6Oj"/>
+                                    <constraint firstAttribute="height" constant="50" id="cmL-VX-ZW9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                 <state key="normal" title="ACCEPT">
@@ -38,11 +39,11 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZg-yM-wIh">
-                                <rect key="frame" x="92" y="644" width="230" height="50"/>
+                                <rect key="frame" x="92" y="599" width="230" height="50"/>
                                 <color key="backgroundColor" red="0.94335803529999995" green="0.1335219543" blue="0.0094775621929999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="AjD-4b-Tmm"/>
-                                    <constraint firstAttribute="width" constant="230" id="EK9-j4-SEk"/>
+                                    <constraint firstAttribute="height" constant="50" id="Dj0-mY-80a"/>
+                                    <constraint firstAttribute="width" constant="230" id="S8p-LW-7Tp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                 <state key="normal" title="REJECT">
@@ -50,35 +51,35 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJS-46-QD8" userLabel="pulsatingView">
-                                <rect key="frame" x="57" y="114" width="300" height="300"/>
+                                <rect key="frame" x="59.5" y="114" width="295" height="295"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="iuC-Ec-h5X">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="295" height="295"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="300" id="N8J-zN-ETP"/>
-                                            <constraint firstAttribute="width" constant="300" id="kwn-0a-lJ0"/>
+                                            <constraint firstAttribute="width" constant="295" id="Rsj-q1-kya"/>
+                                            <constraint firstAttribute="height" constant="295" id="riD-OZ-822"/>
                                         </constraints>
                                     </mapView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="iuC-Ec-h5X" firstAttribute="centerX" secondItem="sJS-46-QD8" secondAttribute="centerX" id="1rE-tn-uyM"/>
-                                    <constraint firstAttribute="height" constant="300" id="XuI-Dk-QBi"/>
-                                    <constraint firstItem="iuC-Ec-h5X" firstAttribute="centerY" secondItem="sJS-46-QD8" secondAttribute="centerY" id="h7e-N1-TAG"/>
-                                    <constraint firstAttribute="width" constant="300" id="rng-AG-gww"/>
+                                    <constraint firstAttribute="height" constant="295" id="5ph-Ob-KbU"/>
+                                    <constraint firstAttribute="width" constant="295" id="98m-Eu-dcS"/>
+                                    <constraint firstItem="iuC-Ec-h5X" firstAttribute="centerX" secondItem="sJS-46-QD8" secondAttribute="centerX" id="lGb-eH-wHp"/>
+                                    <constraint firstItem="iuC-Ec-h5X" firstAttribute="centerY" secondItem="sJS-46-QD8" secondAttribute="centerY" id="o4L-kn-q8y"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Dwg-LJ-f7X"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="sJS-46-QD8" firstAttribute="top" secondItem="Dwg-LJ-f7X" secondAttribute="top" constant="70" id="9oS-mM-Kpm"/>
-                            <constraint firstItem="SFX-Sx-FvL" firstAttribute="centerX" secondItem="t03-n5-daR" secondAttribute="centerX" id="WnX-0f-Lte"/>
-                            <constraint firstItem="tZg-yM-wIh" firstAttribute="centerX" secondItem="t03-n5-daR" secondAttribute="centerX" id="flM-ob-muK"/>
-                            <constraint firstItem="tZg-yM-wIh" firstAttribute="top" secondItem="SFX-Sx-FvL" secondAttribute="bottom" constant="20" id="koa-P6-EwA"/>
-                            <constraint firstItem="GbC-kx-4yb" firstAttribute="centerX" secondItem="t03-n5-daR" secondAttribute="centerX" id="opu-lB-wnS"/>
-                            <constraint firstItem="SFX-Sx-FvL" firstAttribute="top" secondItem="GbC-kx-4yb" secondAttribute="bottom" constant="20" id="wr4-gV-b0T"/>
-                            <constraint firstItem="sJS-46-QD8" firstAttribute="centerX" secondItem="t03-n5-daR" secondAttribute="centerX" id="xFl-Af-JK3"/>
-                            <constraint firstItem="GbC-kx-4yb" firstAttribute="top" secondItem="sJS-46-QD8" secondAttribute="bottom" constant="80" id="yg6-QP-Sys"/>
+                            <constraint firstItem="sJS-46-QD8" firstAttribute="centerX" secondItem="t03-n5-daR" secondAttribute="centerX" id="1Iz-fC-Rpq"/>
+                            <constraint firstItem="tZg-yM-wIh" firstAttribute="centerX" secondItem="t03-n5-daR" secondAttribute="centerX" id="1gM-Al-iQ2"/>
+                            <constraint firstItem="GbC-kx-4yb" firstAttribute="top" secondItem="sJS-46-QD8" secondAttribute="bottom" constant="40" id="M71-fw-TxX"/>
+                            <constraint firstItem="SFX-Sx-FvL" firstAttribute="centerX" secondItem="t03-n5-daR" secondAttribute="centerX" id="Ntl-FL-HKe"/>
+                            <constraint firstItem="GbC-kx-4yb" firstAttribute="centerX" secondItem="t03-n5-daR" secondAttribute="centerX" id="cyg-4a-7lo"/>
+                            <constraint firstItem="sJS-46-QD8" firstAttribute="top" secondItem="Dwg-LJ-f7X" secondAttribute="top" constant="70" id="hDf-Qc-a8O"/>
+                            <constraint firstItem="SFX-Sx-FvL" firstAttribute="top" secondItem="GbC-kx-4yb" secondAttribute="bottom" constant="20" id="n57-qn-s4i"/>
+                            <constraint firstItem="tZg-yM-wIh" firstAttribute="top" secondItem="SFX-Sx-FvL" secondAttribute="bottom" constant="20" id="ptv-Ly-tV2"/>
                         </constraints>
                     </view>
                     <connections>

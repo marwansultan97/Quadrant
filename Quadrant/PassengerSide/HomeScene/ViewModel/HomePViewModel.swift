@@ -151,6 +151,17 @@ class HomePViewModel {
         }
     }
     
+    func getDriverLocation(uid: String, completeion: @escaping(MKPlacemark)-> Void) {
+        REF_DRIVER_LOCATION.child(uid).observeSingleEvent(of: .value) { snapshot in
+            guard let dictionary = snapshot.value as? [String:Any] ,
+                  let location = dictionary["l"] as? NSArray ,
+                  let lat = location[0] as? CLLocationDegrees ,
+                  let long = location[1] as? CLLocationDegrees else { return }
+            let driverPlace = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long))
+            completeion(driverPlace)
+        }
+    }
+    
     
     func observeCurrentTripState() {
         

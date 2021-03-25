@@ -66,24 +66,22 @@ class PickupViewController: UIViewController {
     //MARK: - UI Configurations
     private func configureUI() {
         mapView.layer.cornerRadius = mapView.frame.height / 2
-        acceptButton.layer.cornerRadius = 10
-        rejectButton.layer.cornerRadius = 10
+        acceptButton.layer.cornerRadius = acceptButton.frame.height / 2
+        rejectButton.layer.cornerRadius = rejectButton.frame.height / 2
         
-        acceptButton.layer.shadowColor = UIColor.gray.cgColor
         acceptButton.layer.shadowOffset = CGSize.zero
         acceptButton.layer.shadowOpacity = 1
-        acceptButton.layer.shadowRadius = 5
+        acceptButton.layer.shadowRadius = 2
         
-        rejectButton.layer.shadowColor = UIColor.gray.cgColor
         rejectButton.layer.shadowOffset = CGSize.zero
         rejectButton.layer.shadowOpacity = 1
-        rejectButton.layer.shadowRadius = 5
+        rejectButton.layer.shadowRadius = 2
         
     }
     
     //MARK: - MapView Configurations
     private func configureMapView() {
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: self.trip!.pickupCoordinates, span: span)
         mapView.setRegion(region, animated: true)
         mapView.addAndSelectAnnotation(coordinate: self.trip!.pickupCoordinates)

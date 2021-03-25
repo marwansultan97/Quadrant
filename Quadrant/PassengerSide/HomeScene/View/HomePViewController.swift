@@ -3,7 +3,7 @@
 //  Quadrant
 //
 //  Created by Marwan Osama on 3/14/21.
-//
+//133972
 
 import UIKit
 import RxCocoa
@@ -35,6 +35,8 @@ class HomePViewController: UIViewController {
     var user: User?
     var currentTrip: Trip?
     
+    
+    
     private let bag = DisposeBag()
     private var viewModel = HomePViewModel()
     static let locationManager = CLLocationManager()
@@ -55,6 +57,7 @@ class HomePViewController: UIViewController {
         closeBottomViewButtonTapped()
         bindViewModelData()
         addNotificationCenterObservers()
+        addPanGesture()
         
     }
     
@@ -88,6 +91,11 @@ class HomePViewController: UIViewController {
         SideMenuController.preferences.basic.shouldRespectLanguageDirection = true
         SideMenuController.preferences.animation.shadowColor = UIColor.black
         SideMenuController.preferences.animation.shadowAlpha = 0.5
+    }
+    
+    func addPanGesture() {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(moveBottomView(_:)))
+        bottomView.addGestureRecognizer(pan)
     }
     
     
@@ -188,8 +196,30 @@ class HomePViewController: UIViewController {
     
     
     
-    //MARK: - Trip Life Cycle Functions
+    //MARK: - UIPanGesture
+    @objc func moveBottomView( _ gesture: UIPanGestureRecognizer) {
+        switch gesture.state {
+        case .changed:
+            let yTranslate = gesture.translation(in: bottomView).y
+            UIView.animate(withDuration: 0) {
+                self.bottomViewHeight.constant = self.bottomViewHeight.constant - yTranslate
+                gesture.setTranslation(.zero, in: self.bottomView)
+            }
+        case .ended:
+            if self.bottomViewHeight.constant > self.view.frame.height / 2 || self.bottomViewHeight.constant < 100 {
+                UIView.animate(withDuration: 0.5) {
+                    self.bottomViewHeight.constant = 200
+                    self.view.layoutIfNeeded()
+                }
+            }
+        default:
+            break
+        }
+    }
+    
+    //MARK: - Trip Life Cycle Helper Functions
     private func selectedPlaceShowDetails(place: MKPlacemark) {
+        
         sideMenuButton.alpha = 0
         whereButton.alpha = 0
         requestButton.alpha = 1
@@ -264,6 +294,10 @@ class HomePViewController: UIViewController {
             let zoomInAnnotations = self.mapView.annotations.filter({ $0.isKind(of: DriverAnnotation.self) || $0.isKind(of: MKUserLocation.self) })
             self.mapView.fitAll(in: zoomInAnnotations, andShow: true)
         })
+        viewModel.getDriverLocation(uid: trip.driverUID!) { driverPlace in
+            self.viewModel.showPolyline(destination: driverPlace, locationManager: HomePViewController.locationManager)
+        }
+        
         
     }
     
@@ -277,8 +311,10 @@ class HomePViewController: UIViewController {
         REF_DRIVER_LOCATION.child(trip.driverUID!).removeAllObservers()
         mapView.removeAnnotationAndOverlays()
         mapView.addAndSelectAnnotation(coordinate: trip.destinationCoordinates)
+        
         let zoomInAnnotations = mapView.annotations.filter({ $0.isKind(of: MKUserLocation.self) || $0.isKind(of: MKPointAnnotation.self) })
         mapView.fitAll(in: zoomInAnnotations, andShow: true)
+        viewModel.showPolyline(destination: MKPlacemark(coordinate: trip.destinationCoordinates), locationManager: HomePViewController.locationManager)
         driverStateLabel.text = "En Route To Destination"
     }
     
@@ -387,7 +423,7 @@ extension HomePViewController: MKMapViewDelegate {
     func configureMapView(location: CLLocation) {
         mapView.delegate = self
         let coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region: MKCoordinateRegion = MKCoordinateRegion(center: coordinate, span: span)
         self.mapView.setRegion(region, animated: true)
         self.mapView.showsUserLocation = true
@@ -397,9 +433,9 @@ extension HomePViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
-//        renderer.strokeColor = UIColor(hexString: "C90000")
+        renderer.strokeColor = UIColor(rgb: 0xEB0000)
         renderer.lineWidth = 5.0
-        renderer.alpha = 1.0
+        renderer.alpha = 0.5
         return renderer
     }
     
@@ -428,5 +464,3 @@ extension HomePViewController: MKMapViewDelegate {
 }
 
 
-//      37.33233141
-//     -122.0312186
