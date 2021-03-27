@@ -463,6 +463,7 @@ extension HomeDViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         guard let location = userLocation.location else { return }
+        
         viewModel.setDriverLocation(location: location)
     }
     

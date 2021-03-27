@@ -11,6 +11,7 @@ import RxSwift
 import SideMenuSwift
 import MapKit
 import CoreLocation
+import UserNotifications
 
 class HomePViewController: UIViewController {
 
@@ -35,8 +36,6 @@ class HomePViewController: UIViewController {
     var user: User?
     var currentTrip: Trip?
     
-    
-    
     private let bag = DisposeBag()
     private var viewModel = HomePViewModel()
     static let locationManager = CLLocationManager()
@@ -53,12 +52,13 @@ class HomePViewController: UIViewController {
         configureSideMenu()
         whereButtonTapped()
         actionButtonTapped()
+        callButtonTapped()
         sideMenuButtonTapped()
         closeBottomViewButtonTapped()
         bindViewModelData()
         addNotificationCenterObservers()
         addPanGesture()
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,6 +130,7 @@ class HomePViewController: UIViewController {
         
         viewModel.currentTripObservable.subscribe(onNext: { [weak self] trip in
             guard let self = self else { return }
+            self.currentTrip = trip
             switch trip.tripState {
             case .requested:
                 self.showHUD(message: "We are finding you a ride, please wait...")
@@ -163,16 +164,17 @@ class HomePViewController: UIViewController {
         whereButton.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             let vc = UIStoryboard(name: "LocationInput", bundle: nil).instantiateInitialViewController() as? LocationInputViewController
-            
+
             vc?.selectedPlaceMarkBehavior
                 .filter({ $0 != nil })
                 .subscribe(onNext: { placeMark in
                     self.selectedPlaceMark = placeMark
                     self.selectedPlaceShowDetails(place: placeMark!)
                 }).disposed(by: self.bag)
-            
+
             vc?.modalPresentationStyle = .popover
             self.present(vc!, animated: true)
+            print("Sent")
         }).disposed(by: bag)
     }
     
@@ -185,6 +187,9 @@ class HomePViewController: UIViewController {
     private func closeBottomViewButtonTapped() {
         closeBottomViewButton.rx.tap.subscribe(onNext: { [weak self] in
             self?.closeBottomView()
+            if let driverUID = self?.currentTrip?.driverUID, !driverUID.isEmpty {
+                REF_DRIVER_LOCATION.child(driverUID).removeAllObservers()
+            }
         }).disposed(by: bag)
     }
     
@@ -192,6 +197,14 @@ class HomePViewController: UIViewController {
         requestButton.rx.tap.subscribe(onNext: { [weak self] in
             self?.requestTrip()
         }).disposed(by: bag)
+    }
+    
+    private func callButtonTapped() {
+        callButton.rx.tap.subscribe(onNext: { [weak self] in
+            guard let driverPhoneNumber = self?.currentTrip?.driverPhoneNumber else { return }
+            self?.call(number: driverPhoneNumber)
+        }).disposed(by: bag)
+        
     }
     
     
@@ -260,11 +273,10 @@ class HomePViewController: UIViewController {
         if let driverUID = currentTrip?.driverUID , !driverUID.isEmpty {
             REF_DRIVER_LOCATION.child(driverUID).removeAllObservers()
         }
-        if let passengerUID = currentTrip?.passengerUID, !passengerUID.isEmpty {
-            REF_TRIPS.child(passengerUID).removeAllObservers()
-        }
         viewModel.removeObserverAndValueTrip()
         mapView.removeAnnotationAndOverlays()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         mapView.centerMapOnUser()
         UIView.animate(withDuration: 0.4, delay: 0, options: UIView.AnimationOptions.curveEaseOut) {
             self.whereButton.alpha = 1
@@ -302,6 +314,7 @@ class HomePViewController: UIViewController {
     }
     
     private func driverArrived() {
+        self.sendNotification(body: "Your Driver Has Arrived")
         driverStateLabel.text = "The Driver has arrived, Please meet Him at Pickup Location"
     }
     
@@ -332,6 +345,10 @@ class HomePViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    private func call(number: String) {
+        guard let number = URL(string: "tel://" + number) else { return }
+        UIApplication.shared.open(number)
+    }
     
     // MARK: - Navigation and Side Menu Controllers
     private func addNotificationCenterObservers() {
@@ -459,6 +476,34 @@ extension HomePViewController: MKMapViewDelegate {
         
         return nil
     }
+    
+    
+}
+
+//MARK: - Local Notifications
+extension HomePViewController: UNUserNotificationCenterDelegate {
+    
+    func sendNotification(body: String) {
+        let nContent = UNMutableNotificationContent()
+        nContent.title = "Your Trip"
+        nContent.body = body
+        nContent.badge = 1
+        nContent.sound = .default
+        let date = Date().addingTimeInterval(0.5)
+        let dateComp = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second,.weekday], from: date)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: false)
+        
+        let identifier = UUID().uuidString
+        let request = UNNotificationRequest(identifier: identifier,
+                                            content: nContent,
+                                            trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { (err) in
+            if let err = err {
+                print(err)
+            }
+        }
+    }
+    
     
     
 }

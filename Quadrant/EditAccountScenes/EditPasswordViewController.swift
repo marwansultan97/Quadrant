@@ -70,13 +70,13 @@ class EditPasswordViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 guard let oldPassword = self?.oldPasswordTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
                 guard let newPassword = self?.newPasswordTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-                print(oldPassword,newPassword)
+                self?.changePassword(oldPassword: oldPassword, newPassword: newPassword)
             }).disposed(by: bag)
         
         
     }
     
-    func changePassword(email: String, oldPassword: String, newPassword: String, completion: @escaping(Error?)-> Void) {
+    func changePassword(oldPassword: String, newPassword: String) {
         showHUD(message: nil)
         guard let user = Auth.auth().currentUser ,
               let email = Auth.auth().currentUser?.email else { return }
@@ -87,16 +87,16 @@ class EditPasswordViewController: UIViewController {
         user.reauthenticate(with: credential, completion: { [weak self] (res, err) in
             guard let self = self else { return }
             if let err = err {
-                print("DEBUG: err credential \(err)")
+                print("err invalid credentials \(err)")
                 self.dismissHUD()
-                self.showError(message: "Something went wrong... Please try again!", dismissDelay: 2)
+                self.showError(message: err.localizedDescription, dismissDelay: 2)
+                return
             }
-            print("DEBUG: credential is \(credential)")
             user.updatePassword(to: newPassword) { (err) in
                 if let err = err {
                     print("err updating Password \(err)")
                     self.dismissHUD()
-                    self.showError(message: "Something went wrong... Please try again!", dismissDelay: 2)
+                    self.showError(message: err.localizedDescription, dismissDelay: 2)
                     return
                 }
                 self.dismissHUD()

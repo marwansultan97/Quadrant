@@ -32,7 +32,7 @@
 	<false/>
 	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
 	<dict>
-		<key>Allow &apos;Maps&apos; to use your precise location once</key>
+		<key>Allow 'Maps' to use your precise location once</key>
 		<string>Please allow to get you a ride</string>
 	</dict>
 	<key>NSLocationUsageDescription</key>
@@ -60,6 +60,11 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

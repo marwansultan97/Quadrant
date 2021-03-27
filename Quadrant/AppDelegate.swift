@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,16 +17,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        FirebaseApp.configure()
+        
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0        
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         let rootVC = UIStoryboard(name: "Launch", bundle: nil).instantiateInitialViewController()
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
         
-        FirebaseApp.configure()
+        
+        UNUserNotificationCenter.current().delegate = self
+        let authOptions = UNAuthorizationOptions(arrayLiteral: .alert,.sound,.badge)
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (success, err) in
+            if let err = err {
+                print("UserNotification Auth \(err)")
+            }
+        }
+        
+        
+        
+        
         
         return true
     }
-
+    
+    
     // MARK: UISceneSession Lifecycle
     @available(iOS 13.0, *)
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
@@ -44,3 +62,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert,.sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
+    }
+    
+}

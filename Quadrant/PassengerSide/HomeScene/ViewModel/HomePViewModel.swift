@@ -35,7 +35,8 @@ class HomePViewModel {
 
     
     private var currentTripSubject = PublishSubject<Trip>()
-    var currentTripObservable: Observable<Trip> {
+    
+     var currentTripObservable: Observable<Trip> {
         return currentTripSubject.asObservable()
     }
     
