@@ -8,6 +8,7 @@
 import SVProgressHUD
 import UIKit
 import JSSAlertView
+import TTGSnackbar
 
 
 extension UIViewController {
@@ -60,4 +61,39 @@ extension UIViewController {
     }
     
     
+    func createTTGSnackBar(message: String, icon: UIImage, color: UIColor, duration: TTGSnackbarDuration) -> TTGSnackbar {
+        let connectedSnackBar = TTGSnackbar()
+        connectedSnackBar.backgroundColor = color
+        connectedSnackBar.messageLabel.text = message
+        connectedSnackBar.messageTextFont = UIFont.systemFont(ofSize: 20, weight: .bold)
+        connectedSnackBar.messageTextAlign = .center
+        connectedSnackBar.icon = icon
+        connectedSnackBar.duration = duration
+        connectedSnackBar.animationType = .slideFromBottomToTop
+        connectedSnackBar.leftMargin = 20
+        connectedSnackBar.rightMargin = 20
+        connectedSnackBar.bottomMargin = 20
+        connectedSnackBar.cornerRadius = 10
+        
+        connectedSnackBar.onTapBlock = { _ in
+            connectedSnackBar.dismiss()
+        }
+        
+        connectedSnackBar.onSwipeBlock = { (snackbar, direction) in
+            if direction == .right {
+                connectedSnackBar.animationType = .slideFromLeftToRight
+            } else if direction == .left {
+                connectedSnackBar.animationType = .slideFromRightToLeft
+            } else if direction == .up {
+                connectedSnackBar.animationType = .slideFromTopBackToTop
+            } else if direction == .down {
+                connectedSnackBar.animationType = .slideFromTopBackToTop
+            }
+
+            connectedSnackBar.dismiss()
+        }
+        return connectedSnackBar
+    }
+    
+        
 }

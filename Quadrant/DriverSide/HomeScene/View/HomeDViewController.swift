@@ -37,7 +37,7 @@ class HomeDViewController: UIViewController {
     private let bag = DisposeBag()
     private var viewModel = HomeDViewModel()
     
-    private let locationManager = CLLocationManager()
+    static let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +49,7 @@ class HomeDViewController: UIViewController {
         setupLocationManager()
         sideMenuButtonTapped()
         searchButtonTapped()
+        callButtonTapped()
         bindViewModelData()
         pickupPassengerButtonTapped()
         cancelTripButtonTapped()
@@ -144,6 +145,16 @@ class HomeDViewController: UIViewController {
 
         }).disposed(by: bag)
     }
+    
+    private func callButtonTapped() {
+        callButton.rx.tap.subscribe(onNext: { [weak self] in
+            guard let passengerPhoneNumber = self?.currentTrip?.passengerPhoneNumber else { return }
+            self?.call(number: passengerPhoneNumber)
+        }).disposed(by: bag)
+        
+    }
+    
+    
     
     
     //MARK: - ViewModel Binding
@@ -260,7 +271,7 @@ class HomeDViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
         mapView.addAndSelectAnnotation(coordinate: trip.pickupCoordinates)
-        viewModel.showPolyline(destinationCoordinations: trip.pickupCoordinates, locationManager: locationManager)
+        viewModel.showPolyline(destinationCoordinations: trip.pickupCoordinates, locationManager: HomeDViewController.locationManager)
         let zoomInAnnotations = mapView.annotations.filter({ $0.isKind(of: MKPointAnnotation.self) || $0.isKind(of: MKUserLocation.self) })
         mapView.fitAll(in: zoomInAnnotations, andShow: true)
         setCircleRegion(identifier: CircularRegionType.pickup.rawValue, coordinate: trip.pickupCoordinates)
@@ -312,7 +323,7 @@ class HomeDViewController: UIViewController {
         mapView.addAndSelectAnnotation(coordinate: currentTrip!.destinationCoordinates)
         let zoomInAnnotations = mapView.annotations.filter({ $0.isKind(of: MKPointAnnotation.self) || $0.isKind(of: MKUserLocation.self) })
         mapView.fitAll(in: zoomInAnnotations, andShow: true)
-        viewModel.showPolyline(destinationCoordinations: currentTrip!.destinationCoordinates, locationManager: locationManager)
+        viewModel.showPolyline(destinationCoordinations: currentTrip!.destinationCoordinates, locationManager: HomeDViewController.locationManager)
         setCircleRegion(identifier: CircularRegionType.destination.rawValue, coordinate: currentTrip!.destinationCoordinates)
     }
     
@@ -334,7 +345,7 @@ class HomeDViewController: UIViewController {
     
     private func setCircleRegion(identifier: String, coordinate: CLLocationCoordinate2D) {
         let circleRegion = CLCircularRegion(center: coordinate, radius: 20, identifier: identifier)
-        locationManager.startMonitoring(for: circleRegion)
+        HomeDViewController.locationManager.startMonitoring(for: circleRegion)
     }
     
     private func showAlertSheet(title: String?, message: String?) {
@@ -342,6 +353,11 @@ class HomeDViewController: UIViewController {
         let action = UIAlertAction.init(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func call(number: String) {
+        guard let number = URL(string: "tel://" + number) else { return }
+        UIApplication.shared.open(number)
     }
     
     
@@ -387,13 +403,13 @@ class HomeDViewController: UIViewController {
 extension HomeDViewController: CLLocationManagerDelegate {
     
     private func setupLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        HomeDViewController.locationManager.delegate = self
+        HomeDViewController.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         if #available(iOS 14.0, *) {
             
         } else {
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
+            HomeDViewController.locationManager.requestWhenInUseAuthorization()
+            HomeDViewController.locationManager.startUpdatingLocation()
         }
     }
     @available(iOS 14.0, *)
@@ -401,13 +417,13 @@ extension HomeDViewController: CLLocationManagerDelegate {
         switch manager.authorizationStatus {
         
         case .notDetermined:
-            locationManager.requestAlwaysAuthorization()
+            HomeDViewController.locationManager.requestAlwaysAuthorization()
             break
         case .authorizedWhenInUse:
-            locationManager.startUpdatingLocation()
+            HomeDViewController.locationManager.startUpdatingLocation()
             break
         case .authorizedAlways:
-            locationManager.startUpdatingLocation()
+            HomeDViewController.locationManager.startUpdatingLocation()
             break
         case .restricted:
             // restricted by e.g. parental controls. User can't enable Location Services
@@ -423,7 +439,7 @@ extension HomeDViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let passengerLocation = locations.first else { return}
         configureMapView(location: passengerLocation)
-        locationManager.stopUpdatingLocation()
+        HomeDViewController.locationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {

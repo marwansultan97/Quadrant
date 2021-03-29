@@ -8,12 +8,15 @@
 import UIKit
 import Firebase
 import UserNotifications
+import Reachability
+import TTGSnackbar
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     var window: UIWindow?
+    let reachability = ReachabilityManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -36,12 +39,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        
+//        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(notification:)), name: .reachabilityChanged, object: reachability)
+//        do{
+//            try reachability.startNotifier()
+//        }catch{
+//            print("could not start reachability notifier")
+//        }
         
         
         
         return true
     }
+    
+//    @objc func reachabilityChanged(notification: Notification) {
+//        let reachability = notification.object as! Reachability
+//        switch reachability.connection {
+//        case .wifi, .cellular:
+//            print("Connected")
+//        case .unavailable:
+//            print("Disconnected")
+//        default:
+//            break
+//        }
+//    }
+    
     
     
     // MARK: UISceneSession Lifecycle

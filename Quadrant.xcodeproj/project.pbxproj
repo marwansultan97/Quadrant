@@ -11,6 +11,7 @@
 		CB2550072566D2DC003BC53C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2550062566D2DC003BC53C /* SceneDelegate.swift */; };
 		CB25500E2566D2DE003BC53C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB25500D2566D2DE003BC53C /* Assets.xcassets */; };
 		CB2550112566D2DE003BC53C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB25500F2566D2DE003BC53C /* LaunchScreen.storyboard */; };
+		CB39B4202610F9EE004E6F8F /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB39B41F2610F9EE004E6F8F /* ReachabilityManager.swift */; };
 		CB500AE825752FF3005CD813 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500AE725752FF3005CD813 /* User.swift */; };
 		CB500B0425767BB9005CD813 /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B0325767BB9005CD813 /* DriverAnnotation.swift */; };
 		CB500B35258104FD005CD813 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B34258104FC005CD813 /* Trip.swift */; };
@@ -90,6 +91,7 @@
 		CB25500D2566D2DE003BC53C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB2550102566D2DE003BC53C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB2550122566D2DE003BC53C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB39B41F2610F9EE004E6F8F /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		CB500AE725752FF3005CD813 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CB500B0325767BB9005CD813 /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
 		CB500B34258104FC005CD813 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 				CBF48A6C260AAA9A0061976D /* UIColorEX.swift */,
 				CBF48A6F260AAABA0061976D /* MKMapViewEX.swift */,
 				CBF48A74260AB3EF0061976D /* FirebaseRefrences.swift */,
+				CB39B41F2610F9EE004E6F8F /* ReachabilityManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -846,6 +849,7 @@
 				CBFC15D8260671CD00347B96 /* SetupFavoritePlaceViewController.swift in Sources */,
 				CB5C7E1C25FD588E00B34F62 /* SignupViewController.swift in Sources */,
 				CBFC15AC26056D8600347B96 /* TripsTableViewCell.swift in Sources */,
+				CB39B4202610F9EE004E6F8F /* ReachabilityManager.swift in Sources */,
 				CBF6FA482607847100FDE153 /* EditPhonenumberViewController.swift in Sources */,
 				CB5C7E2325FD645700B34F62 /* SignupViewModel.swift in Sources */,
 				CB500AE825752FF3005CD813 /* User.swift in Sources */,

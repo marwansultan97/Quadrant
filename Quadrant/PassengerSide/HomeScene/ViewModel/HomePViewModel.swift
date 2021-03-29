@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import MapKit
 import Firebase
+import GeoFire
 
 class HomePViewModel {
     
@@ -23,8 +24,8 @@ class HomePViewModel {
         return userSubject.asObservable()
     }
     
-    private var routeSubject = PublishSubject<MKRoute>()
-    var routeObservable: Observable<MKRoute> {
+    private var routeSubject = PublishSubject<MKRoute?>()
+    var routeObservable: Observable<MKRoute?> {
         return routeSubject.asObservable()
     }
     
@@ -67,7 +68,10 @@ class HomePViewModel {
         let routeRequest = MKDirections(request: request)
         
         routeRequest.calculate { [weak self] (response, err) in
-            guard let route = response?.routes.first else { return }
+            guard let route = response?.routes.first else {
+                self?.routeSubject.onNext(nil)
+                return
+            }
             self?.routeSubject.onNext(route)
         }
     }
@@ -97,6 +101,7 @@ class HomePViewModel {
     
     func uploadTrip(pickup: CLLocationCoordinate2D, destinationPlace: MKPlacemark, user: User) {
         guard let uid = Auth.auth().currentUser?.uid else {return}
+        let geofire = GeoFire(firebaseRef: REF_TRIPS.child(uid))
         let dateformmater = DateFormatter()
         dateformmater.dateFormat = "EEEE, MMM d, yyyy, h:mm a"
         let timeStamp = dateformmater.string(from: self.date)
@@ -123,6 +128,9 @@ class HomePViewModel {
                                     "passengerPhoneNumber": passengerPhoneNumber,
                                     "state": TripState.requested.rawValue,
                                     "date": timeStamp]
+        
+        let pickupLocation = CLLocation(latitude: pickup.latitude, longitude: pickup.longitude)
+        geofire.setLocation(pickupLocation, forKey: "pickup")
         REF_TRIPS.child(uid).updateChildValues(values)
         
     }

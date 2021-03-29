@@ -12,6 +12,7 @@ import SideMenuSwift
 import MapKit
 import CoreLocation
 import UserNotifications
+import TTGSnackbar
 
 class HomePViewController: UIViewController {
 
@@ -40,6 +41,7 @@ class HomePViewController: UIViewController {
     private var viewModel = HomePViewModel()
     static let locationManager = CLLocationManager()
     
+    private var snackbar = TTGSnackbar()
     private var selectedPlaceMark: MKPlacemark?
     
     override func viewDidLoad() {
@@ -58,6 +60,19 @@ class HomePViewController: UIViewController {
         bindViewModelData()
         addNotificationCenterObservers()
         addPanGesture()
+        
+        ReachabilityManager.shared.isConnectedObservable.subscribe(onNext: { [weak self] isConnected in
+            guard let self = self else { return }
+            if isConnected {
+                self.snackbar.dismiss()
+                self.snackbar = self.createTTGSnackBar(message: "Connected Successfully", icon: UIImage(named: "Material_Check_Circle")!, color: UIColor.systemGreen, duration: .middle)
+                self.snackbar.show()
+            } else {
+                self.snackbar.dismiss()
+                self.snackbar = self.createTTGSnackBar(message: "No Internet Connection", icon: UIImage(named: "Material_Cancel")!, color: UIColor.systemRed, duration: .forever)
+                self.snackbar.show()
+            }
+        }).disposed(by: bag)
 
     }
     
@@ -75,12 +90,6 @@ class HomePViewController: UIViewController {
         bottomView.layer.shadowOpacity = 1
         bottomView.layer.shadowOffset = CGSize(width: 10, height: 10)
         bottomView.layer.shadowRadius = 20
-        
-        
-        
-        requestButton.layer.shadowOffset = CGSize.zero
-        requestButton.layer.shadowOpacity = 1
-        requestButton.layer.shadowRadius = 3
 
     }
 
@@ -112,10 +121,16 @@ class HomePViewController: UIViewController {
         viewModel.routeObservable
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] route in
-                self?.mapView.addOverlay(route.polyline)
-                self?.distanceLabel.text = String(format: "%.1f", (route.distance / 1000)) + " KM"
-                self?.priceLabel.text = String(format: "%.1f", ((route.distance / 1000) * 3 + 15)) + " EGP"
-                self?.timeLabel.text = String(format: "%.1f", ((route.expectedTravelTime / 60) + 5)) + " MINUTES"
+                guard route != nil else {
+                    self?.distanceLabel.text = "--"
+                    self?.priceLabel.text = "--"
+                    self?.timeLabel.text = "--"
+                    return
+                }
+                self?.mapView.addOverlay(route!.polyline)
+                self?.distanceLabel.text = String(format: "%.1f", (route!.distance / 1000)) + " KM"
+                self?.priceLabel.text = String(format: "%.1f", ((route!.distance / 1000) * 3 + 15)) + " EGP"
+                self?.timeLabel.text = String(format: "%.1f", ((route!.expectedTravelTime / 60) + 5)) + " MINUTES"
             }).disposed(by: bag)
         
         viewModel.polylineObservable
@@ -248,7 +263,7 @@ class HomePViewController: UIViewController {
         destinationLabel.text = "\(name ?? "") \(thoroughFare ?? "") \(subThoroughFare ?? "") \(locality ?? "") \(adminArea ?? "")"
         
         UIView.animate(withDuration: 0.5, delay: 0.5, options: UIView.AnimationOptions.curveEaseIn) {
-            self.bottomViewHeight.constant = 200
+            self.bottomViewHeight.constant = 220
             self.view.layoutIfNeeded()
         }
         mapView.addAndSelectAnnotation(coordinate: place.coordinate)

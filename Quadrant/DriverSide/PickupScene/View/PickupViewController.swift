@@ -69,14 +69,6 @@ class PickupViewController: UIViewController {
         acceptButton.layer.cornerRadius = acceptButton.frame.height / 2
         rejectButton.layer.cornerRadius = rejectButton.frame.height / 2
         
-        acceptButton.layer.shadowOffset = CGSize.zero
-        acceptButton.layer.shadowOpacity = 1
-        acceptButton.layer.shadowRadius = 2
-        
-        rejectButton.layer.shadowOffset = CGSize.zero
-        rejectButton.layer.shadowOpacity = 1
-        rejectButton.layer.shadowRadius = 2
-        
     }
     
     //MARK: - MapView Configurations

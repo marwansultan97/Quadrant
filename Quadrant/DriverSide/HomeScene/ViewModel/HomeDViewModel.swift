@@ -75,13 +75,20 @@ class HomeDViewModel {
     
     func fetchTrip() {
         
-        REF_TRIPS.queryOrdered(byChild: "state").queryEqual(toValue: TripState.requested.rawValue).observeSingleEvent(of: .childAdded, with: { [weak self] (snapshot) in
+        REF_TRIPS.queryOrdered(byChild: "state").queryEqual(toValue: TripState.requested.rawValue).observe(.childAdded, with: { [weak self] (snapshot) in
             guard let self = self else {return  }
             guard let dictionary = snapshot.value as? [String:Any] else {return}
             let passengerUID = snapshot.key
             let trip = Trip(passengerUID: passengerUID, values: dictionary)
-            self.tripSubject.onNext(trip)
-            REF_TRIPS.removeAllObservers()
+            let distance = HomeDViewController.locationManager.location!.distance(from: CLLocation(latitude: trip.pickupCoordinates.latitude, longitude: trip.pickupCoordinates.longitude))
+            if distance < 5000 {
+                print("Distance Acceptable")
+                self.tripSubject.onNext(trip)
+                REF_TRIPS.removeAllObservers()
+            } else {
+                print("Very Far Distance")
+            }
+            
         })
     }
     
