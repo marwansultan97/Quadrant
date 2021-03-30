@@ -11,6 +11,7 @@ import CoreLocation
 import SideMenuSwift
 import RxCocoa
 import RxSwift
+import TTGSnackbar
 
 class HomeDViewController: UIViewController {
     
@@ -34,6 +35,7 @@ class HomeDViewController: UIViewController {
     var user: User?
     var currentTrip: Trip?
     
+    private var snackbar = TTGSnackbar()
     private let bag = DisposeBag()
     private var viewModel = HomeDViewModel()
     
@@ -56,11 +58,30 @@ class HomeDViewController: UIViewController {
         dropoffPassengerButtonTapped()
         addNotificationCenterObservers()
         addPanGesture()
+        setupReachability()
     }
     
 
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    //MARK: - Reachability
+    private func setupReachability() {
+        
+        ReachabilityManager.shared.isConnectedObservable.subscribe(onNext: { [weak self] isConnected in
+            guard let self = self else { return }
+            if isConnected {
+                self.snackbar.dismiss()
+                guard self.snackbar.messageLabel.text == "No Internet Connection" else { return }
+                self.snackbar = self.createTTGSnackBar(message: "Connected Successfully", icon: UIImage(named: "Material_Check_Circle")!, color: UIColor.systemGreen, duration: .middle)
+                self.snackbar.show()
+            } else {
+                self.snackbar.dismiss()
+                self.snackbar = self.createTTGSnackBar(message: "No Internet Connection", icon: UIImage(named: "Material_Cancel")!, color: UIColor.systemRed, duration: .forever)
+                self.snackbar.show()
+            }
+        }).disposed(by: bag)
     }
     
     //MARK: - UI Configurations

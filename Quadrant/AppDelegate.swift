@@ -39,29 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(notification:)), name: .reachabilityChanged, object: reachability)
-//        do{
-//            try reachability.startNotifier()
-//        }catch{
-//            print("could not start reachability notifier")
-//        }
-        
-        
         
         return true
     }
     
-//    @objc func reachabilityChanged(notification: Notification) {
-//        let reachability = notification.object as! Reachability
-//        switch reachability.connection {
-//        case .wifi, .cellular:
-//            print("Connected")
-//        case .unavailable:
-//            print("Disconnected")
-//        default:
-//            break
-//        }
-//    }
     
     
     

@@ -60,11 +60,22 @@ class HomePViewController: UIViewController {
         bindViewModelData()
         addNotificationCenterObservers()
         addPanGesture()
+        setupReachability()
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    //MARK: - Reachability
+    private func setupReachability() {
         
         ReachabilityManager.shared.isConnectedObservable.subscribe(onNext: { [weak self] isConnected in
             guard let self = self else { return }
             if isConnected {
                 self.snackbar.dismiss()
+                guard self.snackbar.messageLabel.text == "No Internet Connection" else { return }
                 self.snackbar = self.createTTGSnackBar(message: "Connected Successfully", icon: UIImage(named: "Material_Check_Circle")!, color: UIColor.systemGreen, duration: .middle)
                 self.snackbar.show()
             } else {
@@ -73,11 +84,6 @@ class HomePViewController: UIViewController {
                 self.snackbar.show()
             }
         }).disposed(by: bag)
-
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
     }
     
     //MARK: - UI Configurations

@@ -20,9 +20,7 @@ class ReachabilityManager: NSObject {
     }
     
     var reachability: Reachability!
-    
-//    var connectedSnackBar: TTGSnackbar!
-//    var disconnectedSnackBar: TTGSnackbar!
+
     
     override init() {
         super.init()
@@ -34,8 +32,7 @@ class ReachabilityManager: NSObject {
         } catch let err {
             print(err)
         }
-//        connectedSnackBar = connectedTTGSnackBar()
-//        disconnectedSnackBar = disconnectedTTGSnackBar()
+
         
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(notification:)), name: .reachabilityChanged, object: reachability)
         

@@ -12,7 +12,6 @@ import Firebase
 
 extension MKMapView {
     
-    // We call this function and give it the annotations we want added to the map. we display the annotations if necessary
     func fitAll(in annotations: [MKAnnotation], andShow show: Bool) {
         var zoomRect:MKMapRect  = MKMapRect.null
         

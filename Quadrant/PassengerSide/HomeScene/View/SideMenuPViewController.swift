@@ -83,7 +83,7 @@ class SideMenuPViewController: UIViewController {
             SettingsMenu(icon: UIImage(named: "SF_car_fill")!, title: "Your Trips", handler: {
                 self.sideMenuController?.hideMenu()
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "YourTripsP"), object: nil)
-                
+    
             }),
             SettingsMenu(icon: UIImage(named: "SF_person_crop_circle_badge_plus")!, title: "Log out", handler: {
                 self.sideMenuController?.hideMenu()
