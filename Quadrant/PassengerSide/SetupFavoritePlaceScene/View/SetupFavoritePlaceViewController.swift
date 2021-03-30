@@ -98,8 +98,6 @@ class SetupFavoritePlaceViewController: UIViewController {
                 self?.tableView.alpha = 1
             }
             self?.tableView.reloadData()
-        }, onDisposed: {
-            print("Button Disposed")
         }).disposed(by: bag)
         
         viewModel.isUpdateSuccess.subscribe(onNext: { [weak self] isUpdateSuccess in

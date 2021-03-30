@@ -195,7 +195,6 @@ class HomePViewController: UIViewController {
 
             vc?.modalPresentationStyle = .popover
             self.present(vc!, animated: true)
-            print("Sent")
         }).disposed(by: bag)
     }
     
@@ -207,10 +206,18 @@ class HomePViewController: UIViewController {
     
     private func closeBottomViewButtonTapped() {
         closeBottomViewButton.rx.tap.subscribe(onNext: { [weak self] in
-            self?.closeBottomView()
-            if let driverUID = self?.currentTrip?.driverUID, !driverUID.isEmpty {
-                REF_DRIVER_LOCATION.child(driverUID).removeAllObservers()
+            let alert = UIAlertController(title: "Cancel Trip", message: "Do you really want to cancel the trip?", preferredStyle: .alert)
+            let action1 = UIAlertAction(title: "YES", style: .default) { _ in
+                self?.closeBottomView()
+                if let driverUID = self?.currentTrip?.driverUID, !driverUID.isEmpty {
+                    REF_DRIVER_LOCATION.child(driverUID).removeAllObservers()
+                }
             }
+            let action2 = UIAlertAction(title: "NO", style: .cancel, handler: nil)
+            alert.addAction(action1)
+            alert.addAction(action2)
+            self?.present(alert, animated: true)
+            
         }).disposed(by: bag)
     }
     

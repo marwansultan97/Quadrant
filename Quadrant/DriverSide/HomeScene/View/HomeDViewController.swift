@@ -129,16 +129,24 @@ class HomeDViewController: UIViewController {
     private func cancelTripButtonTapped() {
         cancelTripButton.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
-            REF_TRIPS.child(self.currentTrip!.passengerUID).removeAllObservers()
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
-                self.bottomViewHeight.constant = 0
-                self.view.layoutIfNeeded()
+            let alert = UIAlertController(title: "Cancel Trip", message: "Do you really want to cancel the trip?", preferredStyle: .alert)
+            let action1 = UIAlertAction(title: "YES", style: .default) { _ in
+                REF_TRIPS.child(self.currentTrip!.passengerUID).removeAllObservers()
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
+                    self.bottomViewHeight.constant = 0
+                    self.view.layoutIfNeeded()
+                }
+                self.searchButton.tag = 0
+                self.searchButton.hideLoading()
+                self.mapView.removeAnnotationAndOverlays()
+                self.mapView.centerMapOnUser()
+                self.viewModel.updateTripState(uid: self.currentTrip!.passengerUID, state: .rejected)
             }
-            self.searchButton.tag = 0
-            self.searchButton.hideLoading()
-            self.mapView.removeAnnotationAndOverlays()
-            self.mapView.centerMapOnUser()
-            self.viewModel.updateTripState(uid: self.currentTrip!.passengerUID, state: .rejected)
+            let action2 = UIAlertAction(title: "NO", style: .cancel, handler: nil)
+            alert.addAction(action1)
+            alert.addAction(action2)
+            self.present(alert, animated: true)
+            
         }).disposed(by: bag)
     }
     
@@ -149,12 +157,10 @@ class HomeDViewController: UIViewController {
                 self.searchButton.tag = 1
                 self.searchButton.showLoading()
                 self.viewModel.fetchTrip()
-                print("Start Fetching trips")
             } else {
                 self.searchButton.tag = 0
                 self.searchButton.hideLoading()
                 REF_TRIPS.removeAllObservers()
-                print("Stop Fetching")
             }
         }).disposed(by: bag)
     }

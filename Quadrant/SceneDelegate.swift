@@ -39,6 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         REF_DRIVER_LOCATION.child(uid).onDisconnectRemoveValue()
+        REF_TRIPS.child(uid).onDisconnectRemoveValue()
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
     }

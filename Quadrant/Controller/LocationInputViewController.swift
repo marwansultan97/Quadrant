@@ -46,8 +46,6 @@ class LocationInputViewController: UIViewController {
     private func backButtonTapped() {
         backButton.rx.tap.subscribe(onNext: { [weak self] in
             self?.dismiss(animated: true, completion: nil)
-        }, onDisposed: {
-            print("Disposed")
         }).disposed(by: bag)
     }
     

@@ -31,7 +31,7 @@ class PickupViewController: UIViewController {
     var pulsatingLayer = CAShapeLayer()
     var progressLayer = CAShapeLayer()
     var trackLayer = CAShapeLayer()
-    var counter = 15
+    var counter = 25
     var timer : Timer?
     
     
@@ -105,7 +105,6 @@ class PickupViewController: UIViewController {
     
     @objc func updateCounter() {
         if counter > 0 {
-            print(counter)
             self.counter -= 1
         } else {
             viewModel.updateTripState(uid: trip!.passengerUID, state: .rejected)
@@ -127,7 +126,7 @@ class PickupViewController: UIViewController {
         pulsatingView.layer.addSublayer(progressLayer)
         pulsatingView.addSubview(mapView)
         setPulsatingAnimation()
-        setProgressAnimation(duration: 15)
+        setProgressAnimation(duration: 25)
     }
     
     func setCircleLayers(strokeColor: UIColor, fillColor: UIColor) -> CAShapeLayer {

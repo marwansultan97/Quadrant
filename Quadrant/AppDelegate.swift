@@ -24,9 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        let rootVC = UIStoryboard(name: "Launch", bundle: nil).instantiateInitialViewController()
-        window?.rootViewController = rootVC
-        window?.makeKeyAndVisible()
+        if #available(iOS 13.0, *) {
+            
+        } else {
+            let rootVC = UIStoryboard(name: "Launch", bundle: nil).instantiateInitialViewController()
+            window?.rootViewController = rootVC
+            window?.makeKeyAndVisible()
+        }
+        
         
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
@@ -40,7 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           UNUserNotificationCenter.current().requestAuthorization(
             options: authOptions,
             completionHandler: {_, _ in })
-            print("Iam here")
         } else {
           let settings: UIUserNotificationSettings =
           UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
@@ -53,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
+        REF_DRIVER_LOCATION.child(uid).onDisconnectRemoveValue()
         REF_TRIPS.child(uid).onDisconnectRemoveValue()
     }
         
@@ -94,7 +99,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       // With swizzling disabled you must let Messaging know about the message, for Analytics
       // Messaging.messaging().appDidReceiveMessage(userInfo)
 
-      // Print message ID.
       if let messageID = userInfo[gcmMessageIDKey] {
         print("Message ID: \(messageID)")
       }

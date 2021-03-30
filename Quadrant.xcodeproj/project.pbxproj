@@ -18,7 +18,6 @@
 		CB500B3F25854827005CD813 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB500B3E25854827005CD813 /* Enumerations.swift */; };
 		CB5C4FE2259EA1EF000A271D /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5C4FE1259EA1EF000A271D /* LoadingButton.swift */; };
 		CB5C504225A4978D000A271D /* UIViewControllerEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5C504125A4978D000A271D /* UIViewControllerEX.swift */; };
-		CB5C50A025AB8168000A271D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB5C50A225AB8168000A271D /* Localizable.strings */; };
 		CB5C7DB525FCFAB300B34F62 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5C7DB425FCFAB300B34F62 /* LoginViewController.swift */; };
 		CB5C7DB825FCFACC00B34F62 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB5C7DB725FCFACC00B34F62 /* Login.storyboard */; };
 		CB5C7E1725FD4EEC00B34F62 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5C7E1625FD4EEC00B34F62 /* LoginViewModel.swift */; };
@@ -98,8 +97,6 @@
 		CB500B3E25854827005CD813 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		CB5C4FE1259EA1EF000A271D /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
 		CB5C504125A4978D000A271D /* UIViewControllerEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerEX.swift; sourceTree = "<group>"; };
-		CB5C50A125AB8168000A271D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CB5C50A425AB816B000A271D /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CB5C7DB425FCFAB300B34F62 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CB5C7DB725FCFACC00B34F62 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		CB5C7E1625FD4EEC00B34F62 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -233,7 +230,6 @@
 				CB25500F2566D2DE003BC53C /* LaunchScreen.storyboard */,
 				CB2550122566D2DE003BC53C /* Info.plist */,
 				CB64542226135BF6008C895C /* GoogleService-Info.plist */,
-				CB5C50A225AB8168000A271D /* Localizable.strings */,
 			);
 			path = Quadrant;
 			sourceTree = "<group>";
@@ -737,7 +733,6 @@
 				CBDAD52925FEE14C007AA22F /* LocationInputTableViewCell.xib in Resources */,
 				CBFC15DB260671D900347B96 /* SetupFavoritePlace.storyboard in Resources */,
 				CBFC15B72606072200347B96 /* YourTripsD.storyboard in Resources */,
-				CB5C50A025AB8168000A271D /* Localizable.strings in Resources */,
 				CB5C7DB825FCFACC00B34F62 /* Login.storyboard in Resources */,
 				CBFC15C1260614FB00347B96 /* ProfileInfosTableViewCell.xib in Resources */,
 				CBF0AF6F2607EA030030B5F8 /* SettingsD.storyboard in Resources */,
@@ -868,15 +863,6 @@
 				CB2550102566D2DE003BC53C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		CB5C50A225AB8168000A271D /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CB5C50A125AB8168000A271D /* en */,
-				CB5C50A425AB816B000A271D /* ar */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

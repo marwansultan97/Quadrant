@@ -54,19 +54,16 @@ class LocationInputPViewModel {
         REF_FAVORITE_PLACES.child(uid!).child("Home").observeSingleEvent(of: .value) { [weak self] (snapshot) in
             guard let self = self else { return }
             guard let dictionary = snapshot.value as? [String:Any] else {
-                print("HomePLace is not here")
                 self.group?.leave()
                 return
             }
             let place = FavoritePlace(values: dictionary)
             let homePlace = self.convertFavoritePlaceToPlaceMark(place: place)
             self.homePlaceBehavior.accept(homePlace)
-            print("HomePLace here")
             self.group?.leave()
         }
         
         group?.notify(queue: .main) {
-            print("HOME and WORK Done")
             self.isLoadingBehavior.accept(false)
         }
     }
@@ -76,14 +73,12 @@ class LocationInputPViewModel {
         REF_FAVORITE_PLACES.child(uid!).child("Work").observeSingleEvent(of: .value) { [weak self] (snapshot) in
             guard let self = self else { return }
             guard let dictionary = snapshot.value as? [String:Any] else {
-                print("WorkPlace is not here")
                 self.group?.leave()
                 return
             }
             let place = FavoritePlace(values: dictionary)
             let workPlace = self.convertFavoritePlaceToPlaceMark(place: place)
             self.workPlaceBehavior.accept(workPlace)
-            print("WorkPLACE here")
             self.group?.leave()
         }
     }
