@@ -19,6 +19,7 @@ pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git
 pod 'RxSwift'
 pod 'RxCocoa'
 pod 'JSSAlertView'
+pod 'Firebase/Messaging'
 
 end
 

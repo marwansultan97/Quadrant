@@ -25,6 +25,7 @@
 		CB5C7E1C25FD588E00B34F62 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5C7E1B25FD588E00B34F62 /* SignupViewController.swift */; };
 		CB5C7E2025FD58AD00B34F62 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB5C7E1F25FD58AD00B34F62 /* Signup.storyboard */; };
 		CB5C7E2325FD645700B34F62 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5C7E2225FD645700B34F62 /* SignupViewModel.swift */; };
+		CB64542326135BF6008C895C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB64542226135BF6008C895C /* GoogleService-Info.plist */; };
 		CB77A0ED2600EAB2009A6FB6 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77A0EB2600EAB2009A6FB6 /* SideMenuTableViewCell.swift */; };
 		CB77A0EE2600EAB2009A6FB6 /* SideMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB77A0EC2600EAB2009A6FB6 /* SideMenuTableViewCell.xib */; };
 		CB77A0F326012E24009A6FB6 /* HomeDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77A0F226012E24009A6FB6 /* HomeDViewController.swift */; };
@@ -34,7 +35,6 @@
 		CB77A10326018A4C009A6FB6 /* PickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77A10226018A4C009A6FB6 /* PickupViewController.swift */; };
 		CB77A10626018A56009A6FB6 /* Pickup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB77A10526018A56009A6FB6 /* Pickup.storyboard */; };
 		CB77A109260239F3009A6FB6 /* PickupDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77A108260239F2009A6FB6 /* PickupDViewModel.swift */; };
-		CB8C0E5D256BBDFC00C714B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB8C0E5C256BBDFC00C714B8 /* GoogleService-Info.plist */; };
 		CBDAD50E25FE8156007AA22F /* HomePViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAD50D25FE8156007AA22F /* HomePViewController.swift */; };
 		CBDAD51225FE817E007AA22F /* HomeP.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBDAD51125FE817E007AA22F /* HomeP.storyboard */; };
 		CBDAD51525FE906D007AA22F /* SideMenuPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAD51425FE906D007AA22F /* SideMenuPViewController.swift */; };
@@ -106,6 +106,8 @@
 		CB5C7E1B25FD588E00B34F62 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		CB5C7E1F25FD58AD00B34F62 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		CB5C7E2225FD645700B34F62 /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		CB64542226135BF6008C895C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CB64542826137FA4008C895C /* Quadrant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Quadrant.entitlements; sourceTree = "<group>"; };
 		CB77A0EB2600EAB2009A6FB6 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		CB77A0EC2600EAB2009A6FB6 /* SideMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuTableViewCell.xib; sourceTree = "<group>"; };
 		CB77A0F226012E24009A6FB6 /* HomeDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDViewController.swift; sourceTree = "<group>"; };
@@ -115,7 +117,6 @@
 		CB77A10226018A4C009A6FB6 /* PickupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupViewController.swift; sourceTree = "<group>"; };
 		CB77A10526018A56009A6FB6 /* Pickup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pickup.storyboard; sourceTree = "<group>"; };
 		CB77A108260239F2009A6FB6 /* PickupDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupDViewModel.swift; sourceTree = "<group>"; };
-		CB8C0E5C256BBDFC00C714B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CBDAD50D25FE8156007AA22F /* HomePViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePViewController.swift; sourceTree = "<group>"; };
 		CBDAD51125FE817E007AA22F /* HomeP.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeP.storyboard; sourceTree = "<group>"; };
 		CBDAD51425FE906D007AA22F /* SideMenuPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuPViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +218,7 @@
 		CB2550032566D2DC003BC53C /* Quadrant */ = {
 			isa = PBXGroup;
 			children = (
+				CB64542826137FA4008C895C /* Quadrant.entitlements */,
 				CBEBB3A2260B7C230047CCC6 /* LaunchScene */,
 				CBDAD52425FEE103007AA22F /* Cells */,
 				CBF6FA382607832900FDE153 /* EditAccountScenes */,
@@ -230,7 +232,7 @@
 				CB25500D2566D2DE003BC53C /* Assets.xcassets */,
 				CB25500F2566D2DE003BC53C /* LaunchScreen.storyboard */,
 				CB2550122566D2DE003BC53C /* Info.plist */,
-				CB8C0E5C256BBDFC00C714B8 /* GoogleService-Info.plist */,
+				CB64542226135BF6008C895C /* GoogleService-Info.plist */,
 				CB5C50A225AB8168000A271D /* Localizable.strings */,
 			);
 			path = Quadrant;
@@ -739,7 +741,6 @@
 				CB5C7DB825FCFACC00B34F62 /* Login.storyboard in Resources */,
 				CBFC15C1260614FB00347B96 /* ProfileInfosTableViewCell.xib in Resources */,
 				CBF0AF6F2607EA030030B5F8 /* SettingsD.storyboard in Resources */,
-				CB8C0E5D256BBDFC00C714B8 /* GoogleService-Info.plist in Resources */,
 				CBEBB3A7260B7C450047CCC6 /* Launch.storyboard in Resources */,
 				CB25500E2566D2DE003BC53C /* Assets.xcassets in Resources */,
 				CB5C7E2025FD58AD00B34F62 /* Signup.storyboard in Resources */,
@@ -750,6 +751,7 @@
 				CBF6FA3F2607841200FDE153 /* EditAccount.storyboard in Resources */,
 				CBDAD52025FECDAE007AA22F /* LocationInput.storyboard in Resources */,
 				CBFC15C92606344B00347B96 /* SettingsP.storyboard in Resources */,
+				CB64542326135BF6008C895C /* GoogleService-Info.plist in Resources */,
 				CBFC159C2605650700347B96 /* YourTripsP.storyboard in Resources */,
 				CBDAD53325FF863A007AA22F /* FavoritePlacesTableViewCell.xib in Resources */,
 				CB77A0EE2600EAB2009A6FB6 /* SideMenuTableViewCell.xib in Resources */,
@@ -1010,7 +1012,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = Quadrant/Quadrant.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H9CA4UU97K;
@@ -1034,8 +1036,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "Apple Development: marwansultan97@gmail.com (K4KAUF3SH4)";
+				CODE_SIGN_ENTITLEMENTS = Quadrant/Quadrant.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H9CA4UU97K;
 				INFOPLIST_FILE = Quadrant/Info.plist;

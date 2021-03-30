@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>587361554469-9qcqjd7876s0gjhjq5ebhjqhd5e44b2o.apps.googleusercontent.com</string>
+	<string>587361554469-bvo23apo71jdjkrcnosdsud8emr1r2gg.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.587361554469-9qcqjd7876s0gjhjq5ebhjqhd5e44b2o</string>
+	<string>com.googleusercontent.apps.587361554469-bvo23apo71jdjkrcnosdsud8emr1r2gg</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAVAhvQGOcEm4puX6SwwvGTkkPq_wwDz20</string>
 	<key>GCM_SENDER_ID</key>
@@ -19,17 +19,17 @@
 	<key>STORAGE_BUCKET</key>
 	<string>uber-ac96b.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:587361554469:ios:4c54ed747ee91eee572fcc</string>
+	<string>1:587361554469:ios:77787822552b1502572fcc</string>
 	<key>DATABASE_URL</key>
 	<string>https://uber-ac96b.firebaseio.com</string>
 </dict>
