@@ -2,7 +2,7 @@
   <img src="https://user-images.githubusercontent.com/52767660/113348569-09183d80-9337-11eb-8022-409d9903569d.png" width="750px" height="250px"/></p>
   
 <p align="center">
-  <img src="https://img.shields.io/badge/Platform-IOS%2012%2B-green"> <img alt src="https://img.shields.io/badge/Language-Swift%205-blueviolet"> <img alt src="https://img.shields.io/badge/App%20Store-Reviewing-red"</p>
+  <img src="https://img.shields.io/badge/Platform-IOS%2012%2B-green"> <img alt src="https://img.shields.io/badge/Language-Swift%205-blueviolet"> <img alt src="https://img.shields.io/badge/App%20Store-Available-orange"</p>
 
 
 --------------------------
