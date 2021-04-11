@@ -44,6 +44,6 @@ _______________________
 ![Apple iPhone 8 Plus Presentation](https://user-images.githubusercontent.com/52767660/113356000-e93a4700-9341-11eb-9728-dfc6cef10878.png)
 ____________________
 ## gif
-![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/52767660/113360880-f445a500-934a-11eb-9757-e4354fcd2c4b.gif)
+<img src="https://user-images.githubusercontent.com/52767660/113360880-f445a500-934a-11eb-9757-e4354fcd2c4b.gif" width="320"  />
 
 
